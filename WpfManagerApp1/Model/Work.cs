@@ -13,6 +13,13 @@ namespace WpfManagerApp1.Model
         High,
         Max
     }
+    public enum EisenhowerMatrixCell
+    {
+        ImportantImmediately,
+        ImportantUnimmediately,
+        UnimportantImmediately,
+        UnimportantUnmmediately
+    }
     public abstract class Work
     {
         public string Name { get; set; } = "Укажите название";
@@ -24,5 +31,10 @@ namespace WpfManagerApp1.Model
         /// </summary>
         public int DurationInMinutes { get; set; }
         public DateTime CreationDate { get; set; }
+        /// <summary>
+        /// Устанавливается true для дел которые получают особый приоритет
+        /// </summary>
+        public bool IsHighPriority { get; set; }
+        public EisenhowerMatrixCell EisenhowerMatrixCell { get; set; }
     }
 }
