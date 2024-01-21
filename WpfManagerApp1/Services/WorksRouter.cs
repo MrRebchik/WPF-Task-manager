@@ -8,45 +8,71 @@ namespace WpfManagerApp1.Services
     public enum SortFilters
     {
         ByImportance,
-        ByImportanceDescending
+        ByImportanceDescending,
+        ByImmediacy,
+        ByImmediacyWithHabits,
+        ByImmediacyDescending,
+        ByImmediacyWithHabitsDescending,
+        ByHabits,
     }
     public class WorksRouter
     {
         #region События
 
         public static event Action OnDataUpdated;
+        public static event Action<Work> OnEntityEdited;
         public static event Action OnWorksRouterLoaded;
+        public static event Action OnDataLoaded;
 
         #endregion
 
         #region Конструкторы
 
-        public WorksRouter()
+        public WorksRouter(IDataWorksProvider dataProvider)
         {
             AllWorksList = new List<Work>();
+            DataProvider = dataProvider;
+            LoadData();
             SortCommandsMap = new Dictionary<SortFilters, ListOperation>();
             InitializeSortCommandsMap();
+            OnEntityEdited += DataProvider.EditWork;
 
             OnWorksRouterLoaded?.Invoke();
+
         }
 
         #endregion
 
         #region Свойства
 
+        private List<Work> allWorksList;
         /// <summary>
         /// Список всех дел
         /// </summary>
-        private List<Work> AllWorksList { get; set; }
+        private List<Work> AllWorksList 
+        { 
+            get => allWorksList; 
+            set => allWorksList = value; 
+        }
         public Dictionary<SortFilters,ListOperation> SortCommandsMap { get; set; }
+        private IDataWorksProvider DataProvider { get; set; }
 
         #endregion
 
         #region Методы
 
+        private void LoadData()
+        {
+            if (DataProvider.GetWorks(out allWorksList))
+            {
+                OnDataLoaded?.Invoke();
+            }
+            else throw new Exception("Data has not been uploaded");
+        }
         public void AddWork(Work item)
         {
             AllWorksList.Add(item);
+            DataProvider.SaveWork(item);
             OnDataUpdated?.Invoke();
         }
 
@@ -78,6 +104,11 @@ namespace WpfManagerApp1.Services
         {
             SortCommandsMap.Add(SortFilters.ByImportance, SortByImportance);
             SortCommandsMap.Add(SortFilters.ByImportanceDescending, SortByImportanceDescending);
+            SortCommandsMap.Add(SortFilters.ByImmediacy, SortByImmediacy);
+            SortCommandsMap.Add(SortFilters.ByImmediacyWithHabits, SortByImmediacyWithHabits);
+            SortCommandsMap.Add(SortFilters.ByImmediacyDescending, SortByImmediacyDescending);
+            SortCommandsMap.Add(SortFilters.ByImmediacyWithHabitsDescending, SortByImmediacyWithHabitsDescending);
+            SortCommandsMap.Add(SortFilters.ByHabits, SortByHabits);
         }
 
         #endregion
@@ -86,9 +117,56 @@ namespace WpfManagerApp1.Services
 
         public ListOperation SortByImportance = (work) => work.ToArray().OrderByDescending(n => n.Importance).ToList();
         public ListOperation SortByImportanceDescending = (work) => work.ToArray().OrderBy(n => n.Importance).ToList();
+        public ListOperation SortByImmediacy = (work) =>
+        {
+            return work.ToArray().
+            Where(n => n.GetType() == typeof(UniqueWork)).
+            Select(n => (UniqueWork)n).
+            OrderBy(n => n.DeadLine - DateTime.Now).
+            Select(n => (Work)n).
+            ToList();
+        };
+        public ListOperation SortByImmediacyWithHabits = (work) =>
+        {
+            return work.ToArray().
+            Where(n => n.GetType() == typeof(UniqueWork)).
+            Select(n => (UniqueWork)n).
+            OrderBy(n => n.DeadLine - DateTime.Now).
+            Union(work.Where(m => m.GetType() == typeof(RegularWork))).
+            Select(n => (Work)n).
+            ToList();
+        };
+        public ListOperation SortByImmediacyDescending = (work) =>
+        {
+            return work.ToArray().
+            Where(n => n.GetType() == typeof(UniqueWork)).
+            Select(n => (UniqueWork)n).
+            OrderByDescending(n => n.DeadLine - DateTime.Now).
+            Select(n => (Work)n).
+            ToList();
+        };
+        public ListOperation SortByImmediacyWithHabitsDescending = (work) =>
+        {
+            return work.ToArray().
+            Where(n => n.GetType() == typeof(UniqueWork)).
+            Select(n => (UniqueWork)n).
+            OrderByDescending(n => n.DeadLine - DateTime.Now).
+            Union(work.Where(m => m.GetType() == typeof(RegularWork))).
+            Select(n => (Work)n).
+            ToList();
+        };
+        public ListOperation SortByHabits = (work) =>
+        {
+            return work.ToArray().
+            Where(n => n.GetType() == typeof(RegularWork)).
+            Select(n => (RegularWork)n).
+            Where(n => n.IsHabit == true).
+            Select(n => (Work)n).
+            ToList();
+        };
+
 
         public delegate List<Work> ListOperation(List<Work> work);
-
         #endregion
     }
 }

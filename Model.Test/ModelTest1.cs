@@ -86,6 +86,154 @@ namespace Model.Test
         }
 
         [TestMethod]
+        public void SortByImmediacy()
+        {
+            WorksRouter a = new WorksRouter();
+
+            UniqueWork work = new UniqueWork
+            {
+                Name = "Last",
+                Importance = Importance.Low,
+                DeadLine = new DateTime(2026,5,20),
+            };
+            UniqueWork work1 = new UniqueWork
+            {
+                Name = "Next",
+                Importance = Importance.High,
+                DeadLine = new DateTime(2025, 5, 20),
+            };
+            UniqueWork work2 = new UniqueWork
+            {
+                Name = "Previous",
+                Importance = Importance.Max,
+                DeadLine = new DateTime(2016, 5, 20),
+            };
+            RegularWork regular = new RegularWork
+            {
+                Name = "Routine0",
+                Importance = Importance.Medium
+            };
+            RegularWork regular1 = new RegularWork
+            {
+                Name = "Routine1",
+                Importance = Importance.Low
+            };
+
+            a.AddWork(work);
+            a.AddWork(work1);
+            a.AddWork(work2);
+            a.AddWork(regular);
+            a.AddWork(regular1);
+
+            var b = a.GetWorks(SortFilters.ByImmediacy);
+
+            Assert.AreEqual(3, b.Count);
+            Assert.AreEqual("Previous", b[0].Name);
+            Assert.AreEqual("Next", b[1].Name);
+            Assert.AreEqual("Last", b[2].Name);
+        }
+
+        [TestMethod]
+        public void SortByImmediacyWithHabits()
+        {
+            WorksRouter a = new WorksRouter();
+
+            UniqueWork work = new UniqueWork
+            {
+                Name = "Last",
+                Importance = Importance.Low,
+                DeadLine = new DateTime(2026, 5, 20),
+            };
+            UniqueWork work1 = new UniqueWork
+            {
+                Name = "Next",
+                Importance = Importance.High,
+                DeadLine = new DateTime(2025, 5, 20),
+            };
+            UniqueWork work2 = new UniqueWork
+            {
+                Name = "Previous",
+                Importance = Importance.Max,
+                DeadLine = new DateTime(2016, 5, 20),
+            };
+            RegularWork regular = new RegularWork
+            {
+                Name = "Routine0",
+                Importance = Importance.Medium
+            };
+            RegularWork regular1 = new RegularWork
+            {
+                Name = "Routine1",
+                Importance = Importance.Low
+            };
+
+            a.AddWork(work);
+            a.AddWork(work1);
+            a.AddWork(work2);
+            a.AddWork(regular);
+            a.AddWork(regular1);
+
+            var b = a.GetWorks(SortFilters.ByImmediacyWithHabits);
+
+            Assert.AreEqual(5, b.Count);
+            Assert.AreEqual("Previous", b[0].Name);
+            Assert.AreEqual("Next", b[1].Name);
+            Assert.AreEqual("Last", b[2].Name);
+            Assert.AreEqual("Routine0", b[3].Name);
+            Assert.AreEqual("Routine1", b[4].Name);
+        }
+
+        [TestMethod]
+        public void SortByImmediacyWithHabitsDescending()
+        {
+            WorksRouter a = new WorksRouter();
+
+            UniqueWork work = new UniqueWork
+            {
+                Name = "Last",
+                Importance = Importance.Low,
+                DeadLine = new DateTime(2026, 5, 20),
+            };
+            UniqueWork work1 = new UniqueWork
+            {
+                Name = "Next",
+                Importance = Importance.High,
+                DeadLine = new DateTime(2025, 5, 20),
+            };
+            UniqueWork work2 = new UniqueWork
+            {
+                Name = "Previous",
+                Importance = Importance.Max,
+                DeadLine = new DateTime(2016, 5, 20),
+            };
+            RegularWork regular = new RegularWork
+            {
+                Name = "Routine0",
+                Importance = Importance.Medium
+            };
+            RegularWork regular1 = new RegularWork
+            {
+                Name = "Routine1",
+                Importance = Importance.Low
+            };
+
+            a.AddWork(work);
+            a.AddWork(work1);
+            a.AddWork(work2);
+            a.AddWork(regular);
+            a.AddWork(regular1);
+
+            var b = a.GetWorks(SortFilters.ByImmediacyWithHabitsDescending);
+
+            Assert.AreEqual(5, b.Count);
+            Assert.AreEqual("Last", b[0].Name);
+            Assert.AreEqual("Next", b[1].Name);
+            Assert.AreEqual("Previous", b[2].Name);
+            Assert.AreEqual("Routine0", b[3].Name);
+            Assert.AreEqual("Routine1", b[4].Name);
+        }
+
+        [TestMethod]
         public void DeleteWork()
         {
             WorksRouter a = new WorksRouter();
@@ -110,5 +258,7 @@ namespace Model.Test
 
             Assert.AreEqual(work1, a.GetWorks()[0]);
         }
+
+        
     }
 }
