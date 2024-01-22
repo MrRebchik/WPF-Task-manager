@@ -8,6 +8,8 @@ namespace WpfManagerApp1.Model
     {
         private List<DayOfWeek> repeatDays;
 
+        public RegularWork(int id) : base(id) { }
+
         public List<DayOfWeek> RepeatDays 
         { 
             get => repeatDays; 

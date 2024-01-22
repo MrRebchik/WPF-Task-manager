@@ -22,6 +22,11 @@ namespace WpfManagerApp1.Model
     }
     public abstract class Work
     {
+        public Work(int id)
+        {
+            Id = Id;
+        }
+        public int Id { get; private set; }
         public string Name { get; set; } = "Укажите название";
         public string Description { get; set; } = "Добавить описание";
         public CompleteStatus Completeness { get; set; }

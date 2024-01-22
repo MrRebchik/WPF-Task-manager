@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using WpfManagerApp1.Data;
 using WpfManagerApp1.Model;
 using WpfManagerApp1.Services;
 
@@ -14,9 +15,10 @@ namespace Model.Test
         {
             List<DayOfWeek> input = new List<DayOfWeek>() {DayOfWeek.Monday, DayOfWeek.Friday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Sunday };
             List<DayOfWeek> required = new List<DayOfWeek>() { DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Friday};
-            RegularWork a = new RegularWork();
-
-            a.RepeatDays = input;
+            RegularWork a = new RegularWork(1)
+            {
+                RepeatDays = input
+            };
 
             Assert.AreEqual(required.Count, a.RepeatDays.Count);
             Assert.AreEqual(4, a.RepeatDays.Count);
@@ -32,23 +34,9 @@ namespace Model.Test
         [TestMethod]
         public void GetSortedByImportanceList1()
         {
-            WorksRouter a = new WorksRouter();
-            UniqueWork work = new UniqueWork();
-            work.Importance = Importance.Low;
-            UniqueWork work1 = new UniqueWork();
-            work1.Importance = Importance.High;
-            UniqueWork work2 = new UniqueWork();
-            work2.Importance = Importance.Max;
-            RegularWork regular = new RegularWork();
-            regular.Importance = Importance.Medium;
-            RegularWork regular1 = new RegularWork();
-            regular1.Importance = Importance.Low;
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
-            a.AddWork( work );
-            a.AddWork( work1 );
-            a.AddWork( work2 );
-            a.AddWork( regular );
-            a.AddWork( regular1 );
 
             Assert.AreEqual(Importance.Max, a.GetWorks(SortFilters.ByImportance)[0].Importance);
             Assert.AreEqual(Importance.High, a.GetWorks(SortFilters.ByImportance)[1].Importance);
@@ -60,23 +48,8 @@ namespace Model.Test
         [TestMethod]
         public void GetSortedByImportanceDescendingList1()
         {
-            WorksRouter a = new WorksRouter();
-            UniqueWork work = new UniqueWork();
-            work.Importance = Importance.Low;
-            UniqueWork work1 = new UniqueWork();
-            work1.Importance = Importance.High;
-            UniqueWork work2 = new UniqueWork();
-            work2.Importance = Importance.Max;
-            RegularWork regular = new RegularWork();
-            regular.Importance = Importance.Medium;
-            RegularWork regular1 = new RegularWork();
-            regular1.Importance = Importance.Low;
-
-            a.AddWork(work);
-            a.AddWork(work1);
-            a.AddWork(work2);
-            a.AddWork(regular);
-            a.AddWork(regular1);
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
             Assert.AreEqual(Importance.Low, a.GetWorks(SortFilters.ByImportance)[3].Importance);
             Assert.AreEqual(Importance.Low, a.GetWorks(SortFilters.ByImportance)[4].Importance);
@@ -88,42 +61,9 @@ namespace Model.Test
         [TestMethod]
         public void SortByImmediacy()
         {
-            WorksRouter a = new WorksRouter();
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
-            UniqueWork work = new UniqueWork
-            {
-                Name = "Last",
-                Importance = Importance.Low,
-                DeadLine = new DateTime(2026,5,20),
-            };
-            UniqueWork work1 = new UniqueWork
-            {
-                Name = "Next",
-                Importance = Importance.High,
-                DeadLine = new DateTime(2025, 5, 20),
-            };
-            UniqueWork work2 = new UniqueWork
-            {
-                Name = "Previous",
-                Importance = Importance.Max,
-                DeadLine = new DateTime(2016, 5, 20),
-            };
-            RegularWork regular = new RegularWork
-            {
-                Name = "Routine0",
-                Importance = Importance.Medium
-            };
-            RegularWork regular1 = new RegularWork
-            {
-                Name = "Routine1",
-                Importance = Importance.Low
-            };
-
-            a.AddWork(work);
-            a.AddWork(work1);
-            a.AddWork(work2);
-            a.AddWork(regular);
-            a.AddWork(regular1);
 
             var b = a.GetWorks(SortFilters.ByImmediacy);
 
@@ -136,42 +76,9 @@ namespace Model.Test
         [TestMethod]
         public void SortByImmediacyWithHabits()
         {
-            WorksRouter a = new WorksRouter();
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
-            UniqueWork work = new UniqueWork
-            {
-                Name = "Last",
-                Importance = Importance.Low,
-                DeadLine = new DateTime(2026, 5, 20),
-            };
-            UniqueWork work1 = new UniqueWork
-            {
-                Name = "Next",
-                Importance = Importance.High,
-                DeadLine = new DateTime(2025, 5, 20),
-            };
-            UniqueWork work2 = new UniqueWork
-            {
-                Name = "Previous",
-                Importance = Importance.Max,
-                DeadLine = new DateTime(2016, 5, 20),
-            };
-            RegularWork regular = new RegularWork
-            {
-                Name = "Routine0",
-                Importance = Importance.Medium
-            };
-            RegularWork regular1 = new RegularWork
-            {
-                Name = "Routine1",
-                Importance = Importance.Low
-            };
-
-            a.AddWork(work);
-            a.AddWork(work1);
-            a.AddWork(work2);
-            a.AddWork(regular);
-            a.AddWork(regular1);
 
             var b = a.GetWorks(SortFilters.ByImmediacyWithHabits);
 
@@ -186,42 +93,9 @@ namespace Model.Test
         [TestMethod]
         public void SortByImmediacyWithHabitsDescending()
         {
-            WorksRouter a = new WorksRouter();
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
-            UniqueWork work = new UniqueWork
-            {
-                Name = "Last",
-                Importance = Importance.Low,
-                DeadLine = new DateTime(2026, 5, 20),
-            };
-            UniqueWork work1 = new UniqueWork
-            {
-                Name = "Next",
-                Importance = Importance.High,
-                DeadLine = new DateTime(2025, 5, 20),
-            };
-            UniqueWork work2 = new UniqueWork
-            {
-                Name = "Previous",
-                Importance = Importance.Max,
-                DeadLine = new DateTime(2016, 5, 20),
-            };
-            RegularWork regular = new RegularWork
-            {
-                Name = "Routine0",
-                Importance = Importance.Medium
-            };
-            RegularWork regular1 = new RegularWork
-            {
-                Name = "Routine1",
-                Importance = Importance.Low
-            };
-
-            a.AddWork(work);
-            a.AddWork(work1);
-            a.AddWork(work2);
-            a.AddWork(regular);
-            a.AddWork(regular1);
 
             var b = a.GetWorks(SortFilters.ByImmediacyWithHabitsDescending);
 
@@ -236,29 +110,44 @@ namespace Model.Test
         [TestMethod]
         public void DeleteWork()
         {
-            WorksRouter a = new WorksRouter();
-            UniqueWork work = new UniqueWork();
-            work.Importance = Importance.Low;
-            UniqueWork work1 = new UniqueWork();
-            work1.Importance = Importance.High;
-            UniqueWork work2 = new UniqueWork();
-            work2.Importance = Importance.Max;
-            RegularWork regular = new RegularWork();
-            regular.Importance = Importance.Medium;
-            RegularWork regular1 = new RegularWork();
-            regular1.Importance = Importance.Low;
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
 
-            a.AddWork(work);
-            a.AddWork(work1);
-            a.AddWork(work2);
-            a.AddWork(regular);
-            a.AddWork(regular1);
+            var work = a.GetWorks()[0];
+            var work1 = a.GetWorks()[1];
+
+            a.DeleteWork(work);
+
+            Assert.AreEqual(work1, a.GetWorks()[0]);
+        }
+        [TestMethod]
+        public void EditWork()
+        {
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
+
+            var work = a.GetWorks()[0];
+            var work1 = a.GetWorks()[1];
 
             a.DeleteWork(work);
 
             Assert.AreEqual(work1, a.GetWorks()[0]);
         }
 
-        
+
+    }
+
+    [TestClass]
+    public class DataMockTest1
+    {
+        [TestMethod]
+        public void EditWork1()
+        {
+            BDMock bd = new BDMock();
+            List<Work> list = new List<Work>();
+            bd.GetWorks(out list);
+            var work = list[0];
+            
+        }
     }
 }

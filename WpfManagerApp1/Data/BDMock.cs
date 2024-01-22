@@ -1,56 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfManagerApp1.Model;
 using WpfManagerApp1.Services;
 
 namespace WpfManagerApp1.Data
 {
-    internal class BDMock : IDataWorksProvider
+    public class BDMock : IDataWorksProvider
     {
-        UniqueWork a1;
-        UniqueWork a2;
-        RegularWork b1;
-
-        List<Work> works;
+        private readonly List<Work> works;
         public BDMock()
         {
-            a1 = new UniqueWork()
+            UniqueWork work = new UniqueWork(1)
             {
-                Name = "Один1",
+                Name = "Last",
+                Importance = Importance.Low,
+                DeadLine = new DateTime(2026, 5, 20),
             };
-            a2 = new UniqueWork()
+            UniqueWork work1 = new UniqueWork(2)
             {
-                Name = "Один2",
+                Name = "Next",
+                Importance = Importance.High,
+                DeadLine = new DateTime(2025, 5, 20),
             };
-            b1 = new RegularWork()
+            UniqueWork work2 = new UniqueWork(3)
             {
-                Name = "Привычка1",
+                Name = "Previous",
+                Importance = Importance.Max,
+                DeadLine = new DateTime(2016, 5, 20),
             };
-            works = new List<Work>() { a1, a2, b1 };
+            RegularWork regular = new RegularWork(4)
+            {
+                Name = "Routine0",
+                Importance = Importance.Medium
+            };
+            RegularWork regular1 = new RegularWork(5)
+            {
+                Name = "Routine1",
+                Importance = Importance.Low
+            };
+
+            works = new List<Work>() { work, work1, work2, regular, regular1 };
         }
         public void DeleteWork(Work work)
         {
-            throw new NotImplementedException();
+            works.Where(n => n.Id == work.Id).Select(n => works.Remove(n)); //ТЕСТИРОВАТЬ
         }
 
         public void EditWork(Work work)
         {
-            throw new NotImplementedException();
+            works.Where(n => n.Id == work.Id).Select(n => n = work);
         }
 
         public bool GetWorks(out List<Work> list)
         {
-
             list = works;
             return true;
         }
 
         public void SaveWork(Work work)
         {
-            throw new NotImplementedException();
+            works.Add(work); // ТЕСТИРОВАТЬ
         }
     }
 }

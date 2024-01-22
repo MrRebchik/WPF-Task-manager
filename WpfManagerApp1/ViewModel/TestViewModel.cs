@@ -10,10 +10,11 @@ namespace WpfManagerApp1.ViewModel
         {
             data = new BDMock();
             a = new WorksRouter(data);
+            a.GetWorks()[0].Name = "Test";
             MessageBox.Show(a.GetWorks()[0].Name);
         }
-        IDataWorksProvider data;
-        WorksRouter a;
+        readonly IDataWorksProvider data;
+        readonly WorksRouter a;
 
     }
 }
