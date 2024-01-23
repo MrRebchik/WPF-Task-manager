@@ -41,6 +41,10 @@ namespace WpfManagerApp1.Data
             };
 
             works = new List<Work>() { work, work1, work2, regular, regular1 };
+            foreach(var e in works)
+            {
+                e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
+            }
         }
         public void DeleteWork(Work work)
         {

@@ -20,26 +20,106 @@ namespace WpfManagerApp1.Model
         UnimportantImmediately,
         UnimportantUnmmediately
     }
+    public delegate void WorkPropertyChangedHandler(Work item);
     public abstract class Work
     {
+        private string name = "Укажите название";
+        private string description = "Добавить описание";
+        private CompleteStatus completeness;
+        private Importance importance;
+        private int durationInMinutes;
+        private DateTime creationDate;
+        private bool isHighPriority;
+        private EisenhowerMatrixCell eisenhowerMatrixCell;
+
+        public event WorkPropertyChangedHandler WorkPropertyChanged;
         public Work(int id)
         {
-            Id = Id;
+            Id = id;
         }
         public int Id { get; private set; }
-        public string Name { get; set; } = "Укажите название";
-        public string Description { get; set; } = "Добавить описание";
-        public CompleteStatus Completeness { get; set; }
-        public Importance Importance { get; set; }
+        public string Name
+        { 
+            get => name; 
+            set
+            {
+                name = value;
+                OnWorkPropertyChanged();
+            }
+        }
+        public string Description 
+        { 
+            get => description;
+            set
+            {
+                description = value;
+                OnWorkPropertyChanged();
+            }
+        }
+        public CompleteStatus Completeness 
+        { 
+            get => completeness;
+            set
+            {
+                completeness = value;
+                OnWorkPropertyChanged();
+            }
+        }
+        public Importance Importance 
+        { 
+            get => importance; 
+            set 
+            {
+                importance = value;
+                OnWorkPropertyChanged();
+            } 
+        }
         /// <summary>
         /// Примерное время затрачиваемое на задание (мин.)
         /// </summary>
-        public int DurationInMinutes { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int DurationInMinutes 
+        { 
+            get => durationInMinutes; 
+            set 
+            {
+                durationInMinutes = value;
+                OnWorkPropertyChanged();
+            } 
+        }
+        public DateTime CreationDate 
+        { 
+            get => creationDate; 
+            set 
+            {
+                creationDate = value;
+                OnWorkPropertyChanged();
+            } 
+        }
         /// <summary>
         /// Устанавливается true для дел которые получают особый приоритет
         /// </summary>
-        public bool IsHighPriority { get; set; }
-        public EisenhowerMatrixCell EisenhowerMatrixCell { get; set; }
+        public bool IsHighPriority 
+        { 
+            get => isHighPriority; 
+            set 
+            {
+                isHighPriority = value;
+                OnWorkPropertyChanged();
+            } 
+        }
+        public EisenhowerMatrixCell EisenhowerMatrixCell 
+        { 
+            get => eisenhowerMatrixCell; 
+            set 
+            {
+                eisenhowerMatrixCell = value;
+                OnWorkPropertyChanged();
+            } 
+        }
+
+        public void OnWorkPropertyChanged()
+        {
+            WorkPropertyChanged?.Invoke((Work)this);
+        }
     }
 }

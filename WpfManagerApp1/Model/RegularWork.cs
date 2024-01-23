@@ -7,14 +7,27 @@ namespace WpfManagerApp1.Model
     public class RegularWork : Work
     {
         private List<DayOfWeek> repeatDays;
+        private bool isHabit;
 
         public RegularWork(int id) : base(id) { }
 
         public List<DayOfWeek> RepeatDays 
         { 
-            get => repeatDays; 
-            set => repeatDays = value.ToArray().Distinct().OrderBy(n=>(int)n).ToList(); 
+            get => repeatDays;
+            set
+            {
+                repeatDays = value.ToArray().Distinct().OrderBy(n => (int)n).ToList();
+                OnWorkPropertyChanged();
+            }
         }
-        public bool IsHabit { get; set; }
+        public bool IsHabit 
+        { 
+            get => isHabit;
+            set
+            {
+                isHabit = value;
+                OnWorkPropertyChanged();
+            }
+        }
     }
 }

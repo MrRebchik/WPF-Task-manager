@@ -19,10 +19,10 @@ namespace WpfManagerApp1.Services
     {
         #region События
 
-        public static event Action OnDataUpdated;
-        public static event Action<Work> OnEntityEdited;
-        public static event Action OnWorksRouterLoaded;
-        public static event Action OnDataLoaded;
+        public static event Action DataUpdated;
+        public static event Action<Work> EntityEdited;
+        public static event Action WorksRouterLoaded;
+        public static event Action DataLoaded;
 
         #endregion
 
@@ -35,9 +35,9 @@ namespace WpfManagerApp1.Services
             LoadData();
             SortCommandsMap = new Dictionary<SortFilters, ListOperation>();
             InitializeSortCommandsMap();
-            OnEntityEdited += DataProvider.EditWork;
+            EntityEdited += DataProvider.EditWork;
 
-            OnWorksRouterLoaded?.Invoke();
+            WorksRouterLoaded?.Invoke();
 
         }
 
@@ -65,7 +65,7 @@ namespace WpfManagerApp1.Services
         {
             if (DataProvider.GetWorks(out allWorksList))
             {
-                OnDataLoaded?.Invoke();
+                DataLoaded?.Invoke();
             }
             else throw new Exception("Data has not been uploaded");
         }
@@ -73,13 +73,14 @@ namespace WpfManagerApp1.Services
         {
             AllWorksList.Add(item);
             DataProvider.SaveWork(item);
-            OnDataUpdated?.Invoke();
+            item.WorkPropertyChanged += DataProvider.EditWork;
+            DataUpdated?.Invoke();
         }
 
         public void DeleteWork(Work item)
         {
             AllWorksList.Remove(item);
-            OnDataUpdated?.Invoke();
+            DataUpdated?.Invoke();
         }
 
         /// <summary>

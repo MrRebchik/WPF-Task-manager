@@ -27,6 +27,13 @@ namespace Model.Test
             Assert.AreEqual(required[2], a.RepeatDays[2]);
             Assert.AreEqual(required[3], a.RepeatDays[3]);
         }
+
+        [TestMethod]
+        public void WorkPropertyChangedEvent()
+        {
+
+        }
+
     }
     [TestClass]
     public class WorkerRouterTest1
@@ -147,7 +154,13 @@ namespace Model.Test
             List<Work> list = new List<Work>();
             bd.GetWorks(out list);
             var work = list[0];
-            
+            var name = work.Name;
+
+            work.Name = "New name";
+            bd.EditWork(work);
+            bd.GetWorks(out list);
+
+            Assert.AreEqual ("New name", list[0].Name);
         }
     }
 }
