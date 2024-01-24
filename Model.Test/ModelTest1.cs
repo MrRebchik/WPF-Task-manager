@@ -31,8 +31,16 @@ namespace Model.Test
         [TestMethod]
         public void WorkPropertyChangedEvent()
         {
+            BDMock bd = new BDMock();
+            WorksRouter a = new WorksRouter(bd);
+            List<Work> list;
 
+            a.GetWorks()[0].Name= "A";
+            bd.GetWorks(out list);
+
+            Assert.AreEqual("A", list[0].Name);
         }
+
 
     }
     [TestClass]
@@ -151,10 +159,9 @@ namespace Model.Test
         public void EditWork1()
         {
             BDMock bd = new BDMock();
-            List<Work> list = new List<Work>();
+            List<Work> list;
             bd.GetWorks(out list);
             var work = list[0];
-            var name = work.Name;
 
             work.Name = "New name";
             bd.EditWork(work);

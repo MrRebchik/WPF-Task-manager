@@ -2,6 +2,7 @@
 
 namespace WpfManagerApp1.Model
 {
+    #region enum'ы
     public enum CompleteStatus
     {
         Done,Waiting,Frozen
@@ -20,9 +21,12 @@ namespace WpfManagerApp1.Model
         UnimportantImmediately,
         UnimportantUnmmediately
     }
+    #endregion
+
     public delegate void WorkPropertyChangedHandler(Work item);
     public abstract class Work
     {
+        #region Приватные переменные
         private string name = "Укажите название";
         private string description = "Добавить описание";
         private CompleteStatus completeness;
@@ -31,8 +35,23 @@ namespace WpfManagerApp1.Model
         private DateTime creationDate;
         private bool isHighPriority;
         private EisenhowerMatrixCell eisenhowerMatrixCell;
+        #endregion
 
-        public event WorkPropertyChangedHandler WorkPropertyChanged;
+        WorkPropertyChangedHandler workPropertyChanged;
+        public event WorkPropertyChangedHandler WorkPropertyChanged
+        {
+            add
+            {
+                if(workPropertyChanged.GetInvocationList().Length == 0)
+                workPropertyChanged += value;
+            }
+            remove
+            {
+                workPropertyChanged -= value;
+            }
+
+        }
+
         public Work(int id)
         {
             Id = id;
@@ -117,9 +136,9 @@ namespace WpfManagerApp1.Model
             } 
         }
 
-        public void OnWorkPropertyChanged()
+        private void OnWorkPropertyChanged()
         {
-            WorkPropertyChanged?.Invoke((Work)this);
+            workPropertyChanged?.Invoke((Work)this);
         }
     }
 }

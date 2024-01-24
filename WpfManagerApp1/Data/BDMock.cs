@@ -6,8 +6,9 @@ using WpfManagerApp1.Services;
 
 namespace WpfManagerApp1.Data
 {
-    public class BDMock : IDataWorksProvider
+    public class BDMock : IDataWorksProvider, IDataDayPlansProvider
     {
+        
         private readonly List<Work> works;
         public BDMock()
         {
@@ -41,11 +42,14 @@ namespace WpfManagerApp1.Data
             };
 
             works = new List<Work>() { work, work1, work2, regular, regular1 };
+
             foreach(var e in works)
             {
                 e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
             }
         }
+
+        #region Works
         public void DeleteWork(Work work)
         {
             works.Where(n => n.Id == work.Id).Select(n => works.Remove(n)); //ТЕСТИРОВАТЬ
@@ -64,7 +68,35 @@ namespace WpfManagerApp1.Data
 
         public void SaveWork(Work work)
         {
+            work.WorkPropertyChanged += EditWork;
             works.Add(work); // ТЕСТИРОВАТЬ
         }
+
+        #endregion
+
+        #region DayPlans
+
+        public void DeleteDayPlan(DayPlan dayPlan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditDayPlan(DayPlan dayPlan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetDaysPlans(out List<DayPlan> list)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveDayPlan(DayPlan dayPlan)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion       
+
     }
 }
