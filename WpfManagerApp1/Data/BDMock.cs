@@ -10,6 +10,7 @@ namespace WpfManagerApp1.Data
     {
         
         private readonly List<Work> works;
+        private readonly List<DayPlan> dayPlans;
         public BDMock()
         {
             UniqueWork work = new UniqueWork(1)
@@ -43,9 +44,28 @@ namespace WpfManagerApp1.Data
 
             works = new List<Work>() { work, work1, work2, regular, regular1 };
 
+            DayPlan d1 = new DayPlan(1)
+            {
+                Date = new DateTime(2031, 1, 1),
+                FreeTimeAmuontInMinutes = 4 * 60,
+                Works = new List<Work> { work, work1, regular1 }
+            };
+            DayPlan d2 = new DayPlan(2)
+            {
+                Date = new DateTime(2031, 1, 1),
+                FreeTimeAmuontInMinutes = 6 * 60,
+                Works = new List<Work> { work2, regular }
+            };
+
+            dayPlans = new List<DayPlan>() { d1, d2 };
+
             foreach(var e in works)
             {
                 e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
+            }
+            foreach (var e in dayPlans)
+            {
+                e.DayPlanPropertyChanged += EditDayPlan; // можно переделать в LINQ
             }
         }
 
@@ -78,22 +98,24 @@ namespace WpfManagerApp1.Data
 
         public void DeleteDayPlan(DayPlan dayPlan)
         {
-            throw new NotImplementedException();
+            dayPlans.Where(n => n.Id == dayPlan.Id).Select(n => dayPlans.Remove(n)); //ТЕСТИРОВАТЬ
         }
 
         public void EditDayPlan(DayPlan dayPlan)
         {
-            throw new NotImplementedException();
+            dayPlans.Where(n => n.Id == dayPlan.Id).Select(n => n = dayPlan);
         }
 
         public bool GetDaysPlans(out List<DayPlan> list)
         {
-            throw new NotImplementedException();
+            list = dayPlans;
+            return true;
         }
 
         public void SaveDayPlan(DayPlan dayPlan)
         {
-            throw new NotImplementedException();
+            dayPlan.DayPlanPropertyChanged += EditDayPlan;
+            dayPlans.Add(dayPlan); // ТЕСТИРОВАТЬ
         }
 
         #endregion       
