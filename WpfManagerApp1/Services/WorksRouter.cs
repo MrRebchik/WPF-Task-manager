@@ -20,7 +20,6 @@ namespace WpfManagerApp1.Services
         #region События
 
         public static event Action DataUpdated;
-        public static event Action<Work> EntityEdited;
         public static event Action WorksRouterLoaded;
         public static event Action DataLoaded;
 
@@ -35,7 +34,6 @@ namespace WpfManagerApp1.Services
             LoadData();
             SortCommandsMap = new Dictionary<SortFilters, ListOperation>();
             InitializeSortCommandsMap();
-            EntityEdited += DataProvider.EditWork;
 
             WorksRouterLoaded?.Invoke();
 

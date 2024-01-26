@@ -42,7 +42,7 @@ namespace WpfManagerApp1.Model
         {
             add
             {
-                if(workPropertyChanged.GetInvocationList().Length == 0)
+                if(workPropertyChanged?.GetInvocationList().Length == 0)
                 workPropertyChanged += value;
             }
             remove
@@ -136,7 +136,7 @@ namespace WpfManagerApp1.Model
             } 
         }
 
-        private void OnWorkPropertyChanged()
+        private protected void OnWorkPropertyChanged()
         {
             workPropertyChanged?.Invoke((Work)this);
         }

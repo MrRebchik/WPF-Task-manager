@@ -19,7 +19,7 @@ namespace WpfManagerApp1.Model
         {
             add
             {
-                if (dayPlanPropertyChanged.GetInvocationList().Length == 0)
+                if (dayPlanPropertyChanged?.GetInvocationList().Length == 0)
                     dayPlanPropertyChanged += value;
             }
             remove

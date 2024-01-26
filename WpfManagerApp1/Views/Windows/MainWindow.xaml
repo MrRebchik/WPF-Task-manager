@@ -5,12 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfManagerApp1"
         mc:Ignorable="d"
-        xmlns:test="clr-namespace:WpfManagerApp1.ViewModel"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
+        Title="{Binding Path=Title}" 
+        Height="450" Width="800">
     <Window.DataContext>
-        <test:TestViewModel/>
+        <vm:MainWindowVM/>
     </Window.DataContext>
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход">
+                    
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem></StatusBarItem>
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Все дела">
+                <Grid ShowGridLines="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+
+                        </ColumnDefinition>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Background="AliceBlue"
+                        Margin="20"
+                        >
+                        <Grid
+                            Grid.Column="0" 
+                            ShowGridLines="True"
+                            
+                            >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Column="1"
+                        Background="BlueViolet"
+                        >
+                    <TextBlock 
+                        Grid.Column="1"
+                        Text="Список дел"
+                        VerticalAlignment="Top"/>
+                    </Border>
+                    <ListBox
+                        Grid.Column="1">
+
+                    </ListBox>
+                    
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Планы по неделям">
+                
+            </TabItem>
+        </TabControl>
         
-    </Grid>
+    </DockPanel>
 </Window>
