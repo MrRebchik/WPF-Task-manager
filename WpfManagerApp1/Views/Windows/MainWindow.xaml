@@ -14,60 +14,72 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход">
-                    
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Помощь">
-                
+                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
             </MenuItem>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem></StatusBarItem>
-        </StatusBar>
+        
         <TabControl>
             <TabItem Header="Все дела">
-                <Grid ShowGridLines="True">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition>
 
                         </ColumnDefinition>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Border
-                        Background="AliceBlue"
-                        Margin="20"
-                        >
-                        <Grid
+                    <Grid
                             Grid.Column="0" 
-                            ShowGridLines="True"
-                            
                             >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                    </Border>
-                    <Border
-                        Grid.Column="1"
-                        Background="BlueViolet"
-                        >
-                    <TextBlock 
-                        Grid.Column="1"
-                        Text="Список дел"
-                        VerticalAlignment="Top"/>
-                    </Border>
-                    <ListBox
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Content="Важные строчные"
+                            />
+                        <Label 
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Content="Важные не строчные"
+                            />
+                        <Label 
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Content="Не важные строчные"
+                            />
+                        <Label 
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Content="Не важные не строчные"
+                            />
+                    </Grid>
+                    <DockPanel
                         Grid.Column="1">
-
-                    </ListBox>
-                    
-                    
+                        <Label
+                            Content="Список дел"
+                            DockPanel.Dock="Top"
+                            />
+                        <StackPanel
+                            Height="25"
+                            Orientation="Horizontal"
+                            DockPanel.Dock="Bottom">
+                            <Button
+                                Content="Добавить задание"
+                                />
+                            <Button
+                                Content="Удалить задание"
+                                />
+                        </StackPanel>
+                        <ListBox>
+                            
+                        </ListBox>
+                    </DockPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Планы по неделям">
