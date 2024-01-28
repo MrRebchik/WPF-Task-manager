@@ -27,7 +27,7 @@ namespace WpfManagerApp1.Services
 
         #region Конструкторы
 
-        public WorksRouter(IDataWorksProvider dataProvider)
+        public WorksRouter(DataProvider dataProvider)
         {
             AllWorksList = new List<Work>();
             DataProvider = dataProvider;

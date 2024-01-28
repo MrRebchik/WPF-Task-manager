@@ -13,7 +13,7 @@ namespace WpfManagerApp1.ViewModel
             a.GetWorks()[0].Name = "Test";
             MessageBox.Show(a.GetWorks()[0].Name);
         }
-        readonly IDataWorksProvider data;
+        readonly DataProvider data;
         readonly WorksRouter a;
 
     }

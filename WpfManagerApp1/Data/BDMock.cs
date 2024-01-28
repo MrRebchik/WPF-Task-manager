@@ -6,7 +6,7 @@ using WpfManagerApp1.Services;
 
 namespace WpfManagerApp1.Data
 {
-    public class BDMock : IDataWorksProvider, IDataDayPlansProvider
+    public class BDMock : DataProvider
     {
         
         private readonly List<Work> works;
@@ -70,23 +70,23 @@ namespace WpfManagerApp1.Data
         }
 
         #region Works
-        public void DeleteWork(Work work)
+        public override void DeleteWork(Work work)
         {
             works.Where(n => n.Id == work.Id).Select(n => works.Remove(n)); //ТЕСТИРОВАТЬ
         }
 
-        public void EditWork(Work work)
+        public override void EditWork(Work work)
         {
             works.Where(n => n.Id == work.Id).Select(n => n = work);
         }
 
-        public bool GetWorks(out List<Work> list)
+        public override bool GetWorks(out List<Work> list)
         {
             list = works;
             return true;
         }
 
-        public void SaveWork(Work work)
+        public override void SaveWork(Work work)
         {
             work.WorkPropertyChanged += EditWork;
             works.Add(work); // ТЕСТИРОВАТЬ
@@ -96,23 +96,23 @@ namespace WpfManagerApp1.Data
 
         #region DayPlans
 
-        public void DeleteDayPlan(DayPlan dayPlan)
+        public override void DeleteDayPlan(DayPlan dayPlan)
         {
             dayPlans.Where(n => n.Id == dayPlan.Id).Select(n => dayPlans.Remove(n)); //ТЕСТИРОВАТЬ
         }
 
-        public void EditDayPlan(DayPlan dayPlan)
+        public override void EditDayPlan(DayPlan dayPlan)
         {
             dayPlans.Where(n => n.Id == dayPlan.Id).Select(n => n = dayPlan);
         }
 
-        public bool GetDaysPlans(out List<DayPlan> list)
+        public override bool GetDaysPlans(out List<DayPlan> list)
         {
             list = dayPlans;
             return true;
         }
 
-        public void SaveDayPlan(DayPlan dayPlan)
+        public override void SaveDayPlan(DayPlan dayPlan)
         {
             dayPlan.DayPlanPropertyChanged += EditDayPlan;
             dayPlans.Add(dayPlan); // ТЕСТИРОВАТЬ

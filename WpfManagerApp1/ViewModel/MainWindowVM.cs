@@ -7,6 +7,10 @@ using System.Windows;
 using System.Windows.Input;
 using WpfManagerApp1.Infrastructure.Commands;
 using WpfManagerApp1.ViewModel.Base;
+using WpfManagerApp1.Services;
+using WpfManagerApp1.Data;
+using WpfManagerApp1.Model;
+using System.Collections.ObjectModel;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -27,7 +31,18 @@ namespace WpfManagerApp1.ViewModel
 
         #region Свойства
 
-        private 
+        #region Связь с Model
+        public DataProvider DataProvider { get; }
+        public WorksRouter WorksRouter { get; }
+        public DayPlanManager DayPlanManager { get; }
+        #endregion
+
+        #region Коллекции
+
+        ObservableCollection <Work> WorksCollection { get; set; }
+        ObservableCollection<DayPlan> DayPlanCollection { get; set; }
+
+        #endregion
 
         #region Title - название окна
         private string _title = "Планировщик";
@@ -41,13 +56,21 @@ namespace WpfManagerApp1.ViewModel
             {
                 Set(ref _title, value);
             }
-        } 
+        }
+
         #endregion
 
         #endregion
 
         public MainWindowVM()
         {
+
+            #region Связь с Model
+            DataProvider = new BDMock();
+            WorksRouter = new WorksRouter(DataProvider);
+            DayPlanManager = new DayPlanManager(DataProvider); 
+            #endregion
+
             #region Команды
 
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);

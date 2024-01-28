@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfManagerApp1.Model;
 using static WpfManagerApp1.Services.WorksRouter;
 
@@ -19,7 +16,7 @@ namespace WpfManagerApp1.Services
 
         #endregion
 
-        public DayPlanManager(IDataDayPlansProvider dataProvider)
+        public DayPlanManager(DataProvider dataProvider)
         {
             AllDaysList = new List<DayPlan>();
             DataProvider = dataProvider;
