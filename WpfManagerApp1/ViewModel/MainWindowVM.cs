@@ -39,8 +39,8 @@ namespace WpfManagerApp1.ViewModel
 
         #region Коллекции
 
-        ObservableCollection <Work> WorksCollection { get; set; }
-        ObservableCollection<DayPlan> DayPlanCollection { get; set; }
+        public ObservableCollection <Work> WorksCollection { get; set; }
+        public ObservableCollection<DayPlan> DayPlanCollection { get; set; }
 
         #endregion
 
@@ -68,7 +68,9 @@ namespace WpfManagerApp1.ViewModel
             #region Связь с Model
             DataProvider = new BDMock();
             WorksRouter = new WorksRouter(DataProvider);
-            DayPlanManager = new DayPlanManager(DataProvider); 
+            DayPlanManager = new DayPlanManager(DataProvider);
+
+            WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
             #endregion
 
             #region Команды

@@ -76,9 +76,15 @@
                                 Content="Удалить задание"
                                 />
                         </StackPanel>
-                        <ListBox>
-                            
-                        </ListBox>
+                        <ListView ItemsSource="{Binding WorksCollection}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Importance}">Важность</GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Completeness}">Статус</GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </DockPanel>
                 </Grid>
             </TabItem>

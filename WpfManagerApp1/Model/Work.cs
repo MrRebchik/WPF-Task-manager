@@ -29,7 +29,7 @@ namespace WpfManagerApp1.Model
         #region Приватные переменные
         private string name = "Укажите название";
         private string description = "Добавить описание";
-        private CompleteStatus completeness;
+        private CompleteStatus completeness = CompleteStatus.Waiting;
         private Importance importance;
         private int durationInMinutes;
         private DateTime creationDate;
