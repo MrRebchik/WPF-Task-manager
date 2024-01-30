@@ -4,9 +4,98 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfManagerApp1.Views.Windows"
+        xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
         mc:Ignorable="d"
-        Title="AddNewWorkWindow" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AddNewWorkWindowVM/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Label 
+            Grid.Row="1" 
+            Content="Создание нового задания"
+            HorizontalContentAlignment="Center"
+            FontSize="22"/>
+        <Label
+            Grid.Row="2"
+            VerticalAlignment="Bottom"
+            Content="Название"
+            Margin="85 0 0 0"
+            FontSize="12"
+            />
+        <TextBox
+            VerticalAlignment="Top"
+            Margin="80 0 80 0"
+            Height="30"
+            Grid.Row="3"
+            Text="Введите название"
+            FontSize="16"
+            Foreground="Gray"
+            />
+        <Label
+            Grid.Row="4"
+            VerticalAlignment="Bottom"
+            Content="Описание"
+            Margin="85 0 0 0"
+            FontSize="12"
+            />
+        <TextBox
+            VerticalAlignment="Top"
+            Margin="80 0 80 0"
+            Height="30"
+            Grid.Row="5"
+            Text="Напишите описание"
+            FontSize="16"
+            Foreground="Gray"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"/>
+        <Label
+            Grid.Row="7"
+            Content="Важность задания"
+            Margin="85 0 0 0"
+            VerticalAlignment="Bottom"
+            />
+        <ComboBox
+            Grid.Row="7"
+            Width="300"
+            HorizontalAlignment="Center"
+            DataContext="{Binding Path=ImportanceList}"
+            >
+        </ComboBox>
+        <Label
+            Grid.Row="9"
+            Content="Тип задания"
+            Margin="85 0 0 0"
+            VerticalAlignment="Bottom"
+            />
+        <ComboBox
+            Grid.Row="9"
+            Width="300"
+            HorizontalAlignment="Center"
+            />
+        <Button
+            Grid.Row="11"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Height="40"
+            Width="250"
+            Content="Создать"
+            FontSize="19"
+            />
     </Grid>
 </Window>

@@ -22,9 +22,7 @@
             <TabItem Header="Все дела">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition>
-
-                        </ColumnDefinition>
+                        <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid
