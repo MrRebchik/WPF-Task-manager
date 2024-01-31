@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfManagerApp1.Services;
 
 namespace WpfManagerApp1.Views.Windows
 {
@@ -19,14 +20,11 @@ namespace WpfManagerApp1.Views.Windows
     /// </summary>
     public partial class AddNewWorkWindow : Window
     {
+        public WorksRouter WorksRouter { get; set; }
         public AddNewWorkWindow()
         {
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

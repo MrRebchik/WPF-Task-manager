@@ -8,6 +8,7 @@ using WpfManagerApp1.Model;
 using System.Collections.ObjectModel;
 using System.Security.Policy;
 using System.Collections.Generic;
+using WpfManagerApp1.Views.Windows;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -53,7 +54,7 @@ namespace WpfManagerApp1.ViewModel
         #endregion
 
         #region ImportanceList
-        private List<string> importanceList = new List<string>
+        private ObservableCollection<string> importanceList = new ObservableCollection<string>
         {
             "Низкая важность",
             "Обычная важность",
@@ -61,7 +62,7 @@ namespace WpfManagerApp1.ViewModel
             "Максимальная важность",
         };
 
-        public List<string> ImportanceList { get => importanceList; }
+        public ObservableCollection<string> ImportanceList { get => importanceList; }
         #endregion
 
         private string selectedImportance;
@@ -75,14 +76,21 @@ namespace WpfManagerApp1.ViewModel
         private bool CanCreateNewWorkCommandExecute(object parameter) => true;
         private void OnCreateNewWorkCommandExecuted(object parameter)
         {
-            WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });
+            WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription });
+            foreach(Window w in App.Current.Windows)
+            {
+                if(w is AddNewWorkWindow)
+                    w.Close();
+            }
         }
 
         #endregion
 
-        public AddNewWorkWindowVM(WorksRouter wr)
+        public AddNewWorkWindowVM()
         {
-            WorksRouter = wr;
+            WorksRouter = MainWindowVM.WorksRouter;
+
+            CreateNewWorkCommand = new RelayCommand(OnCreateNewWorkCommandExecuted, CanCreateNewWorkCommandExecute);
         }
 
     }

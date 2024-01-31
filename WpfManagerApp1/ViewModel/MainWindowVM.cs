@@ -6,6 +6,7 @@ using WpfManagerApp1.Services;
 using WpfManagerApp1.Data;
 using WpfManagerApp1.Model;
 using System.Collections.ObjectModel;
+using WpfManagerApp1.Views.Windows;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -22,13 +23,21 @@ namespace WpfManagerApp1.ViewModel
         }
         #endregion
 
+        public ICommand AddNewWorkCommand { get; }
+        private bool CanAddNewWorkCommandExecute(object parameter) => true;
+        private void OnAddNewWorkCommandExecuted(object parameter)
+        {
+            AddNewWorkWindow addNewWorkWindow = new AddNewWorkWindow();
+            addNewWorkWindow.Show();
+        }
+
         #endregion
 
         #region Свойства
 
         #region Связь с Model
         public DataProvider DataProvider { get; }
-        public WorksRouter WorksRouter { get; }
+        static public WorksRouter WorksRouter { get; set; } // КОСТЫЛИ
         public DayPlanManager DayPlanManager { get; }
         #endregion
 
@@ -57,6 +66,17 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
+        #region Методы
+
+        private void OnWorkListUpdated()
+        {
+            //WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
+            WorksCollection.Add(WorksRouter.GetWorks()[WorksRouter.GetWorks().Count-1]);
+            OnPropertyChanged();
+        }
+
+        #endregion
+
         public MainWindowVM()
         {
 
@@ -71,6 +91,13 @@ namespace WpfManagerApp1.ViewModel
             #region Команды
 
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
+
+            #endregion
+
+            #region Подписка на события
+
+            WorksRouter.DataUpdated += OnWorkListUpdated;
 
             #endregion
         }

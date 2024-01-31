@@ -43,10 +43,14 @@
             Margin="80 0 80 0"
             Height="30"
             Grid.Row="3"
-            Text="Введите название"
+            Text="{Binding Path=WorkName}"
             FontSize="16"
             Foreground="Gray"
-            />
+            
+            
+            >
+            
+        </TextBox>
         <Label
             Grid.Row="4"
             VerticalAlignment="Bottom"
@@ -59,7 +63,7 @@
             Margin="80 0 80 0"
             Height="30"
             Grid.Row="5"
-            Text="Напишите описание"
+            Text="{Binding Path=WorkDescription}"
             FontSize="16"
             Foreground="Gray"
             TextWrapping="Wrap"
@@ -74,8 +78,8 @@
             Grid.Row="7"
             Width="300"
             HorizontalAlignment="Center"
-            DataContext="{Binding Path=ImportanceList}"
             >
+            <ComboBoxItem DataContext="{Binding Path=ImportanceList}"/>
         </ComboBox>
         <Label
             Grid.Row="9"
@@ -96,6 +100,7 @@
             Width="250"
             Content="Создать"
             FontSize="19"
+            Command="{Binding Path=CreateNewWorkCommand}"
             />
     </Grid>
 </Window>
