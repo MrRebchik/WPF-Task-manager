@@ -4,7 +4,7 @@ namespace WpfManagerApp1.Model
 {
     public class UniqueWork : Work
     {
-        private bool isTimeLimited;
+        private bool isTimeLimited = false;
         private DateTime deadLine;
         private int attemptsCount;
 
@@ -25,6 +25,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 deadLine = value;
+                isTimeLimited = true;
                 OnWorkPropertyChanged();
             }
         }

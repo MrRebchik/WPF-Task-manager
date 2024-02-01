@@ -83,9 +83,9 @@ namespace Model.Test
             var b = a.GetWorks(SortFilters.ByImmediacy);
 
             Assert.AreEqual(3, b.Count);
-            Assert.AreEqual("Previous", b[0].Name);
-            Assert.AreEqual("Next", b[1].Name);
-            Assert.AreEqual("Last", b[2].Name);
+            Assert.AreEqual("Что делать в первую очередь - начать курсач", b[0].Name);
+            Assert.AreEqual("Второй очередности - помыть обувь", b[1].Name);
+            Assert.AreEqual("Самое позднее - настроить гитару", b[2].Name);
         }
 
         [TestMethod]
@@ -98,11 +98,11 @@ namespace Model.Test
             var b = a.GetWorks(SortFilters.ByImmediacyWithHabits);
 
             Assert.AreEqual(5, b.Count);
-            Assert.AreEqual("Previous", b[0].Name);
-            Assert.AreEqual("Next", b[1].Name);
-            Assert.AreEqual("Last", b[2].Name);
-            Assert.AreEqual("Routine0", b[3].Name);
-            Assert.AreEqual("Routine1", b[4].Name);
+            Assert.AreEqual("Что делать в первую очередь - начать курсач", b[0].Name);
+            Assert.AreEqual("Второй очередности - помыть обувь", b[1].Name);
+            Assert.AreEqual("Самое позднее - настроить гитару", b[2].Name);
+            Assert.AreEqual("Ложиться до 23 часов", b[3].Name);
+            Assert.AreEqual("Стелить кровать", b[4].Name);
         }
 
         [TestMethod]
@@ -115,11 +115,11 @@ namespace Model.Test
             var b = a.GetWorks(SortFilters.ByImmediacyWithHabitsDescending);
 
             Assert.AreEqual(5, b.Count);
-            Assert.AreEqual("Last", b[0].Name);
-            Assert.AreEqual("Next", b[1].Name);
-            Assert.AreEqual("Previous", b[2].Name);
-            Assert.AreEqual("Routine0", b[3].Name);
-            Assert.AreEqual("Routine1", b[4].Name);
+            Assert.AreEqual("Самое позднее - настроить гитару", b[0].Name);
+            Assert.AreEqual("Второй очередности - помыть обувь", b[1].Name);
+            Assert.AreEqual("Что делать в первую очередь - начать курсач", b[2].Name);
+            Assert.AreEqual("Ложиться до 23 часов", b[3].Name);
+            Assert.AreEqual("Стелить кровать", b[4].Name);
         }
 
         [TestMethod]

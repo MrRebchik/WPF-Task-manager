@@ -79,7 +79,6 @@
             Width="300"
             HorizontalAlignment="Center"
             >
-            <ComboBoxItem DataContext="{Binding Path=ImportanceList}"/>
         </ComboBox>
         <Label
             Grid.Row="9"

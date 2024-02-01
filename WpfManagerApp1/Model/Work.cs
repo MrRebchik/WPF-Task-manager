@@ -33,7 +33,7 @@ namespace WpfManagerApp1.Model
         private Importance importance;
         private int durationInMinutes;
         private DateTime creationDate;
-        private bool isHighPriority;
+        private bool isHighPriority = false;
         private EisenhowerMatrixCell eisenhowerMatrixCell;
         #endregion
 
