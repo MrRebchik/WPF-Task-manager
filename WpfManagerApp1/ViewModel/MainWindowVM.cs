@@ -23,12 +23,24 @@ namespace WpfManagerApp1.ViewModel
         }
         #endregion
 
+        #region AddNewWorkCommand
         public ICommand AddNewWorkCommand { get; }
         private bool CanAddNewWorkCommandExecute(object parameter) => true;
         private void OnAddNewWorkCommandExecuted(object parameter)
         {
             AddNewWorkWindow addNewWorkWindow = new AddNewWorkWindow();
             addNewWorkWindow.Show();
+        } 
+        #endregion
+
+        public ICommand DeleteSelectedWorkCommand { get; }
+        private bool CanDeleteSelectedWorkCommandExecute (object parameter)
+        {
+            return SelectedWorkInFullList!=null;
+        }
+        private void OnDeleteSelectedWorkCommandExecuted (object parameter)
+        {
+            WorksCollection.Remove(SelectedWorkInFullList);
         }
 
         #endregion
@@ -48,8 +60,21 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
+
+        #region SelectedWorkInFullList - выбранный элемент в полном списке
+
+        private Work selectedWorkInFullList;
+        /// <summary>
+        /// Выбранный элемент в полном списке
+        /// </summary>
+        public Work SelectedWorkInFullList { get => selectedWorkInFullList; set => Set(ref selectedWorkInFullList, value); } 
+
+        #endregion
+
+
         #region Title - название окна
         private string _title = "Планировщик";
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -92,6 +117,7 @@ namespace WpfManagerApp1.ViewModel
 
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
+            DeleteSelectedWorkCommand = new RelayCommand(OnDeleteSelectedWorkCommandExecuted, CanDeleteSelectedWorkCommandExecute);
 
             #endregion
 

@@ -73,9 +73,11 @@
                                 />
                             <Button
                                 Content="Удалить задание"
+                                Command="{Binding DeleteSelectedWorkCommand}"
                                 />
                         </StackPanel>
-                        <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedWorkInFullList}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
