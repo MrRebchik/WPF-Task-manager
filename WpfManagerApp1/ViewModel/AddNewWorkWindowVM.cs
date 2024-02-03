@@ -9,6 +9,9 @@ using System.Collections.ObjectModel;
 using System.Security.Policy;
 using System.Collections.Generic;
 using WpfManagerApp1.Views.Windows;
+using System;
+using System.Xml.Linq;
+using System.Dynamic;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -53,8 +56,8 @@ namespace WpfManagerApp1.ViewModel
         public Dictionary<string, Importance> ImportanceMap { get => importanceMap;}
         #endregion
 
-        #region ImportanceList
-        private ObservableCollection<string> importanceList = new ObservableCollection<string>
+        #region importanceList
+        private List<string> importanceList = new List<string>
         {
             "Низкая важность",
             "Обычная важность",
@@ -62,11 +65,38 @@ namespace WpfManagerApp1.ViewModel
             "Максимальная важность",
         };
 
-        public ObservableCollection<string> ImportanceList { get => importanceList; }
+        public List<string> ImportanceList { get => importanceList; }
+
         #endregion
 
+        #region TypesMap
+        private Dictionary<string, Type> typesMap = new Dictionary<string, Type>
+        {
+            {"Единичное задание" , typeof(UniqueWork) },
+            {"Повторяющееся задание" , typeof(RegularWork)},
+        };
+
+        public Dictionary<string, Type> TypesMap { get => typesMap; }
+        #endregion
+
+        #region importanceList
+        private List<string> typesList = new List<string>
+        {
+            "Единичное задание",
+            "Повторяющееся задание",
+        };
+
+        public List<string> TypesList { get => typesList; }
+
+        #endregion
+
+        #region Selected Importance, Type
         private string selectedImportance;
-        public string SelectedImportance { get => selectedImportance; set => Set( ref selectedImportance, value); }
+        public string SelectedImportance { get => selectedImportance; set => Set(ref selectedImportance, value); }
+
+        private string selectedType;
+        public string SelectedType { get => selectedType; set => Set(ref selectedType, value); } 
+        #endregion
 
         #endregion
 
@@ -76,8 +106,10 @@ namespace WpfManagerApp1.ViewModel
         private bool CanCreateNewWorkCommandExecute(object parameter) => true;
         private void OnCreateNewWorkCommandExecuted(object parameter)
         {
-            WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription });
-            foreach(Window w in App.Current.Windows)
+            if (selectedType == "Единичное задание") WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });
+            else WorksRouter.AddWork(new RegularWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });
+            
+            foreach (Window w in App.Current.Windows)
             {
                 if(w is AddNewWorkWindow)
                     w.Close();

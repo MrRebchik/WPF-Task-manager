@@ -25,6 +25,5 @@ namespace WpfManagerApp1.Views.Windows
         {
             InitializeComponent();
         }
-
     }
 }
