@@ -21,6 +21,7 @@ namespace WpfManagerApp1.Data
                 DeadLine = new DateTime(2024, 9, 20),
                 EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantUnmmediately,
                 DurationInMinutes = 20,
+                Completeness = CompleteStatus.Done,
             };
             UniqueWork work1 = new UniqueWork(2)
             {
@@ -30,6 +31,7 @@ namespace WpfManagerApp1.Data
                 DeadLine = new DateTime(2024, 2, 29),
                 EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantImmediately,
                 DurationInMinutes = 50,
+                Completeness = CompleteStatus.Frozen,
             };
             UniqueWork work2 = new UniqueWork(3)
             {

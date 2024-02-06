@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
         Title="{Binding Path=Title}" 
-        Height="450" Width="800">
+        MinHeight="600" MinWidth="1000">
     <Window.DataContext>
         <vm:MainWindowVM/>
     </Window.DataContext>
@@ -77,12 +77,55 @@
                                 />
                         </StackPanel>
                         <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedItem="{Binding SelectedWorkInFullList}">
+                                  SelectedItem="{Binding SelectedWorkInFullList}"
+                                  >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Importance}">Важность</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Completeness}">Статус</GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Name="Importance" Text="{Binding Path=Importance}"/>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Importance}" Value="Low">
+                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Низкая"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Importance}" Value="Medium">
+                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Нормальная"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Importance}" Value="High">
+                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Высокая"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Importance}" Value="Max">
+                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Максимальная"/>
+                                                        <Setter TargetName="Importance" Property="TextBlock.Foreground" Value="#FFEE1C1C"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        Важность
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Name="Completeness" Text="{Binding Path=Completeness}"/>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Completeness}" Value="Waiting">
+                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Активное"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Completeness}" Value="Done">
+                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Выполнено"/>
+                                                        <Setter TargetName="Completeness" Property="TextBlock.Foreground" Value="#FF64BE0C"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Completeness}" Value="Frozen">
+                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Отложено"/>
+                                                        <Setter TargetName="Completeness" Property="TextBlock.Foreground" Value="#FFB8B4B4"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        Статус
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
