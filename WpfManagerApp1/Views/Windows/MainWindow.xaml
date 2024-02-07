@@ -78,7 +78,21 @@
                         </StackPanel>
                         <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedWorkInFullList}"
+                                  SelectionMode="Single"
                                   >
+                            <!--<ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>                ТУТ ПОПЫТКА РЕФАКТОРИТЬ ТО ListView
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>-->
+                            
+                            
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
@@ -126,8 +140,14 @@
                                         </GridViewColumn.CellTemplate>
                                         Статус
                                     </GridViewColumn>
+
                                 </GridView>
                             </ListView.View>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Height" Value="35"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                         </ListView>
                     </DockPanel>
                 </Grid>
