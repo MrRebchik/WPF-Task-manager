@@ -36,26 +36,103 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label 
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label 
                             Grid.Column="0"
                             Grid.Row="0"
                             Content="Важные строчные"
                             />
-                        <Label 
-                            Grid.Column="1"
+                            <ListView
+                                Grid.Row="1"
+                                ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
+                                >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </Grid>
+                        
+                        <Grid 
+                            Grid.Row="1"
+                            Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label 
+                            Grid.Column="0"
                             Grid.Row="0"
                             Content="Важные не строчные"
                             />
-                        <Label 
+                            <ListView
+                                Grid.Row="1"
+                                ItemsSource="{Binding ImportantUnimmediatelyWorksCollection}"
+                                >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </Grid>
+                        
+                        <Grid Grid.Row="0"
+                              Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label 
                             Grid.Column="0"
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Content="Не важные строчные"
                             />
-                        <Label 
-                            Grid.Column="1"
-                            Grid.Row="1"
+                            <ListView
+                                Grid.Row="1"
+                                ItemsSource="{Binding UnimportantImmediatelyWorksCollection}"
+                                >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </Grid>
+                        
+                        <Grid Grid.Row="1"
+                              Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label 
+                            Grid.Column="0"
+                            Grid.Row="0"
                             Content="Не важные не строчные"
                             />
+                            <ListView
+                                Grid.Row="1"
+                                ItemsSource="{Binding UnimportantUnimmediatelyWorksCollection}"
+                                >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </Grid>
+                        
                     </Grid>
                     <DockPanel
                         Grid.Column="1">

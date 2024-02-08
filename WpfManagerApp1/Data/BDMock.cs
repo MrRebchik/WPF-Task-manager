@@ -19,7 +19,7 @@ namespace WpfManagerApp1.Data
                 Description = "Взять гиатру и тюнер и настроить гитару.",
                 Importance = Importance.Low,
                 DeadLine = new DateTime(2024, 9, 20),
-                EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantUnmmediately,
+                EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantUnimmediately,
                 DurationInMinutes = 20,
                 Completeness = CompleteStatus.Done,
             };
@@ -56,7 +56,7 @@ namespace WpfManagerApp1.Data
                 Name = "Стелить кровать",
                 Description = "Ввести себе привычук стелить кровать сразу как проснулся",
                 Importance = Importance.Low,
-                EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantUnmmediately,
+                EisenhowerMatrixCell = EisenhowerMatrixCell.UnimportantUnimmediately,
                 IsHabit = true,
                 DurationInMinutes = 3,
             };

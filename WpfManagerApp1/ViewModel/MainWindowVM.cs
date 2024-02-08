@@ -7,6 +7,7 @@ using WpfManagerApp1.Data;
 using WpfManagerApp1.Model;
 using System.Collections.ObjectModel;
 using WpfManagerApp1.Views.Windows;
+using System.Linq;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -55,7 +56,18 @@ namespace WpfManagerApp1.ViewModel
 
         #region Коллекции
 
-        public ObservableCollection <Work> WorksCollection { get; set; }
+        #region Коллекции дел
+
+        public ObservableCollection<Work> WorksCollection { get; set; }
+
+        public ObservableCollection<Work> ImportantImmediatelyWorksCollection { get; set; }
+        public ObservableCollection<Work> ImportantUnimmediatelyWorksCollection { get; set; }
+        public ObservableCollection<Work> UnimportantImmediatelyWorksCollection { get; set; }
+        public ObservableCollection<Work> UnimportantUnimmediatelyWorksCollection { get; set; }
+
+
+        #endregion
+
         public ObservableCollection<DayPlan> DayPlanCollection { get; set; }
 
         #endregion
@@ -111,6 +123,15 @@ namespace WpfManagerApp1.ViewModel
             DayPlanManager = new DayPlanManager(DataProvider);
 
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
+            ImportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
+                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantImmediately));
+            UnimportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
+                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantImmediately));
+            ImportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
+                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantUnimmediately));
+            UnimportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
+                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantUnimmediately));
+
             #endregion
 
             #region Команды

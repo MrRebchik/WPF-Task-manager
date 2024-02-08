@@ -19,7 +19,7 @@ namespace WpfManagerApp1.Model
         ImportantImmediately,
         ImportantUnimmediately,
         UnimportantImmediately,
-        UnimportantUnmmediately
+        UnimportantUnimmediately
     }
     #endregion
 
