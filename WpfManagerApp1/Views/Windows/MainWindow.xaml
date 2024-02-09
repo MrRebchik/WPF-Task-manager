@@ -155,8 +155,11 @@
                         </StackPanel>
                         <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedWorkInFullList}"
-                                  SelectionMode="Single"
-                                  >
+                                  SelectionMode="Single">
+
+                            
+                                  
+                                  
                             <!--<ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>                ТУТ ПОПЫТКА РЕФАКТОРИТЬ ТО ListView

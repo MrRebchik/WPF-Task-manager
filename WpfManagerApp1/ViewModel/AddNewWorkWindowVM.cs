@@ -22,6 +22,8 @@ namespace WpfManagerApp1.ViewModel
 
         WorksRouter WorksRouter { get; set; }
 
+        ObservableCollection<Work> WorksCollection { get; set; }
+
         #region Title - название окнa
         private string title = "Создание нового задания";
         
@@ -42,7 +44,6 @@ namespace WpfManagerApp1.ViewModel
 
         public string WorkDescription { get => workDescription; set => Set(ref workDescription, value); }
         #endregion
-
 
         #region ImportanceMap
         private Dictionary<string, Importance> importanceMap = new Dictionary<string, Importance>
@@ -123,11 +124,13 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public AddNewWorkWindowVM()
+        public AddNewWorkWindowVM(WorksRouter worksRouter, ObservableCollection<Work> worksCollection)
         {
-            WorksRouter = MainWindowVM.WorksRouter;
+            WorksRouter = worksRouter;
+            WorksCollection = worksCollection;
 
             CreateNewWorkCommand = new RelayCommand(OnCreateNewWorkCommandExecuted, CanCreateNewWorkCommandExecute);
+            WorksCollection = worksCollection;
         }
 
     }

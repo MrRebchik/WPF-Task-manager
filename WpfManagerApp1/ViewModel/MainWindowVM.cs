@@ -29,13 +29,21 @@ namespace WpfManagerApp1.ViewModel
         private bool CanAddNewWorkCommandExecute(object parameter) => true;
         private void OnAddNewWorkCommandExecuted(object parameter)
         {
-            AddNewWorkWindow addNewWorkWindow = new AddNewWorkWindow();
+            AddNewWorkWindowVM addNewWorkWindowVM = new AddNewWorkWindowVM(WorksRouter, WorksCollection);
+
+            AddNewWorkWindow addNewWorkWindow = new AddNewWorkWindow()
+            {
+                DataContext = addNewWorkWindowVM,
+            };
             addNewWorkWindow.Show();
         } 
         #endregion
 
+
         public ICommand DeleteSelectedWorkCommand { get; }
+
         private bool CanDeleteSelectedWorkCommandExecute (object parameter)
+
         {
             return SelectedWorkInFullList!=null;
         }
@@ -50,7 +58,7 @@ namespace WpfManagerApp1.ViewModel
 
         #region Связь с Model
         public DataProvider DataProvider { get; }
-        static public WorksRouter WorksRouter { get; set; } // КОСТЫЛИ
+        public WorksRouter WorksRouter { get; set; }
         public DayPlanManager DayPlanManager { get; }
         #endregion
 
@@ -105,10 +113,16 @@ namespace WpfManagerApp1.ViewModel
 
         #region Методы
 
+        #region Drag Drop
+
+
+
+        #endregion
+
         private void OnWorkListUpdated()
         {
             //WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
-            WorksCollection.Add(WorksRouter.GetWorks()[WorksRouter.GetWorks().Count-1]);
+            WorksCollection.Add(WorksRouter.GetWorks()[WorksRouter.GetWorks().Count-1]);  // КОСТЫЛЬ
             OnPropertyChanged();
         }
 
