@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfManagerApp1"
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
+        xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
         Title="{Binding Path=Title}" 
         MinHeight="600" MinWidth="1000">
     <Window.DataContext>
@@ -50,6 +51,8 @@
                             <ListView
                                 Grid.Row="1"
                                 ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
+                                AllowDrop="True"
+                                Drop="WorkListView_Drop"
                                 >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -171,15 +174,15 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>-->
-                            
-                            
+
+
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
                                     <GridViewColumn>
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Name="Importance" Text="{Binding Path=Importance}"/>
+                                                <TextBlock Name="Importance"  Text="{Binding Path=Importance}"/>
                                                 <DataTemplate.Triggers>
                                                     <DataTrigger Binding="{Binding Importance}" Value="Low">
                                                         <Setter TargetName="Importance" Property="TextBlock.Text" Value="Низкая"/>
@@ -226,6 +229,7 @@
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Height" Value="35"/>
+                                    <EventSetter Event="MouseMove" Handler="Work_MouseMove"/>
                                 </Style>
                             </ListView.ItemContainerStyle>
                         </ListView>

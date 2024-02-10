@@ -20,9 +20,35 @@ namespace WpfManagerApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static readonly DependencyProperty WorkDropCommandProperty =
+            DependencyProperty.Register("WorkDropCommand",typeof(ICommand),typeof(MainWindow),new PropertyMetadata(null));
+
+        public ICommand WorkDropCommand
+        {
+            get { return (ICommand)GetValue(WorkDropCommandProperty); }
+            set { SetValue(WorkDropCommandProperty, value);}
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Work_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed &&
+                sender is FrameworkElement frameworkElement)
+            {
+                DragDrop.DoDragDrop(frameworkElement, new DataObject(DataFormats.Serializable, frameworkElement.DataContext), DragDropEffects.Copy);
+            }
+        }
+
+        private void WorkListView_Drop(object sender, DragEventArgs e)
+        {
+            if(WorkDropCommand?.CanExecute(null)?? false)
+            {
+                WorkDropCommand?.Execute(null);
+            }
         }
     }
 }

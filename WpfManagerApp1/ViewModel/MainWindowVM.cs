@@ -36,21 +36,42 @@ namespace WpfManagerApp1.ViewModel
                 DataContext = addNewWorkWindowVM,
             };
             addNewWorkWindow.Show();
-        } 
+        }
         #endregion
 
+        #region DeleteSelectedWorkCommand
 
         public ICommand DeleteSelectedWorkCommand { get; }
 
-        private bool CanDeleteSelectedWorkCommandExecute (object parameter)
+        private bool CanDeleteSelectedWorkCommandExecute(object parameter)
 
         {
-            return SelectedWorkInFullList!=null;
+            return SelectedWorkInFullList != null;
         }
-        private void OnDeleteSelectedWorkCommandExecuted (object parameter)
+        private void OnDeleteSelectedWorkCommandExecuted(object parameter)
         {
             WorksCollection.Remove(SelectedWorkInFullList);
         }
+
+        #endregion
+
+        #region Drag Drop
+
+        #region WorkItemReceivedCommand
+
+        public ICommand WorkItemReceivedCommand { get; }
+
+        private bool CanWorkItemReceivedCommandExecute(object parameter) => true;
+
+        private void OnWorkItemReceivedCommandExecuted(object parameter)
+        {
+
+        }
+
+        #endregion 
+
+        #endregion
+
 
         #endregion
 
@@ -113,11 +134,6 @@ namespace WpfManagerApp1.ViewModel
 
         #region Методы
 
-        #region Drag Drop
-
-
-
-        #endregion
 
         private void OnWorkListUpdated()
         {
@@ -153,6 +169,7 @@ namespace WpfManagerApp1.ViewModel
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
             DeleteSelectedWorkCommand = new RelayCommand(OnDeleteSelectedWorkCommandExecuted, CanDeleteSelectedWorkCommandExecute);
+            WorkItemReceivedCommand = new RelayCommand(OnWorkItemReceivedCommandExecuted, CanWorkItemReceivedCommandExecute);
 
             #endregion
 
