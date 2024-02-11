@@ -20,14 +20,14 @@ namespace WpfManagerApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static readonly DependencyProperty WorkDropCommandProperty =
-            DependencyProperty.Register("WorkDropCommand",typeof(ICommand),typeof(MainWindow),new PropertyMetadata(null));
+        //public static readonly DependencyProperty WorkDropCommandProperty =
+        //    DependencyProperty.Register("WorkDropCommand",typeof(ICommand),typeof(MainWindow),new PropertyMetadata(null));
 
-        public ICommand WorkDropCommand
-        {
-            get { return (ICommand)GetValue(WorkDropCommandProperty); }
-            set { SetValue(WorkDropCommandProperty, value);}
-        }
+        //public ICommand WorkDropCommand
+        //{
+        //    get { return (ICommand)GetValue(WorkDropCommandProperty); }
+        //    set { SetValue(WorkDropCommandProperty, value);}
+        //}
 
         public MainWindow()
         {
@@ -43,12 +43,12 @@ namespace WpfManagerApp1
             }
         }
 
-        private void WorkListView_Drop(object sender, DragEventArgs e)
-        {
-            if(WorkDropCommand?.CanExecute(null)?? false)
-            {
-                WorkDropCommand?.Execute(null);
-            }
-        }
+        //private void WorkListView_Drop(object sender, DragEventArgs e)
+        //{
+        //    if(WorkDropCommand?.CanExecute(null)?? false)
+        //    {
+        //        WorkDropCommand?.Execute(null);
+        //    }
+        //}
     }
 }

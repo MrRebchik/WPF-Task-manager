@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
         xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
         Title="{Binding Path=Title}" 
-        MinHeight="600" MinWidth="1000">
+        MinHeight="600" MinWidth="1000"
+        >
     <Window.DataContext>
         <vm:MainWindowVM/>
     </Window.DataContext>
@@ -49,11 +50,14 @@
                             Content="Важные строчные"
                             />
                             <ListView
+                                x:Name="MatrixList"
                                 Grid.Row="1"
                                 ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
-                                AllowDrop="True"
-                                Drop="WorkListView_Drop"
-                                >
+                                AllowDrop="True">
+                                <!--Drop="WorkListView_Drop"-->
+                                
+                                
+                                
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
