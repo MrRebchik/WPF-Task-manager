@@ -55,6 +55,8 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
+        
+
         #region Drag Drop
 
         #region WorkItemReceivedCommand

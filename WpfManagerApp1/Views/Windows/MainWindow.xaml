@@ -9,6 +9,7 @@
         xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
         Title="{Binding Path=Title}" 
         MinHeight="600" MinWidth="1000"
+        
         >
     <Window.DataContext>
         <vm:MainWindowVM/>
@@ -21,6 +22,7 @@
         </Menu>
         
         <TabControl>
+            
             <TabItem Header="Все дела">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -53,10 +55,15 @@
                                 x:Name="MatrixList"
                                 Grid.Row="1"
                                 ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
-                                AllowDrop="True">
-                                <!--Drop="WorkListView_Drop"-->
+                                AllowDrop="True"
+                                Drop="WorkListView_Drop">
                                 
-                                
+
+                                <!--<ListView.ItemContainerStyle>
+                                    <Style>
+                                        <EventSetter Event="work"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>-->
                                 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -234,6 +241,7 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Height" Value="35"/>
                                     <EventSetter Event="MouseMove" Handler="Work_MouseMove"/>
+                                    <!--<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>-->
                                 </Style>
                             </ListView.ItemContainerStyle>
                         </ListView>
