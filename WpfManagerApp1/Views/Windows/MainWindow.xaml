@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfManagerApp1"
+        xmlns:uc="clr-namespace:WpfManagerApp1.Views.UserControls"
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
         xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
@@ -167,14 +168,17 @@
                                 Command="{Binding DeleteSelectedWorkCommand}"
                                 />
                         </StackPanel>
-                        <ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
+                        <uc:MainWorkList>
+                            
+                        </uc:MainWorkList>
+                        <!--<ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedWorkInFullList}"
                                   SelectionMode="Single">
 
                             
                                   
                                   
-                            <!--<ListView.ItemTemplate>
+                            --><!--<ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>                ТУТ ПОПЫТКА РЕФАКТОРИТЬ ТО ListView
                                         <Grid.ColumnDefinitions>
@@ -184,7 +188,7 @@
                                         </Grid.ColumnDefinitions>
                                     </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>-->
+                            </ListView.ItemTemplate>--><!--
 
 
                             <ListView.View>
@@ -241,10 +245,10 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Height" Value="35"/>
                                     <EventSetter Event="MouseMove" Handler="Work_MouseMove"/>
-                                    <!--<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>-->
+                                    --><!--<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>--><!--
                                 </Style>
                             </ListView.ItemContainerStyle>
-                        </ListView>
+                        </ListView>-->
                     </DockPanel>
                 </Grid>
             </TabItem>

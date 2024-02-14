@@ -24,5 +24,13 @@ namespace WpfManagerApp1.Views.UserControls
         {
             InitializeComponent();
         }
+        private void Work_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                sender is FrameworkElement frameworkElement)
+            {
+                DragDrop.DoDragDrop(frameworkElement, new DataObject(DataFormats.Serializable, frameworkElement.DataContext), DragDropEffects.Copy);
+            }
+        }
     }
 }
