@@ -13,6 +13,17 @@ namespace WpfManagerApp1.ViewModel
 {
     internal class MainWindowVM : ViewModelBase
     {
+        #region Другие VM
+        
+        private MainWorkListVM mainWorkListVM;
+        public MainWorkListVM MainWorkListVM 
+        { 
+            get => mainWorkListVM; 
+            set => Set(ref mainWorkListVM, value); 
+        }
+
+        #endregion
+
         #region Команды
 
         #region CloseApplicationCommand
@@ -103,7 +114,6 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-
         #region SelectedWorkInFullList - выбранный элемент в полном списке
 
         private Work selectedWorkInFullList;
@@ -114,9 +124,9 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-
         #region Title - название окна
         private string _title = "Планировщик";
+        
 
         /// <summary>
         /// Заголовок окна
@@ -146,26 +156,34 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public MainWindowVM()
+        public MainWindowVM(MainWorkListVM _mainWindowVM)
         {
+            
 
             #region Связь с Model
+
             DataProvider = new BDMock();
             WorksRouter = new WorksRouter(DataProvider);
             DayPlanManager = new DayPlanManager(DataProvider);
 
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
+
             ImportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
                 .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantImmediately));
+
             UnimportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
                 .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantImmediately));
+
             ImportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
                 .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantUnimmediately));
+
             UnimportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
                 .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantUnimmediately));
 
             #endregion
-
+            
+            this.MainWorkListVM = _mainWindowVM;
+            
             #region Команды
 
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);

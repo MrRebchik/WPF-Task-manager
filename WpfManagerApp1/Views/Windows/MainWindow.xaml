@@ -10,20 +10,15 @@
         xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
         Title="{Binding Path=Title}" 
         MinHeight="600" MinWidth="1000"
-        
         >
-    <Window.DataContext>
-        <vm:MainWindowVM/>
-    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
                 <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
             </MenuItem>
         </Menu>
-        
+
         <TabControl>
-            
             <TabItem Header="Все дела">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -41,7 +36,6 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
@@ -53,19 +47,18 @@
                             Content="Важные строчные"
                             />
                             <ListView
-                                x:Name="MatrixList"
                                 Grid.Row="1"
                                 ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
                                 AllowDrop="True"
-                                Drop="WorkListView_Drop">
-                                
+                                >
+                                <!--Drop="WorkListView_Drop"-->
 
                                 <!--<ListView.ItemContainerStyle>
                                     <Style>
                                         <EventSetter Event="work"/>
                                     </Style>
                                 </ListView.ItemContainerStyle>-->
-                                
+
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
@@ -74,7 +67,7 @@
 
                             </ListView>
                         </Grid>
-                        
+
                         <Grid 
                             Grid.Row="1"
                             Grid.Column="0">
@@ -99,7 +92,7 @@
 
                             </ListView>
                         </Grid>
-                        
+
                         <Grid Grid.Row="0"
                               Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -123,7 +116,7 @@
 
                             </ListView>
                         </Grid>
-                        
+
                         <Grid Grid.Row="1"
                               Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -147,7 +140,7 @@
 
                             </ListView>
                         </Grid>
-                        
+
                     </Grid>
                     <DockPanel
                         Grid.Column="1">
@@ -168,94 +161,17 @@
                                 Command="{Binding DeleteSelectedWorkCommand}"
                                 />
                         </StackPanel>
-                        <uc:MainWorkList>
-                            
+                        <uc:MainWorkList
+                            x:Name="MainWorkList"
+                            WorkDropCommand="{Binding WorkItemReceivedCommand}"
+                            >
                         </uc:MainWorkList>
-                        <!--<ListView ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedItem="{Binding SelectedWorkInFullList}"
-                                  SelectionMode="Single">
-
-                            
-                                  
-                                  
-                            --><!--<ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>                ТУТ ПОПЫТКА РЕФАКТОРИТЬ ТО ListView
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            
-                                        </Grid.ColumnDefinitions>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>--><!--
-
-
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
-                                    <GridViewColumn>
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Name="Importance"  Text="{Binding Path=Importance}"/>
-                                                <DataTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding Importance}" Value="Low">
-                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Низкая"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Importance}" Value="Medium">
-                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Нормальная"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Importance}" Value="High">
-                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Высокая"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Importance}" Value="Max">
-                                                        <Setter TargetName="Importance" Property="TextBlock.Text" Value="Максимальная"/>
-                                                        <Setter TargetName="Importance" Property="TextBlock.Foreground" Value="#FFEE1C1C"/>
-                                                    </DataTrigger>
-                                                </DataTemplate.Triggers>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                        Важность
-                                    </GridViewColumn>
-                                    <GridViewColumn>
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Name="Completeness" Text="{Binding Path=Completeness}"/>
-                                                <DataTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding Completeness}" Value="Waiting">
-                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Активное"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Completeness}" Value="Done">
-                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Выполнено"/>
-                                                        <Setter TargetName="Completeness" Property="TextBlock.Foreground" Value="#FF64BE0C"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Completeness}" Value="Frozen">
-                                                        <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Отложено"/>
-                                                        <Setter TargetName="Completeness" Property="TextBlock.Foreground" Value="#FFB8B4B4"/>
-                                                    </DataTrigger>
-                                                </DataTemplate.Triggers>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                        Статус
-                                    </GridViewColumn>
-
-                                </GridView>
-                            </ListView.View>
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="Height" Value="35"/>
-                                    <EventSetter Event="MouseMove" Handler="Work_MouseMove"/>
-                                    --><!--<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>--><!--
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                        </ListView>-->
                     </DockPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Планы по неделям">
-                
+
             </TabItem>
         </TabControl>
-        
     </DockPanel>
 </Window>

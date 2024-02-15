@@ -8,11 +8,29 @@ using System.Windows;
 using WpfManagerApp1.ViewModel.Base;
 using System.Collections.ObjectModel;
 using WpfManagerApp1.Model;
+using WpfManagerApp1.Infrastructure.Commands;
 
 namespace WpfManagerApp1.ViewModel
 {
     internal class MainWorkListVM : ViewModelBase
     {
         public ObservableCollection<Work> WorksCollection { get; set; }
+        public Work SelectedWorkInFullList { get; set; }
+
+        #region Команды
+
+        public ICommand WorkRecieveCommand { get; }
+
+        private void OnWorkRecieveCommandExecuted(object parameter)
+        {
+            
+        }
+
+        #endregion
+
+        public MainWorkListVM()
+        {
+            WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted);
+        }
     }
 }

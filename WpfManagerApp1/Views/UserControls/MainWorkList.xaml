@@ -6,11 +6,7 @@
              xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
              mc:Ignorable="d" 
-
              >
-    <UserControl.DataContext>
-        <vm:MainWorkListVM/>
-    </UserControl.DataContext>
     <Grid>
         <ListView
             ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
@@ -64,13 +60,14 @@
                         </GridViewColumn.CellTemplate>
                         Статус
                     </GridViewColumn>
-
                 </GridView>
             </ListView.View>
+            
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="35"/>
-                    <!--<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>-->
+                    <EventSetter Event="MouseMove" Handler="Work_MouseMove"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>

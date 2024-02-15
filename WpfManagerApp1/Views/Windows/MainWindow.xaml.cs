@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfManagerApp1.ViewModel.Base;
 
 namespace WpfManagerApp1
 {
@@ -20,23 +21,7 @@ namespace WpfManagerApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static readonly DependencyProperty WorkDropCommandProperty =
-            DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(MainWindow), new PropertyMetadata(null));
 
-        public ICommand WorkDropCommand
-        {
-            get { return (ICommand)GetValue(WorkDropCommandProperty); }
-            set { SetValue(WorkDropCommandProperty, value); }
-        }
-
-        //public static readonly DependencyProperty WorkMouseDoubleClickCommandProperty =
-        //    DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(MainWindow), new PropertyMetadata(null));
-
-        //public ICommand WorkMouseDoubleClickCommand
-        //{
-        //    get { return (ICommand)GetValue(WorkMouseDoubleClickCommandProperty); }
-        //    set { SetValue(WorkMouseDoubleClickCommandProperty, value); }
-        //}
 
         public MainWindow()
         {
@@ -52,20 +37,19 @@ namespace WpfManagerApp1
             }
         }
 
-        private void WorkListView_Drop(object sender, DragEventArgs e)
+        private void ListView_Drop(object sender, DragEventArgs e)
         {
-            if (WorkDropCommand?.CanExecute(null) ?? false)
-            {
-                WorkDropCommand?.Execute(null);
-            }
+
         }
 
-        //private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //private void WorkListView_Drop(object sender, DragEventArgs e)
         //{
-        //    if (WorkMouseDoubleClickCommand?.CanExecute(null) ?? false)
+        //    if (WorkDropCommand?.CanExecute(null) ?? false)
         //    {
-        //        WorkMouseDoubleClickCommand?.Execute(null);
+        //        WorkDropCommand?.Execute(null);
         //    }
         //}
+
+
     }
 }
