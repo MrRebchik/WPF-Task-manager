@@ -92,8 +92,15 @@
 
                             </ListView>
                         </Grid>
+                        <uc:EisenhowerMatrixCell Grid.Row="0"
+                                                 Grid.Column="1"
+                                                 DataContext="{Binding UnimportantImmediatelyWorks}"
+                                                 AllowDrop="True"
+                                                 Drop="EisenhowerMatrixCell_Drop">
+                            
+                        </uc:EisenhowerMatrixCell>
 
-                        <Grid Grid.Row="0"
+                        <!--<Grid Grid.Row="0"
                               Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
@@ -115,7 +122,7 @@
                                 </ListView.ItemTemplate>
 
                             </ListView>
-                        </Grid>
+                        </Grid>-->
 
                         <Grid Grid.Row="1"
                               Grid.Column="1">

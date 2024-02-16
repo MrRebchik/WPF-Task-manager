@@ -8,6 +8,7 @@ using WpfManagerApp1.Model;
 using System.Collections.ObjectModel;
 using WpfManagerApp1.Views.Windows;
 using System.Linq;
+using WpfManagerApp1.ViewModel.UserControls;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -140,6 +141,8 @@ namespace WpfManagerApp1.ViewModel
             }
         }
 
+        public EisenhowerMatrixCellVM UnimportantImmediatelyWorks { get; internal set; }
+
         #endregion
 
         #endregion
@@ -156,7 +159,7 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public MainWindowVM(MainWorkListVM _mainWindowVM)
+        public MainWindowVM(MainWorkListVM _mainWindowVM, EisenhowerMatrixCellVM unimportantImmediatelyWorks)
         {
             
 
@@ -183,7 +186,9 @@ namespace WpfManagerApp1.ViewModel
             #endregion
             
             this.MainWorkListVM = _mainWindowVM;
-            
+            UnimportantImmediatelyWorks = unimportantImmediatelyWorks;
+            UnimportantImmediatelyWorks.CellList = UnimportantImmediatelyWorksCollection;
+
             #region Команды
 
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
