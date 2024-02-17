@@ -18,10 +18,19 @@
         <ListView
             Grid.Row="1"
             ItemsSource="{Binding CellList}"
+            SelectedItem="{Binding SelectedWork}"
+            AllowDrop="True"
+            Drop="EisenhowerMatrixCell_Drop"
             >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseMove" Handler="WorkItem_MouseMove"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock 
+                        Text="{Binding Name}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
 

@@ -36,117 +36,35 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label 
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Content="Важные строчные"
-                            />
-                            <ListView
-                                Grid.Row="1"
-                                ItemsSource="{Binding ImportantImmediatelyWorksCollection}"
-                                AllowDrop="True"
-                                >
-                                <!--Drop="WorkListView_Drop"-->
+                        
+                        <uc:EisenhowerMatrixCell Grid.Row="0"
+                                                 Grid.Column="0"
+                                                 DataContext="{Binding ImportantImmediatelyWorks}"
+                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 >
 
-                                <!--<ListView.ItemContainerStyle>
-                                    <Style>
-                                        <EventSetter Event="work"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>-->
-
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                            </ListView>
-                        </Grid>
-
-                        <Grid 
-                            Grid.Row="1"
-                            Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label 
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Content="Важные не строчные"
-                            />
-                            <ListView
-                                Grid.Row="1"
-                                ItemsSource="{Binding ImportantUnimmediatelyWorksCollection}"
-                                >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                            </ListView>
-                        </Grid>
+                        </uc:EisenhowerMatrixCell>
                         <uc:EisenhowerMatrixCell Grid.Row="0"
                                                  Grid.Column="1"
                                                  DataContext="{Binding UnimportantImmediatelyWorks}"
-                                                 AllowDrop="True"
-                                                 Drop="EisenhowerMatrixCell_Drop">
+                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 >
                             
                         </uc:EisenhowerMatrixCell>
+                        <uc:EisenhowerMatrixCell Grid.Row="1"
+                                                 Grid.Column="0"
+                                                 DataContext="{Binding ImportantUnimmediatelyWorks}"
+                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 >
 
-                        <!--<Grid Grid.Row="0"
-                              Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label 
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Content="Не важные строчные"
-                            />
-                            <ListView
-                                Grid.Row="1"
-                                ItemsSource="{Binding UnimportantImmediatelyWorksCollection}"
-                                >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
+                        </uc:EisenhowerMatrixCell>
+                        <uc:EisenhowerMatrixCell Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 DataContext="{Binding UnimportantUnimmediatelyWorks}"
+                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 >
 
-                            </ListView>
-                        </Grid>-->
-
-                        <Grid Grid.Row="1"
-                              Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label 
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Content="Не важные не строчные"
-                            />
-                            <ListView
-                                Grid.Row="1"
-                                ItemsSource="{Binding UnimportantUnimmediatelyWorksCollection}"
-                                >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-
-                            </ListView>
-                        </Grid>
+                        </uc:EisenhowerMatrixCell>
 
                     </Grid>
                     <DockPanel

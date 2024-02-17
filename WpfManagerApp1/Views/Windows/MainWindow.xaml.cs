@@ -42,10 +42,7 @@ namespace WpfManagerApp1
 
         }
 
-        private void EisenhowerMatrixCell_Drop(object sender, DragEventArgs e)
-        {
 
-        }
 
         //private void WorkListView_Drop(object sender, DragEventArgs e)
         //{

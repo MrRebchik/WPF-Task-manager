@@ -32,5 +32,25 @@ namespace WpfManagerApp1.Views.UserControls
         {
             InitializeComponent();
         }
+
+        private void EisenhowerMatrixCell_Drop(object sender, DragEventArgs e)
+        {
+            if (WorkDropCommand?.CanExecute(null) ?? false)
+            {
+                WorkDropCommand?.Execute(null);
+            }
+        }
+
+        private void WorkItem_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed &&
+                sender is FrameworkElement frameworkElement)
+            {
+                DragDrop.DoDragDrop(frameworkElement, 
+                    new DataObject(DataFormats.Serializable, 
+                    frameworkElement.DataContext),
+                    DragDropEffects.Move);
+            }
+        }
     }
 }

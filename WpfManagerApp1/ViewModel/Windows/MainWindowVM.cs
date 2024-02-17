@@ -23,6 +23,12 @@ namespace WpfManagerApp1.ViewModel
             set => Set(ref mainWorkListVM, value); 
         }
 
+        public EisenhowerMatrixCellVM ImportantImmediatelyWorks { get; internal set; }
+        public EisenhowerMatrixCellVM UnimportantImmediatelyWorks { get; internal set; }
+        public EisenhowerMatrixCellVM ImportantUnimmediatelyWorks { get; internal set; }
+        public EisenhowerMatrixCellVM UnimportantUnimmediatelyWorks { get; internal set; }
+
+
         #endregion
 
         #region Команды
@@ -103,12 +109,6 @@ namespace WpfManagerApp1.ViewModel
 
         public ObservableCollection<Work> WorksCollection { get; set; }
 
-        public ObservableCollection<Work> ImportantImmediatelyWorksCollection { get; set; }
-        public ObservableCollection<Work> ImportantUnimmediatelyWorksCollection { get; set; }
-        public ObservableCollection<Work> UnimportantImmediatelyWorksCollection { get; set; }
-        public ObservableCollection<Work> UnimportantUnimmediatelyWorksCollection { get; set; }
-
-
         #endregion
 
         public ObservableCollection<DayPlan> DayPlanCollection { get; set; }
@@ -141,7 +141,7 @@ namespace WpfManagerApp1.ViewModel
             }
         }
 
-        public EisenhowerMatrixCellVM UnimportantImmediatelyWorks { get; internal set; }
+        
 
         #endregion
 
@@ -159,7 +159,7 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public MainWindowVM(MainWorkListVM _mainWindowVM, EisenhowerMatrixCellVM unimportantImmediatelyWorks)
+        public MainWindowVM(MainWorkListVM _mainWindowVM)
         {
             
 
@@ -171,23 +171,15 @@ namespace WpfManagerApp1.ViewModel
 
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
 
-            ImportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
-                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantImmediately));
-
-            UnimportantImmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
-                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantImmediately));
-
-            ImportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
-                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.ImportantUnimmediately));
-
-            UnimportantUnimmediatelyWorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks()
-                .Where(x => x.EisenhowerMatrixCell == EisenhowerMatrixCell.UnimportantUnimmediately));
 
             #endregion
             
             this.MainWorkListVM = _mainWindowVM;
-            UnimportantImmediatelyWorks = unimportantImmediatelyWorks;
-            UnimportantImmediatelyWorks.CellList = UnimportantImmediatelyWorksCollection;
+
+            ImportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantImmediately);
+            UnimportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantImmediately);
+            ImportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantUnimmediately);
+            UnimportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantUnimmediately);
 
             #region Команды
 

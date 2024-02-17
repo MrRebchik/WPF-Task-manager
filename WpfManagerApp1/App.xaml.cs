@@ -18,9 +18,8 @@ namespace WpfManagerApp1
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWorkListVM mainWorkListVM = new MainWorkListVM();
-            EisenhowerMatrixCellVM unimportantImmediatelyWorks = new EisenhowerMatrixCellVM() { CellName = "Неважные срочные"};
 
-            MainWindowVM mainWindowVM = new MainWindowVM(mainWorkListVM, unimportantImmediatelyWorks)
+            MainWindowVM mainWindowVM = new MainWindowVM(mainWorkListVM)
             {
             };
 
