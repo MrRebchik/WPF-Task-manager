@@ -40,6 +40,7 @@
                         <uc:EisenhowerMatrixCell Grid.Row="0"
                                                  Grid.Column="0"
                                                  DataContext="{Binding ImportantImmediatelyWorks}"
+                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
                                                  >
 
@@ -47,6 +48,7 @@
                         <uc:EisenhowerMatrixCell Grid.Row="0"
                                                  Grid.Column="1"
                                                  DataContext="{Binding UnimportantImmediatelyWorks}"
+                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
                                                  >
                             
@@ -54,6 +56,7 @@
                         <uc:EisenhowerMatrixCell Grid.Row="1"
                                                  Grid.Column="0"
                                                  DataContext="{Binding ImportantUnimmediatelyWorks}"
+                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
                                                  >
 
@@ -61,6 +64,7 @@
                         <uc:EisenhowerMatrixCell Grid.Row="1"
                                                  Grid.Column="1"
                                                  DataContext="{Binding UnimportantUnimmediatelyWorks}"
+                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
                                                  >
 

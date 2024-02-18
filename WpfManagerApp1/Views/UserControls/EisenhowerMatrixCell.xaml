@@ -18,7 +18,6 @@
         <ListView
             Grid.Row="1"
             ItemsSource="{Binding CellList}"
-            SelectedItem="{Binding SelectedWork}"
             AllowDrop="True"
             Drop="EisenhowerMatrixCell_Drop"
             >

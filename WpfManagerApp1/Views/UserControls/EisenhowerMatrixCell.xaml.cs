@@ -20,6 +20,16 @@ namespace WpfManagerApp1.Views.UserControls
     /// </summary>
     public partial class EisenhowerMatrixCell : UserControl
     {
+        public static readonly DependencyProperty IncomingWorkItemProperty =
+            DependencyProperty.Register("IncomingWorkItem", typeof(object), typeof(EisenhowerMatrixCell),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public object IncomingWorkItem
+        {
+            get { return (object)GetValue(IncomingWorkItemProperty); }
+            set { SetValue(IncomingWorkItemProperty, value); }
+        }
+
         public static readonly DependencyProperty WorkDropCommandProperty =
             DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(EisenhowerMatrixCell), new PropertyMetadata(null));
 
@@ -37,6 +47,7 @@ namespace WpfManagerApp1.Views.UserControls
         {
             if (WorkDropCommand?.CanExecute(null) ?? false)
             {
+                IncomingWorkItem = e.Data.GetData(DataFormats.Serializable);
                 WorkDropCommand?.Execute(null);
             }
         }

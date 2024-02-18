@@ -26,30 +26,29 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private EisenhowerMatrixCell _eisenhowerMatrixCell;
         private string cellName;
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
-        private Work selectedWork;
+        private Work _incomingWorkItem;
 
         public string CellName 
         { 
             get => cellName; 
             set => Set(ref cellName, value); 
         }
-
         public ObservableCollection<Work> CellList 
         { 
             get => cellList; 
             set => Set(ref cellList, value); 
         }
-
-        public Work SelectedWork 
-        { 
-            get => selectedWork; 
-            set => Set(ref selectedWork, value); 
-        }
         public ICommand WorkRecieveCommand { get; }
+        public Work IncomingWorkItem
+        {
+            get { return _incomingWorkItem; }
+            set { Set(ref _incomingWorkItem, value); }
+        }
+
 
         private void OnWorkRecieveCommandExecuted(object parameter)
         {
-            
+            CellList.Add(IncomingWorkItem);
         }
 
         public EisenhowerMatrixCellVM(MainWindowVM mainWindowVM, EisenhowerMatrixCell eisenhowerMatrixCell)
@@ -59,6 +58,8 @@ namespace WpfManagerApp1.ViewModel.UserControls
             _eisenhowerMatrixCell = eisenhowerMatrixCell;
 
             CellName = typeNameMap[eisenhowerMatrixCell];
+            CellList = new ObservableCollection<Work>(_mainWindowVM.WorksRouter.GetWorks()
+                .Where(x => x.EisenhowerMatrixCell == eisenhowerMatrixCell));
         }
 
     }
