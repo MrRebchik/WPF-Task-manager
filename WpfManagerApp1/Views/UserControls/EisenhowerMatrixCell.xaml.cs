@@ -20,6 +20,22 @@ namespace WpfManagerApp1.Views.UserControls
     /// </summary>
     public partial class EisenhowerMatrixCell : UserControl
     {
+
+
+        #region Dependencies
+
+        #region IsWorkItemHitTestVisible
+        public static readonly DependencyProperty IsWorkItemHitTestVisibleProperty =
+            DependencyProperty.Register("IsWorkItemHitTestVisible", typeof(bool), typeof(EisenhowerMatrixCell), new PropertyMetadata(true));
+
+        public bool IsWorkItemHitTestVisible
+        {
+            get { return (bool)GetValue(IsWorkItemHitTestVisibleProperty); }
+            set { SetValue(IsWorkItemHitTestVisibleProperty, value); }
+        } 
+        #endregion
+
+        #region IncomingWorkItem
         public static readonly DependencyProperty IncomingWorkItemProperty =
             DependencyProperty.Register("IncomingWorkItem", typeof(object), typeof(EisenhowerMatrixCell),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -29,15 +45,43 @@ namespace WpfManagerApp1.Views.UserControls
             get { return (object)GetValue(IncomingWorkItemProperty); }
             set { SetValue(IncomingWorkItemProperty, value); }
         }
+        #endregion
 
+        #region WorkDropCommand
         public static readonly DependencyProperty WorkDropCommandProperty =
-            DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(EisenhowerMatrixCell), new PropertyMetadata(null));
+           DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(EisenhowerMatrixCell), new PropertyMetadata(null));
 
         public ICommand WorkDropCommand
         {
             get { return (ICommand)GetValue(WorkDropCommandProperty); }
             set { SetValue(WorkDropCommandProperty, value); }
         }
+        #endregion
+
+        #region RemovedWorkItem
+        public static readonly DependencyProperty RemovedWorkItemProperty =
+            DependencyProperty.Register("RemovedWorkItem", typeof(object), typeof(EisenhowerMatrixCell),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public object RemovedWorkItem
+        {
+            get { return (object)GetValue(RemovedWorkItemProperty); }
+            set { SetValue(RemovedWorkItemProperty, value); }
+        }
+        #endregion
+
+        #region WorkRemoveCommand
+        public static readonly DependencyProperty WorkRemoveCommandProperty =
+            DependencyProperty.Register("WorkRemoveCommand", typeof(ICommand), typeof(EisenhowerMatrixCell), new PropertyMetadata(null));
+
+        public ICommand WorkRemoveCommand
+        {
+            get { return (ICommand)GetValue(WorkRemoveCommandProperty); }
+            set { SetValue(WorkRemoveCommandProperty, value); }
+        } 
+        #endregion
+
+        #endregion
         public EisenhowerMatrixCell()
         {
             InitializeComponent();
@@ -57,10 +101,21 @@ namespace WpfManagerApp1.Views.UserControls
             if(e.LeftButton == MouseButtonState.Pressed &&
                 sender is FrameworkElement frameworkElement)
             {
+                IsWorkItemHitTestVisible = false;
                 DragDrop.DoDragDrop(frameworkElement, 
                     new DataObject(DataFormats.Serializable, 
                     frameworkElement.DataContext),
                     DragDropEffects.Move);
+                IsWorkItemHitTestVisible = true;
+            }
+        }
+
+        private void ListView_DragLeave(object sender, DragEventArgs e)
+        {
+            if (WorkRemoveCommand?.CanExecute(null) ?? false)
+            {
+                RemovedWorkItem = e.Data.GetData(DataFormats.Serializable);
+                WorkRemoveCommand?.Execute(null);
             }
         }
     }

@@ -107,9 +107,9 @@ namespace WpfManagerApp1.ViewModel
         private bool CanCreateNewWorkCommandExecute(object parameter) => true;
         private void OnCreateNewWorkCommandExecuted(object parameter)
         {
-            if (string.IsNullOrWhiteSpace(WorkName) || string.IsNullOrEmpty(WorkDescription) || selectedImportance == null || SelectedType == null)
+            if (string.IsNullOrWhiteSpace(WorkName) || selectedImportance == null || SelectedType == null)
             {
-                MessageBox.Show("Все поля для ввода должны быть заполенены");
+                MessageBox.Show("Все обязательные поля для ввода должны быть заполенены");
                 return;
             }
             if (selectedType == "Единичное задание") WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });

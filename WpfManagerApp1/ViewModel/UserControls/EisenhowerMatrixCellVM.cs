@@ -27,6 +27,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private string cellName;
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
         private Work _incomingWorkItem;
+        private Work _removedWorkItemVM;
 
         public string CellName 
         { 
@@ -38,22 +39,43 @@ namespace WpfManagerApp1.ViewModel.UserControls
             get => cellList; 
             set => Set(ref cellList, value); 
         }
-        public ICommand WorkRecieveCommand { get; }
         public Work IncomingWorkItem
         {
             get { return _incomingWorkItem; }
             set { Set(ref _incomingWorkItem, value); }
         }
+        public ICommand WorkRecieveCommand { get; }        
 
-
+        private bool CanWorkRecieveCommandExecute(object parameter)
+        {
+            return true;
+        }
         private void OnWorkRecieveCommandExecuted(object parameter)
         {
+            if (CellList.Contains(IncomingWorkItem)) return;
+            IncomingWorkItem.EisenhowerMatrixCell = _eisenhowerMatrixCell;
             CellList.Add(IncomingWorkItem);
+        }
+
+        public Work RemovedWorkItemVM
+        {
+            get { return _removedWorkItemVM; }
+            set { Set(ref _removedWorkItemVM, value); }
+        }
+        public ICommand WorkRemovedCommandVM { get; }
+        private bool CanWorkRemovedCommandExecute(object parameter)
+        {
+            return true;
+        }
+        private void OnWorkRemovedCommandExecuted(object parameter)
+        {
+            cellList.Remove(RemovedWorkItemVM);
         }
 
         public EisenhowerMatrixCellVM(MainWindowVM mainWindowVM, EisenhowerMatrixCell eisenhowerMatrixCell)
         {
-            WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted);
+            WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted, CanWorkRecieveCommandExecute);
+            WorkRemovedCommandVM = new RelayCommand(OnWorkRemovedCommandExecuted, CanWorkRemovedCommandExecute);
             _mainWindowVM = mainWindowVM;
             _eisenhowerMatrixCell = eisenhowerMatrixCell;
 

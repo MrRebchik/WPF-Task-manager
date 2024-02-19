@@ -41,7 +41,9 @@
                                                  Grid.Column="0"
                                                  DataContext="{Binding ImportantImmediatelyWorks}"
                                                  IncomingWorkItem="{Binding IncomingWorkItem}"
+                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
                                                  >
 
                         </uc:EisenhowerMatrixCell>
@@ -49,7 +51,9 @@
                                                  Grid.Column="1"
                                                  DataContext="{Binding UnimportantImmediatelyWorks}"
                                                  IncomingWorkItem="{Binding IncomingWorkItem}"
+                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
                                                  >
                             
                         </uc:EisenhowerMatrixCell>
@@ -57,7 +61,9 @@
                                                  Grid.Column="0"
                                                  DataContext="{Binding ImportantUnimmediatelyWorks}"
                                                  IncomingWorkItem="{Binding IncomingWorkItem}"
+                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
                                                  >
 
                         </uc:EisenhowerMatrixCell>
@@ -65,7 +71,9 @@
                                                  Grid.Column="1"
                                                  DataContext="{Binding UnimportantUnimmediatelyWorks}"
                                                  IncomingWorkItem="{Binding IncomingWorkItem}"
+                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
                                                  WorkDropCommand="{Binding WorkRecieveCommand}"
+                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
                                                  >
 
                         </uc:EisenhowerMatrixCell>
