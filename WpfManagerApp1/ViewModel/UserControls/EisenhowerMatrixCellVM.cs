@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WpfManagerApp1.Infrastructure.Commands;
 using WpfManagerApp1.Model;
@@ -28,6 +29,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
         private Work _incomingWorkItem;
         private Work _removedWorkItemVM;
+        private bool _isDropFinishedSuccessfully;
 
         public string CellName 
         { 
@@ -52,6 +54,16 @@ namespace WpfManagerApp1.ViewModel.UserControls
         }
         private void OnWorkRecieveCommandExecuted(object parameter)
         {
+
+            #region Проверка что этого задания нет в других ячейках
+
+            foreach(var matrix in _mainWindowVM.Matrix)
+            {
+                if (matrix.CellList.Contains(IncomingWorkItem)) matrix.CellList.Remove(IncomingWorkItem);
+            }
+
+            #endregion
+
             if (CellList.Contains(IncomingWorkItem)) return;
             IncomingWorkItem.EisenhowerMatrixCell = _eisenhowerMatrixCell;
             CellList.Add(IncomingWorkItem);

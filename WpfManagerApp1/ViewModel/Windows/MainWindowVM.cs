@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using WpfManagerApp1.Views.Windows;
 using System.Linq;
 using WpfManagerApp1.ViewModel.UserControls;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -22,7 +24,7 @@ namespace WpfManagerApp1.ViewModel
             get => mainWorkListVM; 
             set => Set(ref mainWorkListVM, value); 
         }
-
+        public List<EisenhowerMatrixCellVM> Matrix { get; set; }
         public EisenhowerMatrixCellVM ImportantImmediatelyWorks { get; internal set; }
         public EisenhowerMatrixCellVM UnimportantImmediatelyWorks { get; internal set; }
         public EisenhowerMatrixCellVM ImportantUnimmediatelyWorks { get; internal set; }
@@ -175,11 +177,20 @@ namespace WpfManagerApp1.ViewModel
             #endregion
             
             this.MainWorkListVM = _mainWindowVM;
-
+            
             ImportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantImmediately);
             UnimportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantImmediately);
             ImportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantUnimmediately);
             UnimportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantUnimmediately);
+
+            Matrix = new List<EisenhowerMatrixCellVM>()
+            {
+                ImportantImmediatelyWorks,
+                UnimportantImmediatelyWorks,
+                ImportantUnimmediatelyWorks,
+                UnimportantUnimmediatelyWorks,
+            };
+            
 
             #region Команды
 
