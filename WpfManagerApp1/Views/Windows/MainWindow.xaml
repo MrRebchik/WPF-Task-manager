@@ -101,6 +101,7 @@
                         <uc:MainWorkList
                             x:Name="MainWorkList"
                             WorkDropCommand="{Binding WorkItemReceivedCommand}"
+                            WorkMouseDoubleClickCommand="{Binding OpenWorkInfoWindowCommand}"
                             >
                         </uc:MainWorkList>
                     </DockPanel>

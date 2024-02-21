@@ -75,8 +75,20 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        
-
+        public ICommand OpenWorkInfoWindowCommand { get; }
+        private bool CanOpenWorkInfoWindowCommandExecute(object parametr)
+        {
+            return SelectedWorkInFullList != null; ;
+        }
+        private void OnOpenWorkInfoWindowCommandExecuted(object parametr)
+        {
+            WorkInfoWindowVM _workInfoWindowVM = new WorkInfoWindowVM(SelectedWorkInFullList);
+            WorkInfoWindow _workInfoWindow = new WorkInfoWindow()
+            {
+                DataContext = _workInfoWindowVM,
+            };
+            _workInfoWindow.Show();
+        }
         #region Drag Drop
 
         #region WorkItemReceivedCommand
@@ -198,6 +210,7 @@ namespace WpfManagerApp1.ViewModel
             AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
             DeleteSelectedWorkCommand = new RelayCommand(OnDeleteSelectedWorkCommandExecuted, CanDeleteSelectedWorkCommandExecute);
             WorkItemReceivedCommand = new RelayCommand(OnWorkItemReceivedCommandExecuted, CanWorkItemReceivedCommandExecute);
+            OpenWorkInfoWindowCommand = new RelayCommand(OnOpenWorkInfoWindowCommandExecuted, CanOpenWorkInfoWindowCommandExecute);
 
             #endregion
 

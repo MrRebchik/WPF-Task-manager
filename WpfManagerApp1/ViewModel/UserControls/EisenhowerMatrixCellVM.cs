@@ -29,7 +29,6 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
         private Work _incomingWorkItem;
         private Work _removedWorkItemVM;
-        private bool _isDropFinishedSuccessfully;
 
         public string CellName 
         { 

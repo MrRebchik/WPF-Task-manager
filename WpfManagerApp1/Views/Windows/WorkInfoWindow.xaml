@@ -9,18 +9,72 @@
         Title="WorkInfoWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" VerticalAlignment="Bottom"
-                    Height=" 50"
-                    Margin="25 0"
-                    Orientation="Horizontal">
-            <TextBlock Text="Тип задания: "/>
-            <TextBlock Text="{Binding Path=CurrentWorkType}" />
+        <TextBlock 
+            Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+            Height=" 50"
+            Margin="60 0"
+            Text="{Binding Path=CurrentWorkType}" />
+        
+        <StackPanel 
+            Grid.Row="1"
+            Margin="35 0 0 10"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Название:" Margin="0 0 20 0" FontSize="16"/>
+            <TextBlock Text="{Binding CurrentWork.Name}" FontSize="18"/>
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Row="2"
+            Margin="35 0"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Содержание:" Margin="0 0 20 0"/>
+            <TextBlock Text="{Binding CurrentWork.Description}" />
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Row="3"
+            Margin="35 0"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Ячейка матрицы:" Margin="0 0 20 0"/>
+            <TextBlock Text="{Binding MatrixCell}" />
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Row="4"
+            Margin="35 0"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Степень важности:" Margin="0 0 20 0"/>
+            <TextBlock Text="{Binding WorkImportance}" />
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Row="5"
+            Margin="35 0"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Статус выполнения:" Margin="0 0 20 0"/>
+            <TextBlock Text="{Binding WorkStatus}" />
+        </StackPanel>
+        <StackPanel 
+            Grid.Row="6"
+            Margin="35 0"
+            Orientation="Horizontal"
+            >
+            <TextBlock Text="Срок завершения:" Margin="0 0 20 0"/>
+            <TextBlock Text="{Binding WorkDeadline}" />
         </StackPanel>
     </Grid>
 </Window>
