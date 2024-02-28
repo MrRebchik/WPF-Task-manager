@@ -7,6 +7,26 @@
         xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
         mc:Ignorable="d"
         Title="WorkInfoWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="Height" Value="24"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="IsEnabled" Value="False"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="TextBox.IsEnabled" Value="True">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+                <Trigger Property="TextBox.IsEnabled" Value="False">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -30,7 +50,7 @@
             Orientation="Horizontal"
             >
             <TextBlock Text="Название:" Margin="0 0 20 0" FontSize="16"/>
-            <TextBlock Text="{Binding CurrentWork.Name}" FontSize="18"/>
+            <TextBox Text="{Binding CurrentWork.Name}" FontSize="18" IsReadOnly="True"/>
         </StackPanel>
 
         <StackPanel 
@@ -74,7 +94,7 @@
             Orientation="Horizontal"
             >
             <TextBlock Text="Срок завершения:" Margin="0 0 20 0"/>
-            <TextBlock Text="{Binding WorkDeadline}" />
+            <TextBlock Text="{Binding WorkDeadline}"/>
         </StackPanel>
     </Grid>
 </Window>
