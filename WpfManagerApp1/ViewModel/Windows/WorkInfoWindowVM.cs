@@ -62,16 +62,16 @@ namespace WpfManagerApp1.ViewModel
         {
             get => statusMap[CurrentWork.Completeness];
         }
-        public string WorkDeadline
+        public DateTime WorkDeadline
         {
             get
             {
                 if (CurrentWork.GetType() == typeof(UniqueWork))
                 {
                     UniqueWork uniqueWork = (UniqueWork)CurrentWork;
-                    return uniqueWork.DeadLine.ToString();
+                    return uniqueWork.DeadLine;
                 }
-                return "Без срока сдачи";      
+                return new DateTime(0);
             }
         }
 
