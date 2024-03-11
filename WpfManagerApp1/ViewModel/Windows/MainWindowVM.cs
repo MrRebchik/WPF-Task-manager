@@ -82,12 +82,15 @@ namespace WpfManagerApp1.ViewModel
         }
         private void OnOpenWorkInfoWindowCommandExecuted(object parametr)
         {
-            WorkInfoWindowVM _workInfoWindowVM = new WorkInfoWindowVM(SelectedWorkInFullList);
-            WorkInfoWindow _workInfoWindow = new WorkInfoWindow()
+            if (SelectedWorkInFullList.GetType() == typeof(UniqueWork))
             {
-                DataContext = _workInfoWindowVM,
-            };
-            _workInfoWindow.Show();
+                UniqueWorkInfoWindowVM _uniqueWorkInfoWindowVM = new UniqueWorkInfoWindowVM((UniqueWork)SelectedWorkInFullList);
+                UniqueWorkInfoWindow _uniqueWorkInfoWindow = new UniqueWorkInfoWindow()
+                {
+                    DataContext = _uniqueWorkInfoWindowVM,
+                };
+                _uniqueWorkInfoWindow.Show(); 
+            }
         }
         #region Drag Drop
 

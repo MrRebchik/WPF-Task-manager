@@ -17,9 +17,9 @@ namespace WpfManagerApp1.Views.Windows
     /// <summary>
     /// Логика взаимодействия для WorkInfoWindow.xaml
     /// </summary>
-    public partial class WorkInfoWindow : Window
+    public partial class UniqueWorkInfoWindow : Window
     {
-        public WorkInfoWindow()
+        public UniqueWorkInfoWindow()
         {
             InitializeComponent();
         }

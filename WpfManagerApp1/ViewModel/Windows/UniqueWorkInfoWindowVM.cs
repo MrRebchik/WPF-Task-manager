@@ -9,7 +9,7 @@ using WpfManagerApp1.ViewModel.Base;
 
 namespace WpfManagerApp1.ViewModel
 {
-    internal class WorkInfoWindowVM : ViewModelBase
+    internal class UniqueWorkInfoWindowVM : ViewModelBase
     {
         private Dictionary<Type, string> typesMap = new Dictionary<Type, string>()
         {
@@ -37,9 +37,9 @@ namespace WpfManagerApp1.ViewModel
             {CompleteStatus.Done , "Выполнено" },
         }; 
 
-        private Work currentWork;
+        private UniqueWork currentWork;
 
-        public Work CurrentWork 
+        public UniqueWork CurrentWork 
         { 
             get => currentWork; 
             set => Set(ref currentWork,value); 
@@ -66,16 +66,16 @@ namespace WpfManagerApp1.ViewModel
         {
             get
             {
-                if (CurrentWork.GetType() == typeof(UniqueWork))
-                {
-                    UniqueWork uniqueWork = (UniqueWork)CurrentWork;
-                    return uniqueWork.DeadLine;
-                }
-                return new DateTime(0);
+                return CurrentWork.DeadLine;
+            }
+            set
+            {
+                CurrentWork.DeadLine = value;
+                OnPropertyChanged(nameof(WorkDeadline));
             }
         }
 
-        public WorkInfoWindowVM(Work work)
+        public UniqueWorkInfoWindowVM(UniqueWork work)
         {
             this.currentWork = work;
         }
