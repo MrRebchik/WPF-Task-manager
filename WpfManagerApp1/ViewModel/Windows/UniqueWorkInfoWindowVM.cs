@@ -11,11 +11,6 @@ namespace WpfManagerApp1.ViewModel
 {
     internal class UniqueWorkInfoWindowVM : ViewModelBase
     {
-        private Dictionary<Type, string> typesMap = new Dictionary<Type, string>()
-        {
-            {typeof(UniqueWork), "Одноразовое задание" },
-            {typeof(RegularWork), "Повторяющееся задание" },
-        };
         private Dictionary<EisenhowerMatrixCell, string> cellMap = new Dictionary<EisenhowerMatrixCell, string>()
         {
             {EisenhowerMatrixCell.ImportantImmediately, "Важное срочное" },
@@ -35,9 +30,26 @@ namespace WpfManagerApp1.ViewModel
             {CompleteStatus.Waiting , "Активное" },
             {CompleteStatus.Frozen , "Отложено" },
             {CompleteStatus.Done , "Выполнено" },
-        }; 
+        };
+        public List<string> CellList
+        {
+            get => EnumToList<EisenhowerMatrixCell>(cellMap);
+            set => EnumToList<EisenhowerMatrixCell>(cellMap);
+        }
+        public List<string> ImportanceList 
+        { 
+            get => EnumToList<Importance>(importanceMap); 
+            set => EnumToList<Importance>(importanceMap);
+        }
+        public List<string> StatusList
+        {
+            get => EnumToList<CompleteStatus>(statusMap);
+            set => EnumToList<CompleteStatus>(statusMap);
+        }
+
 
         private UniqueWork currentWork;
+        
 
         public UniqueWork CurrentWork 
         { 
@@ -46,21 +58,31 @@ namespace WpfManagerApp1.ViewModel
         }
         public string CurrentWorkType
         {
-            get => typesMap[CurrentWork.GetType()];
+            get => "Одноразовое задание";
         }
-
-        public string MatrixCell
+        public string SelectedMatrixCell
         {
             get => cellMap[CurrentWork.EisenhowerMatrixCell];
+            set
+            {
+                CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+            }
         }
-
-        public string WorkImportance
+        public string SelectedWorkImportance
         {
             get => importanceMap[CurrentWork.Importance];
+            set
+            {
+                CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+            }
         }
-        public string WorkStatus
+        public string SelectedWorkStatus
         {
             get => statusMap[CurrentWork.Completeness];
+            set
+            {
+                CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+            }
         }
         public DateTime WorkDeadline
         {
@@ -78,6 +100,11 @@ namespace WpfManagerApp1.ViewModel
         public UniqueWorkInfoWindowVM(UniqueWork work)
         {
             this.currentWork = work;
+        }
+
+        private List<string> EnumToList<T>(Dictionary<T,string> map)
+        {
+            return map.Values.ToList();
         }
     }
 }
