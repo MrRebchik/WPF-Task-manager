@@ -42,7 +42,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Name="Completeness" Text="{Binding Path=Completeness}"/>
+                                <TextBlock Name="Completeness" Text="{Binding Path=Completeness, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding Completeness}" Value="Waiting">
                                         <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Активное"/>

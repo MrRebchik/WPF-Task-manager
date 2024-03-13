@@ -11,6 +11,7 @@ using System.Linq;
 using WpfManagerApp1.ViewModel.UserControls;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using WpfManagerApp1.ViewModel.Windows;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -90,6 +91,16 @@ namespace WpfManagerApp1.ViewModel
                     DataContext = _uniqueWorkInfoWindowVM,
                 };
                 _uniqueWorkInfoWindow.Show(); 
+            }
+            if (SelectedWorkInFullList.GetType() == typeof(RegularWork))
+            {
+                RegularWorkInfoWindowVM _regularWorkInfoWindowVM = new RegularWorkInfoWindowVM((RegularWork)SelectedWorkInFullList);
+                RegularWorkInfoWindow _regularWorkInfoWindow = new RegularWorkInfoWindow()
+                {
+                    DataContext = _regularWorkInfoWindowVM,
+                };
+                _regularWorkInfoWindowVM.UpdateProperty += UpdateCurrentWork;
+                _regularWorkInfoWindow.Show();
             }
         }
         #region Drag Drop
@@ -174,6 +185,10 @@ namespace WpfManagerApp1.ViewModel
             OnPropertyChanged();
         }
 
+        private void UpdateCurrentWork(Work work)
+        {
+            OnPropertyChanged(nameof(work));
+        }
         #endregion
 
         public MainWindowVM(MainWorkListVM _mainWindowVM)

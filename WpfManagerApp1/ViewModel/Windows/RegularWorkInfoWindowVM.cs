@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using WpfManagerApp1.Model;
 using WpfManagerApp1.ViewModel.Base;
 
-namespace WpfManagerApp1.ViewModel
+namespace WpfManagerApp1.ViewModel.Windows
 {
-    internal class UniqueWorkInfoWindowVM : ViewModelBase
+    internal class RegularWorkInfoWindowVM : ViewModelBase
     {
         private Dictionary<EisenhowerMatrixCell, string> cellMap = new Dictionary<EisenhowerMatrixCell, string>()
         {
@@ -18,7 +17,7 @@ namespace WpfManagerApp1.ViewModel
             {EisenhowerMatrixCell.ImportantUnimmediately , "Важное не срочное" },
             {EisenhowerMatrixCell.UnimportantUnimmediately , "Не важное не срочное" },
         };
-        private Dictionary<Importance, string> importanceMap = new Dictionary<Importance, string>() 
+        private Dictionary<Importance, string> importanceMap = new Dictionary<Importance, string>()
         {
             { Importance.Max , "Максимальная" },
             { Importance.High , "Высокая" },
@@ -36,9 +35,9 @@ namespace WpfManagerApp1.ViewModel
             get => EnumToList<EisenhowerMatrixCell>(cellMap);
             set => EnumToList<EisenhowerMatrixCell>(cellMap);
         }
-        public List<string> ImportanceList 
-        { 
-            get => EnumToList<Importance>(importanceMap); 
+        public List<string> ImportanceList
+        {
+            get => EnumToList<Importance>(importanceMap);
             set => EnumToList<Importance>(importanceMap);
         }
         public List<string> StatusList
@@ -48,17 +47,17 @@ namespace WpfManagerApp1.ViewModel
         }
 
 
-        private UniqueWork currentWork;
-        
+        private RegularWork currentWork;
 
-        public UniqueWork CurrentWork 
-        { 
-            get => currentWork; 
-            set => Set(ref currentWork,value); 
+
+        public RegularWork CurrentWork
+        {
+            get => currentWork;
+            set => Set(ref currentWork, value);
         }
         public string CurrentWorkType
         {
-            get => "Одноразовое задание";
+            get => "Повторяемое задание";
         }
         public string SelectedMatrixCell
         {
@@ -66,6 +65,7 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateProperty?.Invoke(CurrentWork);
             }
         }
         public string SelectedWorkImportance
@@ -74,6 +74,7 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateProperty?.Invoke(CurrentWork);
             }
         }
         public string SelectedWorkStatus
@@ -82,29 +83,19 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateProperty?.Invoke(CurrentWork);
             }
         }
-        public DateTime WorkDeadline
-        {
-            get
-            {
-                return CurrentWork.DeadLine;
-            }
-            set
-            {
-                CurrentWork.DeadLine = value;
-                OnPropertyChanged(nameof(WorkDeadline));
-            }
-        }
-
-        public UniqueWorkInfoWindowVM(UniqueWork work)
+        public RegularWorkInfoWindowVM(RegularWork work)
         {
             this.currentWork = work;
         }
 
-        private List<string> EnumToList<T>(Dictionary<T,string> map)
+        private List<string> EnumToList<T>(Dictionary<T, string> map)
         {
             return map.Values.ToList();
         }
+        public delegate void UpdatePropertyHandler(Work a);
+        public event UpdatePropertyHandler UpdateProperty;
     }
 }
