@@ -95,7 +95,5 @@ namespace WpfManagerApp1.ViewModel.Windows
         {
             return map.Values.ToList();
         }
-        public delegate void UpdatePropertyHandler(Work a);
-        public event UpdatePropertyHandler UpdateProperty;
     }
 }

@@ -99,7 +99,6 @@ namespace WpfManagerApp1.ViewModel
                 {
                     DataContext = _regularWorkInfoWindowVM,
                 };
-                _regularWorkInfoWindowVM.UpdateProperty += UpdateCurrentWork;
                 _regularWorkInfoWindow.Show();
             }
         }
@@ -185,9 +184,9 @@ namespace WpfManagerApp1.ViewModel
             OnPropertyChanged();
         }
 
-        private void UpdateCurrentWork(Work work)
+        private void UpdateCollectionsContainsWork()
         {
-            OnPropertyChanged(nameof(work));
+            WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
         }
         #endregion
 
@@ -235,6 +234,7 @@ namespace WpfManagerApp1.ViewModel
             #region Подписка на события
 
             WorksRouter.DataUpdated += OnWorkListUpdated;
+            Work.WorkPropertyChanged += UpdateCollectionsContainsWork;
 
             #endregion
         }
