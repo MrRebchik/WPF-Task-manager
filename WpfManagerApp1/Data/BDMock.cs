@@ -80,11 +80,11 @@ namespace WpfManagerApp1.Data
 
             foreach(var e in works)
             {
-                e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
+                //e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
             }
             foreach (var e in dayPlans)
             {
-                e.DayPlanPropertyChanged += EditDayPlan; // можно переделать в LINQ
+                //e.DayPlanPropertyChanged += EditDayPlan; // можно переделать в LINQ
             }
         }
 
@@ -107,7 +107,7 @@ namespace WpfManagerApp1.Data
 
         public override void SaveWork(Work work)
         {
-            work.WorkPropertyChanged += EditWork;
+            //work.WorkPropertyChanged += EditWork;
             works.Add(work); // ТЕСТИРОВАТЬ
         }
 

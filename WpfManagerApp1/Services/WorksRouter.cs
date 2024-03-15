@@ -17,14 +17,6 @@ namespace WpfManagerApp1.Services
     }
     public class WorksRouter
     {
-        #region События
-
-        public static event Action DataUpdated;
-        public static event Action WorksRouterLoaded;
-        public static event Action DataLoaded;
-
-        #endregion
-
         #region Конструкторы
 
         public WorksRouter(DataProvider dataProvider)
@@ -34,9 +26,6 @@ namespace WpfManagerApp1.Services
             LoadData();
             SortCommandsMap = new Dictionary<SortFilters, ListOperation>();
             InitializeSortCommandsMap();
-
-            WorksRouterLoaded?.Invoke();
-
         }
 
         #endregion
@@ -61,24 +50,17 @@ namespace WpfManagerApp1.Services
 
         private void LoadData()
         {
-            if (DataProvider.GetWorks(out allWorksList))
-            {
-                DataLoaded?.Invoke();
-            }
-            else throw new Exception("Data has not been uploaded");
+            DataProvider.GetWorks(out allWorksList);
         }
         public void AddWork(Work item)
         {
             AllWorksList.Add(item);
             DataProvider.SaveWork(item);
-            item.WorkPropertyChanged += DataProvider.EditWork;
-            DataUpdated?.Invoke();
         }
 
         public void DeleteWork(Work item)
         {
             AllWorksList.Remove(item);
-            DataUpdated?.Invoke();
         }
 
         /// <summary>

@@ -65,7 +65,6 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
-                UpdateProperty?.Invoke(CurrentWork);
             }
         }
         public string SelectedWorkImportance
@@ -74,7 +73,6 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
-                UpdateProperty?.Invoke(CurrentWork);
             }
         }
         public string SelectedWorkStatus
@@ -83,7 +81,6 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
-                UpdateProperty?.Invoke(CurrentWork);
             }
         }
         public RegularWorkInfoWindowVM(RegularWork work)

@@ -187,6 +187,7 @@ namespace WpfManagerApp1.ViewModel
         private void UpdateCollectionsContainsWork()
         {
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
+            mainWorkListVM.WorksCollection = WorksCollection;
         }
         #endregion
 
@@ -231,12 +232,7 @@ namespace WpfManagerApp1.ViewModel
 
             #endregion
 
-            #region Подписка на события
 
-            WorksRouter.DataUpdated += OnWorkListUpdated;
-            Work.WorkPropertyChanged += UpdateCollectionsContainsWork;
-
-            #endregion
         }
     }
 }
