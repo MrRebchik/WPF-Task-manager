@@ -85,7 +85,7 @@ namespace WpfManagerApp1.ViewModel
         {
             if (SelectedWorkInFullList.GetType() == typeof(UniqueWork))
             {
-                UniqueWorkInfoWindowVM _uniqueWorkInfoWindowVM = new UniqueWorkInfoWindowVM((UniqueWork)SelectedWorkInFullList);
+                UniqueWorkInfoWindowVM _uniqueWorkInfoWindowVM = new UniqueWorkInfoWindowVM((UniqueWork)SelectedWorkInFullList,this);
                 UniqueWorkInfoWindow _uniqueWorkInfoWindow = new UniqueWorkInfoWindow()
                 {
                     DataContext = _uniqueWorkInfoWindowVM,
@@ -177,17 +177,19 @@ namespace WpfManagerApp1.ViewModel
         #region Методы
 
 
-        private void OnWorkListUpdated()
+        public void OnWorkListUpdated()
         {
             //WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
             WorksCollection.Add(WorksRouter.GetWorks()[WorksRouter.GetWorks().Count-1]);  // КОСТЫЛЬ
-            OnPropertyChanged();
+            //OnPropertyChanged();
         }
 
-        private void UpdateCollectionsContainsWork()
+        public void UpdateCollectionsContainsWork(Work w)
         {
+            WorksCollection.Clear();
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
             mainWorkListVM.WorksCollection = WorksCollection;
+            OnPropertyChanged();
         }
         #endregion
 

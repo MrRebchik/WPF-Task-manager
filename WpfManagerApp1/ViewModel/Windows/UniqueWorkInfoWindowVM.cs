@@ -49,6 +49,7 @@ namespace WpfManagerApp1.ViewModel
 
 
         private UniqueWork currentWork;
+        private MainWindowVM parentVM;
         
 
         public UniqueWork CurrentWork 
@@ -66,6 +67,7 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
         public string SelectedWorkImportance
@@ -74,6 +76,7 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
         public string SelectedWorkStatus
@@ -82,6 +85,7 @@ namespace WpfManagerApp1.ViewModel
             set
             {
                 CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
         public DateTime WorkDeadline
@@ -94,14 +98,21 @@ namespace WpfManagerApp1.ViewModel
             {
                 CurrentWork.DeadLine = value;
                 OnPropertyChanged(nameof(WorkDeadline));
+                UpdateList();
             }
         }
 
-        public UniqueWorkInfoWindowVM(UniqueWork work)
+        public UniqueWorkInfoWindowVM(UniqueWork work, MainWindowVM parentVM)
         {
             this.currentWork = work;
+            this.parentVM = parentVM;
         }
 
+        private void UpdateList()
+        {
+            parentVM.UpdateCollectionsContainsWork(CurrentWork);
+            //parentVM.OnWorkListUpdated();
+        }
         private List<string> EnumToList<T>(Dictionary<T,string> map)
         {
             return map.Values.ToList();
