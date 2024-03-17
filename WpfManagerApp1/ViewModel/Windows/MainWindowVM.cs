@@ -26,10 +26,10 @@ namespace WpfManagerApp1.ViewModel
             set => Set(ref mainWorkListVM, value); 
         }
         public List<EisenhowerMatrixCellVM> Matrix { get; set; }
-        public EisenhowerMatrixCellVM ImportantImmediatelyWorks { get; internal set; }
-        public EisenhowerMatrixCellVM UnimportantImmediatelyWorks { get; internal set; }
-        public EisenhowerMatrixCellVM ImportantUnimmediatelyWorks { get; internal set; }
-        public EisenhowerMatrixCellVM UnimportantUnimmediatelyWorks { get; internal set; }
+        public EisenhowerMatrixCellVM ImportantImmediatelyWorksVM { get; internal set; }
+        public EisenhowerMatrixCellVM UnimportantImmediatelyWorksVM { get; internal set; }
+        public EisenhowerMatrixCellVM ImportantUnimmediatelyWorksVM { get; internal set; }
+        public EisenhowerMatrixCellVM UnimportantUnimmediatelyWorksVM { get; internal set; }
 
 
         #endregion
@@ -76,6 +76,7 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
+        #region OpenWorkInfoWindowCommand
         public ICommand OpenWorkInfoWindowCommand { get; }
         private bool CanOpenWorkInfoWindowCommandExecute(object parametr)
         {
@@ -85,23 +86,25 @@ namespace WpfManagerApp1.ViewModel
         {
             if (SelectedWorkInFullList.GetType() == typeof(UniqueWork))
             {
-                UniqueWorkInfoWindowVM _uniqueWorkInfoWindowVM = new UniqueWorkInfoWindowVM((UniqueWork)SelectedWorkInFullList,this);
+                UniqueWorkInfoWindowVM _uniqueWorkInfoWindowVM = new UniqueWorkInfoWindowVM((UniqueWork)SelectedWorkInFullList, this);
                 UniqueWorkInfoWindow _uniqueWorkInfoWindow = new UniqueWorkInfoWindow()
                 {
                     DataContext = _uniqueWorkInfoWindowVM,
                 };
-                _uniqueWorkInfoWindow.Show(); 
+                _uniqueWorkInfoWindow.Show();
             }
             if (SelectedWorkInFullList.GetType() == typeof(RegularWork))
             {
-                RegularWorkInfoWindowVM _regularWorkInfoWindowVM = new RegularWorkInfoWindowVM((RegularWork)SelectedWorkInFullList);
+                RegularWorkInfoWindowVM _regularWorkInfoWindowVM = new RegularWorkInfoWindowVM((RegularWork)SelectedWorkInFullList, this);
                 RegularWorkInfoWindow _regularWorkInfoWindow = new RegularWorkInfoWindow()
                 {
                     DataContext = _regularWorkInfoWindowVM,
                 };
                 _regularWorkInfoWindow.Show();
             }
-        }
+        } 
+        #endregion
+
         #region Drag Drop
 
         #region WorkItemReceivedCommand
@@ -176,21 +179,17 @@ namespace WpfManagerApp1.ViewModel
 
         #region Методы
 
-
-        public void OnWorkListUpdated()
+        public void UpdateCollectionsContainsWork(Work work)
         {
-            //WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
-            WorksCollection.Add(WorksRouter.GetWorks()[WorksRouter.GetWorks().Count-1]);  // КОСТЫЛЬ
-            //OnPropertyChanged();
+            RewriteWorkInList(work);
+        }
+        private void RewriteWorkInList(Work item)
+        {
+            int index = WorksCollection.IndexOf(item);
+            WorksCollection.RemoveAt(index);
+            WorksCollection.Insert(index, item);
         }
 
-        public void UpdateCollectionsContainsWork(Work w)
-        {
-            WorksCollection.Clear();
-            WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
-            mainWorkListVM.WorksCollection = WorksCollection;
-            OnPropertyChanged();
-        }
         #endregion
 
         public MainWindowVM(MainWorkListVM _mainWindowVM)
@@ -210,17 +209,17 @@ namespace WpfManagerApp1.ViewModel
             
             this.MainWorkListVM = _mainWindowVM;
             
-            ImportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantImmediately);
-            UnimportantImmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantImmediately);
-            ImportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantUnimmediately);
-            UnimportantUnimmediatelyWorks = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantUnimmediately);
+            ImportantImmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantImmediately);
+            UnimportantImmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantImmediately);
+            ImportantUnimmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantUnimmediately);
+            UnimportantUnimmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantUnimmediately);
 
             Matrix = new List<EisenhowerMatrixCellVM>()
             {
-                ImportantImmediatelyWorks,
-                UnimportantImmediatelyWorks,
-                ImportantUnimmediatelyWorks,
-                UnimportantUnimmediatelyWorks,
+                ImportantImmediatelyWorksVM,
+                UnimportantImmediatelyWorksVM,
+                ImportantUnimmediatelyWorksVM,
+                UnimportantUnimmediatelyWorksVM,
             };
             
 

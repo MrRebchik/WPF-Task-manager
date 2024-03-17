@@ -111,7 +111,6 @@ namespace WpfManagerApp1.ViewModel
         private void UpdateList()
         {
             parentVM.UpdateCollectionsContainsWork(CurrentWork);
-            //parentVM.OnWorkListUpdated();
         }
         private List<string> EnumToList<T>(Dictionary<T,string> map)
         {

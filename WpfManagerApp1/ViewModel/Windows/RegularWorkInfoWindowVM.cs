@@ -48,7 +48,7 @@ namespace WpfManagerApp1.ViewModel.Windows
 
 
         private RegularWork currentWork;
-
+        private MainWindowVM parentVM;
 
         public RegularWork CurrentWork
         {
@@ -65,6 +65,7 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
         public string SelectedWorkImportance
@@ -73,6 +74,7 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
         public string SelectedWorkStatus
@@ -81,13 +83,19 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                UpdateList();
             }
         }
-        public RegularWorkInfoWindowVM(RegularWork work)
+        public RegularWorkInfoWindowVM(RegularWork work, MainWindowVM parentVM)
         {
             this.currentWork = work;
+            this.parentVM = parentVM;
         }
 
+        private void UpdateList()
+        {
+            parentVM.UpdateCollectionsContainsWork(CurrentWork);
+        }
         private List<string> EnumToList<T>(Dictionary<T, string> map)
         {
             return map.Values.ToList();
