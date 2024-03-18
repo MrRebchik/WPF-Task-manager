@@ -71,7 +71,9 @@ namespace WpfManagerApp1.ViewModel
         }
         private void OnDeleteSelectedWorkCommandExecuted(object parameter)
         {
-            WorksCollection.Remove(SelectedWorkInFullList);
+            var workToDelete = SelectedWorkInFullList;
+            WorksCollection.Remove(workToDelete);
+            WorksRouter.DeleteWork(workToDelete);
         }
 
         #endregion
