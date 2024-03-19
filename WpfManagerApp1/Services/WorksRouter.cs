@@ -61,6 +61,7 @@ namespace WpfManagerApp1.Services
         public void DeleteWork(Work item)
         {
             AllWorksList.Remove(item);
+            DataProvider.DeleteWork(item);
         }
 
         /// <summary>
@@ -90,6 +91,11 @@ namespace WpfManagerApp1.Services
             SortCommandsMap.Add(SortFilters.ByImmediacyDescending, SortByImmediacyDescending);
             SortCommandsMap.Add(SortFilters.ByImmediacyWithHabitsDescending, SortByImmediacyWithHabitsDescending);
             SortCommandsMap.Add(SortFilters.ByHabits, SortByHabits);
+        }
+
+        public int IncreaseLastID()
+        {
+            return AllWorksList.OrderByDescending(x => x.Id).Select(x => x.Id).First()+1;
         }
 
         #endregion

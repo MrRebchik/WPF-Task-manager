@@ -50,7 +50,7 @@ namespace WpfManagerApp1.ViewModel
         private bool CanAddNewWorkCommandExecute(object parameter) => true;
         private void OnAddNewWorkCommandExecuted(object parameter)
         {
-            AddNewWorkWindowVM addNewWorkWindowVM = new AddNewWorkWindowVM(WorksRouter, WorksCollection);
+            AddNewWorkWindowVM addNewWorkWindowVM = new AddNewWorkWindowVM(WorksRouter, this);
 
             AddNewWorkWindow addNewWorkWindow = new AddNewWorkWindow()
             {
@@ -196,11 +196,12 @@ namespace WpfManagerApp1.ViewModel
 
         public MainWindowVM(MainWorkListVM _mainWindowVM)
         {
-            
+
 
             #region Связь с Model
 
-            DataProvider = new BDMock();
+            //DataProvider = new BDMock();
+            DataProvider = new DataBaseNoSQL();
             WorksRouter = new WorksRouter(DataProvider);
             DayPlanManager = new DayPlanManager(DataProvider);
 

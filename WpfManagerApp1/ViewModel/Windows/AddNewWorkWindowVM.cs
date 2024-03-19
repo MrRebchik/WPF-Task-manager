@@ -22,7 +22,7 @@ namespace WpfManagerApp1.ViewModel
 
         WorksRouter WorksRouter { get; set; }
 
-        ObservableCollection<Work> WorksCollection { get; set; }
+        MainWindowVM mainWindowVM { get; set; }
 
         #region Title - название окнa
         private string title = "Создание нового задания";
@@ -112,9 +112,10 @@ namespace WpfManagerApp1.ViewModel
                 MessageBox.Show("Все обязательные поля для ввода должны быть заполенены");
                 return;
             }
-            if (selectedType == "Единичное задание") WorksRouter.AddWork(new UniqueWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });
-            else WorksRouter.AddWork(new RegularWork(1) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] });
-            
+            Work createdWork;
+            if (selectedType == "Единичное задание") createdWork = new UniqueWork(WorksRouter.IncreaseLastID()) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+            else createdWork = new RegularWork(WorksRouter.IncreaseLastID()) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+            mainWindowVM.WorksCollection.Add(createdWork);
             foreach (Window w in App.Current.Windows)
             {
                 if(w is AddNewWorkWindow)
@@ -124,13 +125,12 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public AddNewWorkWindowVM(WorksRouter worksRouter, ObservableCollection<Work> worksCollection)
+        public AddNewWorkWindowVM(WorksRouter worksRouter, MainWindowVM mainWindowVM)
         {
             WorksRouter = worksRouter;
-            WorksCollection = worksCollection;
+            this.mainWindowVM = mainWindowVM;
 
             CreateNewWorkCommand = new RelayCommand(OnCreateNewWorkCommandExecuted, CanCreateNewWorkCommandExecute);
-            WorksCollection = worksCollection;
         }
 
     }
