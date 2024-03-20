@@ -25,6 +25,7 @@ namespace WpfManagerApp1.Services
             DataProvider = dataProvider;
             LoadData();
             SortCommandsMap = new Dictionary<SortFilters, ListOperation>();
+            Work.WorkPropertyChanged += DataProvider.EditWork;
             InitializeSortCommandsMap();
         }
 
@@ -95,7 +96,7 @@ namespace WpfManagerApp1.Services
 
         public int IncreaseLastID()
         {
-            return AllWorksList.OrderByDescending(x => x.Id).Select(x => x.Id).First()+1;
+            return AllWorksList.OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault()+1;
         }
 
         #endregion

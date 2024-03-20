@@ -23,12 +23,12 @@ namespace WpfManagerApp1.Model
     }
     #endregion
 
-    public delegate void WorkPropertyChangedHandler();
+    public delegate void WorkPropertyChangedHandler(Work w);
     public abstract class Work
     {
         #region Приватные переменные
         private string name = "Укажите название";
-        private string description = "Добавить описание";
+        private string description;
         private CompleteStatus completeness = CompleteStatus.Waiting;
         private Importance importance;
         private int durationInMinutes;
@@ -37,20 +37,20 @@ namespace WpfManagerApp1.Model
         private EisenhowerMatrixCell eisenhowerMatrixCell;
         #endregion
 
-        //static WorkPropertyChangedHandler workPropertyChanged;
-        //public static event WorkPropertyChangedHandler WorkPropertyChanged
-        //{
-        //    add
-        //    {
-        //        //if(workPropertyChanged?.GetInvocationList().Length == 0)
-        //        workPropertyChanged += value;
-        //    }
-        //    remove
-        //    {
-        //        workPropertyChanged -= value;
-        //    }
+        static WorkPropertyChangedHandler workPropertyChanged;
+        public static event WorkPropertyChangedHandler WorkPropertyChanged
+        {
+            add
+            {
+                //if(workPropertyChanged?.GetInvocationList().Length == 0)
+                workPropertyChanged += value;
+            }
+            remove
+            {
+                workPropertyChanged -= value;
+            }
 
-        //}
+        }
 
         public Work(int id)
         {
@@ -63,7 +63,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 name = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             }
         }
         public string Description 
@@ -72,7 +72,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 description = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             }
         }
         public CompleteStatus Completeness 
@@ -81,7 +81,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 completeness = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             }
         }
         public Importance Importance 
@@ -90,7 +90,7 @@ namespace WpfManagerApp1.Model
             set 
             {
                 importance = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             } 
         }
         /// <summary>
@@ -102,7 +102,7 @@ namespace WpfManagerApp1.Model
             set 
             {
                 durationInMinutes = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             } 
         }
         public DateTime CreationDate 
@@ -111,7 +111,7 @@ namespace WpfManagerApp1.Model
             set 
             {
                 creationDate = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             } 
         }
         /// <summary>
@@ -123,7 +123,7 @@ namespace WpfManagerApp1.Model
             set 
             {
                 isHighPriority = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             } 
         }
         public EisenhowerMatrixCell EisenhowerMatrixCell 
@@ -132,13 +132,13 @@ namespace WpfManagerApp1.Model
             set 
             {
                 eisenhowerMatrixCell = value;
-                //OnWorkPropertyChanged();
+                OnWorkPropertyChanged();
             } 
         }
 
-        //private protected void OnWorkPropertyChanged()
-        //{
-        //    workPropertyChanged?.Invoke();
-        //}
+        private protected void OnWorkPropertyChanged()
+        {
+            workPropertyChanged?.Invoke(this);
+        }
     }
 }

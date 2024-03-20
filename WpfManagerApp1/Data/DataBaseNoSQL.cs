@@ -50,6 +50,12 @@ namespace WpfManagerApp1.Data
 
         public override void EditWork(Work work)
         {
+            using (var db = new LiteDatabase(@"MyData.db"))
+            {
+                var worksCollection = db.GetCollection<Work>("works");
+                worksCollection.Update(work);
+            }
+            works.Remove(work);
         }
 
         public override bool GetDaysPlans(out List<DayPlan> list)

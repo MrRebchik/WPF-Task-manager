@@ -113,8 +113,14 @@ namespace WpfManagerApp1.ViewModel
                 return;
             }
             Work createdWork;
-            if (selectedType == "Единичное задание") createdWork = new UniqueWork(WorksRouter.IncreaseLastID()) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
-            else createdWork = new RegularWork(WorksRouter.IncreaseLastID()) { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+
+            if (selectedType == "Единичное задание") 
+                createdWork = new UniqueWork(WorksRouter.IncreaseLastID()) 
+                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+            else 
+                createdWork = new RegularWork(WorksRouter.IncreaseLastID())
+                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+            mainWindowVM.WorksRouter.AddWork(createdWork);
             mainWindowVM.WorksCollection.Add(createdWork);
             foreach (Window w in App.Current.Windows)
             {
