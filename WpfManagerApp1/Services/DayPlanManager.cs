@@ -48,7 +48,7 @@ namespace WpfManagerApp1.Services
         public void AddDayPlan(DayPlan item)
         {
             AllDaysList.Add(item);
-            DataProvider.SaveDayPlan(item);
+            DataProvider.AddDayPlan(item);
             item.DayPlanPropertyChanged += DataProvider.EditDayPlan;
             DataUpdated?.Invoke();
         }

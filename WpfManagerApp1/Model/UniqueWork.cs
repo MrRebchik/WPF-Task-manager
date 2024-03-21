@@ -16,6 +16,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 isTimeLimited = value;
+                base.OnWorkPropertyChanged();
             }
         }
         public DateTime DeadLine 
@@ -25,6 +26,7 @@ namespace WpfManagerApp1.Model
             {
                 deadLine = value;
                 isTimeLimited = true;
+                base.OnWorkPropertyChanged();
             }
         }
         public int AttemptsCount 
@@ -33,6 +35,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 attemptsCount = value;
+                base.OnWorkPropertyChanged();
             }
         }
     }

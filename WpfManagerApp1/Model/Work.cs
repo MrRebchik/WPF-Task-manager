@@ -56,6 +56,7 @@ namespace WpfManagerApp1.Model
         {
             Id = id;
         }
+
         public int Id { get; private set; }
         public string Name
         { 

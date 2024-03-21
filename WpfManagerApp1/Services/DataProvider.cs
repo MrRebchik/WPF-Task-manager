@@ -36,12 +36,12 @@ namespace WpfManagerApp1.Services
             throw new NotImplementedException();
         }
 
-        public virtual void SaveDayPlan(DayPlan dayPlan)
+        public virtual void AddDayPlan(DayPlan dayPlan)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void SaveWork(Work work)
+        public virtual void AddWork(Work work)
         {
             throw new NotImplementedException();
         }

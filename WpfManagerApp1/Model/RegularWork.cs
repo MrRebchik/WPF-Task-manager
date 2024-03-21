@@ -17,6 +17,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 repeatDays = value.ToArray().Distinct().OrderBy(n => (int)n).ToList();
+                base.OnWorkPropertyChanged();
             }
         }
         public bool IsHabit 
@@ -25,6 +26,7 @@ namespace WpfManagerApp1.Model
             set
             {
                 isHabit = value;
+                base.OnWorkPropertyChanged();
             }
         }
     }

@@ -78,14 +78,6 @@ namespace WpfManagerApp1.Data
 
             dayPlans = new List<DayPlan>() { d1, d2 };
 
-            foreach(var e in works)
-            {
-                //e.WorkPropertyChanged += EditWork; // можно переделать в LINQ
-            }
-            foreach (var e in dayPlans)
-            {
-                //e.DayPlanPropertyChanged += EditDayPlan; // можно переделать в LINQ
-            }
         }
 
         #region Works
@@ -105,9 +97,8 @@ namespace WpfManagerApp1.Data
             return true;
         }
 
-        public override void SaveWork(Work work)
+        public override void AddWork(Work work)
         {
-            //work.WorkPropertyChanged += EditWork;
             works.Add(work); // ТЕСТИРОВАТЬ
         }
 
@@ -131,7 +122,7 @@ namespace WpfManagerApp1.Data
             return true;
         }
 
-        public override void SaveDayPlan(DayPlan dayPlan)
+        public override void AddDayPlan(DayPlan dayPlan)
         {
             dayPlan.DayPlanPropertyChanged += EditDayPlan;
             dayPlans.Add(dayPlan); // ТЕСТИРОВАТЬ

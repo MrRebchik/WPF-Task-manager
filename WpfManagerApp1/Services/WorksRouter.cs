@@ -56,7 +56,7 @@ namespace WpfManagerApp1.Services
         public void AddWork(Work item)
         {
             AllWorksList.Add(item);
-            DataProvider.SaveWork(item);
+            DataProvider.AddWork(item);
         }
 
         public void DeleteWork(Work item)

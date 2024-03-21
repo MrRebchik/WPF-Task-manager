@@ -6,7 +6,7 @@ namespace WpfManagerApp1.Services
     public interface IDataDayPlansProvider
     {
         bool GetDaysPlans(out List<DayPlan> list);
-        void SaveDayPlan(DayPlan dayPlan);
+        void AddDayPlan(DayPlan dayPlan);
         void EditDayPlan(DayPlan dayPlan);
         void DeleteDayPlan(DayPlan dayPlan);
     }

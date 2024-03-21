@@ -13,27 +13,21 @@ namespace WpfManagerApp1.Data
     internal class DataBaseNoSQL : DataProvider
     {
         private List<Work> works;
+
         internal DataBaseNoSQL()
         {
             using (var db = new LiteDatabase(@"MyData.db"))
             {
-                // Получаем коллекцию
                 var worksCollection = db.GetCollection<Work>("works");
                 works = worksCollection.FindAll().ToList();
             }
         }
+
         public override bool GetWorks(out List<Work> list)
         {
             list = works;
             return true;
         }
-
-        ////////////
-        ///
-        public override void DeleteDayPlan(DayPlan dayPlan)
-        {
-        }
-
         public override void DeleteWork(Work work)
         {
             using (var db = new LiteDatabase(@"MyData.db"))
@@ -43,11 +37,6 @@ namespace WpfManagerApp1.Data
             }
             works.Remove(work);
         }
-
-        public override void EditDayPlan(DayPlan dayPlan)
-        {
-        }
-
         public override void EditWork(Work work)
         {
             using (var db = new LiteDatabase(@"MyData.db"))
@@ -57,18 +46,7 @@ namespace WpfManagerApp1.Data
             }
             works.Remove(work);
         }
-
-        public override bool GetDaysPlans(out List<DayPlan> list)
-        {
-            list = new List<DayPlan>();
-            return true;
-        }
-
-        public override void SaveDayPlan(DayPlan dayPlan)
-        {
-        }
-
-        public override void SaveWork(Work work)
+        public override void AddWork(Work work)
         {
             using (var db = new LiteDatabase(@"MyData.db"))
             {
@@ -76,6 +54,21 @@ namespace WpfManagerApp1.Data
                 worksCollection.Insert(work);
             }
             works.Add(work);
+        }
+
+        public override void DeleteDayPlan(DayPlan dayPlan)
+        {
+        }
+        public override void EditDayPlan(DayPlan dayPlan)
+        {
+        }
+        public override bool GetDaysPlans(out List<DayPlan> list)
+        {
+            list = new List<DayPlan>();
+            return true;
+        }
+        public override void AddDayPlan(DayPlan dayPlan)
+        {
         }
     }
 }
