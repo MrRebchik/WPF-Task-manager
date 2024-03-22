@@ -5,7 +5,7 @@ namespace WpfManagerApp1.Model
     #region enum'ы
     public enum CompleteStatus
     {
-        Done,Waiting,Frozen
+        Done,Waiting,Active,Frozen
     }
     public enum Importance
     {
@@ -29,7 +29,7 @@ namespace WpfManagerApp1.Model
         #region Приватные переменные
         private string name = "Укажите название";
         private string description;
-        private CompleteStatus completeness = CompleteStatus.Waiting;
+        private CompleteStatus completeness = CompleteStatus.Active;
         private Importance importance;
         private int durationInMinutes;
         private DateTime creationDate;

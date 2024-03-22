@@ -44,7 +44,7 @@
                             <DataTemplate>
                                 <TextBlock Name="Completeness" Text="{Binding Path=Completeness, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding Completeness}" Value="Waiting">
+                                    <DataTrigger Binding="{Binding Completeness}" Value="Active">
                                         <Setter TargetName="Completeness" Property="TextBlock.Text" Value="Активное"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Completeness}" Value="Done">

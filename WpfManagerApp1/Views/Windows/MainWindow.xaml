@@ -10,11 +10,17 @@
         xmlns:v="clr-namespace:WpfManagerApp1.Views.Windows"
         Title="{Binding Path=Title}" 
         MinHeight="600" MinWidth="1000"
+        WindowState="Maximized"
         >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
                 <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Информация">
+                <MenuItem Header="Текущая версия">
+                    <MenuItem Header="{Binding CurrentVersion}"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
 

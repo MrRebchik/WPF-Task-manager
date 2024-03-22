@@ -26,7 +26,7 @@ namespace WpfManagerApp1.ViewModel.Windows
         };
         private Dictionary<CompleteStatus, string> statusMap = new Dictionary<CompleteStatus, string>()
         {
-            {CompleteStatus.Waiting , "Активное" },
+            {CompleteStatus.Active , "Активное" },
             {CompleteStatus.Frozen , "Отложено" },
             {CompleteStatus.Done , "Выполнено" },
         };

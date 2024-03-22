@@ -82,7 +82,6 @@ namespace WpfManagerApp1.ViewModel.UserControls
         {
             cellList.Remove(RemovedWorkItemVM);
         }
-
         public EisenhowerMatrixCellVM(MainWindowVM mainWindowVM, EisenhowerMatrixCell eisenhowerMatrixCell)
         {
             WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted, CanWorkRecieveCommandExecute);
@@ -92,7 +91,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
 
             CellName = typeNameMap[eisenhowerMatrixCell];
             CellList = new ObservableCollection<Work>(_mainWindowVM.WorksRouter.GetWorks()
-                .Where(x => x.EisenhowerMatrixCell == eisenhowerMatrixCell));
+                .Where(x => x.EisenhowerMatrixCell == eisenhowerMatrixCell).Where(x => x.Completeness == CompleteStatus.Active));
         }
 
     }

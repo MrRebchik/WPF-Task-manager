@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
-             x:Name="root"
              mc:Ignorable="d" 
              >
     <Grid >
@@ -25,7 +24,6 @@
             >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="IsHitTestVisible" Value="{Binding IsWorkItemHitTestVisible, ElementName= root}"/>
                     <EventSetter Event="MouseMove" Handler="WorkItem_MouseMove"/>
                 </Style>
             </ListView.ItemContainerStyle>

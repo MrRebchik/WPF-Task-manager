@@ -12,6 +12,7 @@ using WpfManagerApp1.ViewModel.UserControls;
 using System.Windows.Documents;
 using System.Collections.Generic;
 using WpfManagerApp1.ViewModel.Windows;
+using System.Reflection;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -137,11 +138,7 @@ namespace WpfManagerApp1.ViewModel
 
         #region Коллекции
 
-        #region Коллекции дел
-
         public ObservableCollection<Work> WorksCollection { get; set; }
-
-        #endregion
 
         public ObservableCollection<DayPlan> DayPlanCollection { get; set; }
 
@@ -158,9 +155,9 @@ namespace WpfManagerApp1.ViewModel
         #endregion
 
         #region Title - название окна
+
         private string _title = "Планировщик";
         
-
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -173,10 +170,12 @@ namespace WpfManagerApp1.ViewModel
             }
         }
 
-        
-
         #endregion
 
+        public string CurrentVersion
+        {
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+        }
         #endregion
 
         #region Методы
@@ -190,6 +189,12 @@ namespace WpfManagerApp1.ViewModel
             int index = WorksCollection.IndexOf(item);
             WorksCollection.RemoveAt(index);
             WorksCollection.Insert(index, item);
+        }
+        public void ChangeEisenhowerMatrixCell(Work work, EisenhowerMatrixCell newCell)
+        {
+            //возможно заснуть этот метод в команду удаления
+            //в команде удаления проверять DropAllow у объекта над которым находится
+
         }
 
         #endregion

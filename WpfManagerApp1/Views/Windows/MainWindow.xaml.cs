@@ -21,8 +21,6 @@ namespace WpfManagerApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
         public MainWindow()
         {
             InitializeComponent();
@@ -36,22 +34,5 @@ namespace WpfManagerApp1
                 DragDrop.DoDragDrop(frameworkElement, new DataObject(DataFormats.Serializable, frameworkElement.DataContext), DragDropEffects.Copy);
             }
         }
-
-        private void ListView_Drop(object sender, DragEventArgs e)
-        {
-
-        }
-
-
-
-        //private void WorkListView_Drop(object sender, DragEventArgs e)
-        //{
-        //    if (WorkDropCommand?.CanExecute(null) ?? false)
-        //    {
-        //        WorkDropCommand?.Execute(null);
-        //    }
-        //}
-
-
     }
 }

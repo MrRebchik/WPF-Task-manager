@@ -24,17 +24,6 @@ namespace WpfManagerApp1.Views.UserControls
 
         #region Dependencies
 
-        #region IsWorkItemHitTestVisible
-        public static readonly DependencyProperty IsWorkItemHitTestVisibleProperty =
-            DependencyProperty.Register("IsWorkItemHitTestVisible", typeof(bool), typeof(EisenhowerMatrixCell), new PropertyMetadata(true));
-
-        public bool IsWorkItemHitTestVisible
-        {
-            get { return (bool)GetValue(IsWorkItemHitTestVisibleProperty); }
-            set { SetValue(IsWorkItemHitTestVisibleProperty, value); }
-        } 
-        #endregion
-
         #region IncomingWorkItem
         public static readonly DependencyProperty IncomingWorkItemProperty =
             DependencyProperty.Register("IncomingWorkItem", typeof(object), typeof(EisenhowerMatrixCell),
@@ -101,12 +90,10 @@ namespace WpfManagerApp1.Views.UserControls
             if(e.LeftButton == MouseButtonState.Pressed &&
                 sender is FrameworkElement frameworkElement)
             {
-                IsWorkItemHitTestVisible = false;
                 DragDrop.DoDragDrop(frameworkElement, 
                     new DataObject(DataFormats.Serializable, 
                     frameworkElement.DataContext),
                     DragDropEffects.Move);
-                IsWorkItemHitTestVisible = true;
             }
         }
 
