@@ -20,8 +20,6 @@ namespace WpfManagerApp1.Views.UserControls
     /// </summary>
     public partial class EisenhowerMatrixCell : UserControl
     {
-
-
         #region Dependencies
 
         #region IncomingWorkItem
@@ -78,6 +76,7 @@ namespace WpfManagerApp1.Views.UserControls
 
         private void EisenhowerMatrixCell_Drop(object sender, DragEventArgs e)
         {
+            if (Mouse.DirectlyOver)
             if (WorkDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingWorkItem = e.Data.GetData(DataFormats.Serializable);

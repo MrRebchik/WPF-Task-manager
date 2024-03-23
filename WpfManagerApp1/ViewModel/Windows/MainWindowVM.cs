@@ -112,14 +112,14 @@ namespace WpfManagerApp1.ViewModel
 
         #region WorkItemReceivedCommand
 
-        public ICommand WorkItemReceivedCommand { get; }
+        //public ICommand WorkItemReceivedCommand { get; }
 
-        private bool CanWorkItemReceivedCommandExecute(object parameter) => true;
+        //private bool CanWorkItemReceivedCommandExecute(object parameter) => true;
 
-        private void OnWorkItemReceivedCommandExecuted(object parameter)
-        {
+        //private void OnWorkItemReceivedCommandExecuted(object parameter)
+        //{
 
-        }
+        //}
 
         #endregion 
 
@@ -201,8 +201,6 @@ namespace WpfManagerApp1.ViewModel
 
         public MainWindowVM(MainWorkListVM _mainWindowVM)
         {
-
-
             #region Связь с Model
 
             //DataProvider = new BDMock();
@@ -236,7 +234,7 @@ namespace WpfManagerApp1.ViewModel
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
             DeleteSelectedWorkCommand = new RelayCommand(OnDeleteSelectedWorkCommandExecuted, CanDeleteSelectedWorkCommandExecute);
-            WorkItemReceivedCommand = new RelayCommand(OnWorkItemReceivedCommandExecuted, CanWorkItemReceivedCommandExecute);
+            //WorkItemReceivedCommand = new RelayCommand(OnWorkItemReceivedCommandExecuted, CanWorkItemReceivedCommandExecute);
             OpenWorkInfoWindowCommand = new RelayCommand(OnOpenWorkInfoWindowCommandExecuted, CanOpenWorkInfoWindowCommandExecute);
 
             #endregion

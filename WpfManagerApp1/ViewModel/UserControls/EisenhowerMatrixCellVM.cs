@@ -28,7 +28,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private string cellName;
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
         private Work _incomingWorkItem;
-        private Work _removedWorkItemVM;
+        private Work _removedWorkItemVM = null;
 
         public string CellName 
         { 
@@ -63,7 +63,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
 
             #endregion
 
-            if (CellList.Contains(IncomingWorkItem)) return;
+            if (CellList.Contains(IncomingWorkItem)) return; //чтобы нельзя было бесконечно добавлять одно и то же
             IncomingWorkItem.EisenhowerMatrixCell = _eisenhowerMatrixCell;
             CellList.Add(IncomingWorkItem);
         }
