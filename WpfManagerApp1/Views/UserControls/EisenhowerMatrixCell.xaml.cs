@@ -65,7 +65,18 @@ namespace WpfManagerApp1.Views.UserControls
         {
             get { return (ICommand)GetValue(WorkRemoveCommandProperty); }
             set { SetValue(WorkRemoveCommandProperty, value); }
-        } 
+        }
+        #endregion
+
+        #region CheckIfDropDidComand
+        public static readonly DependencyProperty CheckIfDropDidComandProperty =
+            DependencyProperty.Register("CheckIfDropDidComand", typeof(ICommand), typeof(EisenhowerMatrixCell), new PropertyMetadata(null));
+
+        public ICommand CheckIfDropDidComand
+        {
+            get { return (ICommand)GetValue(CheckIfDropDidComandProperty); }
+            set { SetValue(CheckIfDropDidComandProperty, value); }
+        }
         #endregion
 
         #endregion
@@ -76,7 +87,6 @@ namespace WpfManagerApp1.Views.UserControls
 
         private void EisenhowerMatrixCell_Drop(object sender, DragEventArgs e)
         {
-            if (Mouse.DirectlyOver)
             if (WorkDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingWorkItem = e.Data.GetData(DataFormats.Serializable);
@@ -102,6 +112,17 @@ namespace WpfManagerApp1.Views.UserControls
             {
                 RemovedWorkItem = e.Data.GetData(DataFormats.Serializable);
                 WorkRemoveCommand?.Execute(null);
+            }
+        }
+        private void ListView_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+        {
+            if (!e.KeyStates.HasFlag(DragDropKeyStates.LeftMouseButton))
+            {
+                if (CheckIfDropDidComand?.CanExecute(null) ?? false)
+                {
+                    CheckIfDropDidComand?.Execute(null);
+                }
+                
             }
         }
     }

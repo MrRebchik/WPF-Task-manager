@@ -105,24 +105,7 @@ namespace WpfManagerApp1.ViewModel
                 };
                 _regularWorkInfoWindow.Show();
             }
-        } 
-        #endregion
-
-        #region Drag Drop
-
-        #region WorkItemReceivedCommand
-
-        //public ICommand WorkItemReceivedCommand { get; }
-
-        //private bool CanWorkItemReceivedCommandExecute(object parameter) => true;
-
-        //private void OnWorkItemReceivedCommandExecuted(object parameter)
-        //{
-
-        //}
-
-        #endregion 
-
+        }
         #endregion
 
 
@@ -174,7 +157,7 @@ namespace WpfManagerApp1.ViewModel
 
         public string CurrentVersion
         {
-            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+            get { return "Текущая версия: " + Assembly.GetExecutingAssembly().GetName().Version.ToString(2); }
         }
         #endregion
 
@@ -234,7 +217,7 @@ namespace WpfManagerApp1.ViewModel
             CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             AddNewWorkCommand = new RelayCommand(OnAddNewWorkCommandExecuted, CanAddNewWorkCommandExecute);
             DeleteSelectedWorkCommand = new RelayCommand(OnDeleteSelectedWorkCommandExecuted, CanDeleteSelectedWorkCommandExecute);
-            //WorkItemReceivedCommand = new RelayCommand(OnWorkItemReceivedCommandExecuted, CanWorkItemReceivedCommandExecute);
+            
             OpenWorkInfoWindowCommand = new RelayCommand(OnOpenWorkInfoWindowCommandExecuted, CanOpenWorkInfoWindowCommandExecute);
 
             #endregion

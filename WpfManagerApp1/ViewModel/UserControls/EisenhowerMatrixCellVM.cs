@@ -82,10 +82,26 @@ namespace WpfManagerApp1.ViewModel.UserControls
         {
             cellList.Remove(RemovedWorkItemVM);
         }
+
+        public ICommand CheckIfDropDidComandVM { get; }
+
+        private bool CanCheckIfDropDidCommandExecute(object parameter) => true;
+
+        private void OnCheckIfDropDidCommandExecuted(object parameter) // происходит в источнике перетягивания
+        {
+            bool isSuccessfully = false;
+            foreach (var matrix in _mainWindowVM.Matrix)
+            {
+                if(matrix.CellList.Contains(RemovedWorkItemVM)) isSuccessfully = true;
+            }
+            if(!isSuccessfully) cellList.Add(RemovedWorkItemVM);
+        }
+
         public EisenhowerMatrixCellVM(MainWindowVM mainWindowVM, EisenhowerMatrixCell eisenhowerMatrixCell)
         {
             WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted, CanWorkRecieveCommandExecute);
             WorkRemovedCommandVM = new RelayCommand(OnWorkRemovedCommandExecuted, CanWorkRemovedCommandExecute);
+            CheckIfDropDidComandVM = new RelayCommand(OnCheckIfDropDidCommandExecuted, CanCheckIfDropDidCommandExecute);
             _mainWindowVM = mainWindowVM;
             _eisenhowerMatrixCell = eisenhowerMatrixCell;
 

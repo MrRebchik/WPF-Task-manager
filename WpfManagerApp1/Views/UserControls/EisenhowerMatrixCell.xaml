@@ -25,6 +25,7 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseMove" Handler="WorkItem_MouseMove"/>
+                    <EventSetter Event="QueryContinueDrag" Handler="ListView_QueryContinueDrag"/>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
