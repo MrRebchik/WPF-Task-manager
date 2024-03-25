@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using WpfManagerApp1.Services;
 using LiteDB;
 using WpfManagerApp1.Model;
-using WpfManagerApp1.Infrastructure.Commands;
 
 namespace WpfManagerApp1.Data
 {
     internal class DataBaseNoSQL : DataProvider
     {
         private List<Work> works;
-
+        //private string const WorkDBName = "";
         internal DataBaseNoSQL()
         {
             using (var db = new LiteDatabase(@"MyData.db"))

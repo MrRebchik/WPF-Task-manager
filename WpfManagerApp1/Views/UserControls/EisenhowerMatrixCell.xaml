@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
              mc:Ignorable="d" 
              >
-    <Grid >
+    <Grid Margin="15" >
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -21,7 +21,23 @@
             AllowDrop="True"
             Drop="EisenhowerMatrixCell_Drop"
             DragLeave="ListView_DragLeave"
+            Padding="5"
             >
+            <!--<ListView.Template>
+                <ControlTemplate TargetType="{x:Type ListView}">
+                    <Border CornerRadius="6" BorderThickness="1" BorderBrush="White">
+                        <ScrollViewer>
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ListView.Template>-->
+            <ListView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#ffbcad" Offset="0.1" />
+                    <GradientStop Color="#fbceb1" Offset="0.9" />
+                </LinearGradientBrush>
+            </ListView.Background>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseMove" Handler="WorkItem_MouseMove"/>
