@@ -21,14 +21,6 @@ namespace WpfManagerApp1.Views.UserControls
     public partial class MainWorkList : UserControl
     {
         #region DependencyProperies
-        public static readonly DependencyProperty WorkDropCommandProperty =
-            DependencyProperty.Register("WorkDropCommand", typeof(ICommand), typeof(MainWorkList), new PropertyMetadata(null));
-
-        public ICommand WorkDropCommand
-        {
-            get { return (ICommand)GetValue(WorkDropCommandProperty); }
-            set { SetValue(WorkDropCommandProperty, value); }
-        }
 
         public static readonly DependencyProperty WorkMouseDoubleClickCommandProperty =
             DependencyProperty.Register("WorkMouseDoubleClickCommand", typeof(ICommand), typeof(MainWorkList), new PropertyMetadata(null));
@@ -38,7 +30,6 @@ namespace WpfManagerApp1.Views.UserControls
             get { return (ICommand)GetValue(WorkMouseDoubleClickCommandProperty); }
             set { SetValue(WorkMouseDoubleClickCommandProperty, value); }
         }
-
         #endregion
 
         public MainWorkList()

@@ -16,21 +16,5 @@ namespace WpfManagerApp1.ViewModel
     {
         public ObservableCollection<Work> WorksCollection { get; set; }
         public Work SelectedWorkInFullList { get; set; }
-
-        #region Команды
-
-        public ICommand WorkRecieveCommand { get; }
-
-        private void OnWorkRecieveCommandExecuted(object parameter)
-        {
-            
-        }
-
-        #endregion
-
-        public MainWorkListVM()
-        {
-            WorkRecieveCommand = new RelayCommand(OnWorkRecieveCommandExecuted);
-        }
     }
 }

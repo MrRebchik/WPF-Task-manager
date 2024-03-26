@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
              mc:Ignorable="d" 
              >
-    <Grid Margin="15" >
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -15,42 +15,40 @@
             Grid.Row="0"
             Content="{Binding CellName}"
             />
-        <ListView
-            Grid.Row="1"
-            ItemsSource="{Binding CellList}"
-            AllowDrop="True"
-            Drop="EisenhowerMatrixCell_Drop"
-            DragLeave="ListView_DragLeave"
-            Padding="5"
-            >
-            <!--<ListView.Template>
-                <ControlTemplate TargetType="{x:Type ListView}">
-                    <Border CornerRadius="6" BorderThickness="1" BorderBrush="White">
-                        <ScrollViewer>
-                            <ItemsPresenter/>
-                        </ScrollViewer>
+        <ListBox Grid.Row="1"
+                    ItemsSource="{Binding CellList}"
+                    AllowDrop="True"
+                    Drop="EisenhowerMatrixCell_Drop"
+                    DragLeave="ListView_DragLeave"
+                    Padding="5"
+                    >
+            <ListBox.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="8" BorderThickness="0" Padding="8">
+                        <Border.Background>
+                            <RadialGradientBrush GradientOrigin="0.2,0.4">
+                                <GradientStop Color="#FFFFBCAD" Offset="1"/>
+                                <GradientStop Color="#FFFBCEB1" Offset="0.243"/>
+                            </RadialGradientBrush>
+                        </Border.Background>
+                        <ItemsPresenter>
+
+                        </ItemsPresenter>
                     </Border>
                 </ControlTemplate>
-            </ListView.Template>-->
-            <ListView.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#ffbcad" Offset="0.1" />
-                    <GradientStop Color="#fbceb1" Offset="0.9" />
-                </LinearGradientBrush>
-            </ListView.Background>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
+            </ListBox.Template>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseMove" Handler="WorkItem_MouseMove"/>
                     <EventSetter Event="QueryContinueDrag" Handler="ListView_QueryContinueDrag"/>
                 </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock 
-                        Text="{Binding Name}"/>
+                    <Label
+                        Content="{Binding Name}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-
-        </ListView>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
