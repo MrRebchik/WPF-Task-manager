@@ -45,6 +45,10 @@ namespace WpfManagerApp1.ViewModel.UserControls
             get { return _incomingWorkItem; }
             set { Set(ref _incomingWorkItem, value); }
         }
+        public EisenhowerMatrixCell EisenhowerMatrixCell
+        {
+            get { return _eisenhowerMatrixCell; }
+        }
         public ICommand WorkRecieveCommand { get; }        
 
         private bool CanWorkRecieveCommandExecute(object parameter)

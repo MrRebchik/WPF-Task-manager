@@ -173,12 +173,6 @@ namespace WpfManagerApp1.ViewModel
             WorksCollection.RemoveAt(index);
             WorksCollection.Insert(index, item);
         }
-        public void ChangeEisenhowerMatrixCell(Work work, EisenhowerMatrixCell newCell)
-        {
-            //возможно заснуть этот метод в команду удаления
-            //в команде удаления проверять DropAllow у объекта над которым находится
-
-        }
 
         #endregion
 

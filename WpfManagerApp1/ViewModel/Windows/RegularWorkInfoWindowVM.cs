@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfManagerApp1.Model;
 using WpfManagerApp1.ViewModel.Base;
+using WpfManagerApp1.ViewModel.UserControls;
 
 namespace WpfManagerApp1.ViewModel.Windows
 {
@@ -64,7 +65,8 @@ namespace WpfManagerApp1.ViewModel.Windows
             get => cellMap[CurrentWork.EisenhowerMatrixCell];
             set
             {
-                CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                ChangeCell(cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault());
+                CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault(); //не понятно что делает
                 UpdateList();
             }
         }
@@ -95,6 +97,17 @@ namespace WpfManagerApp1.ViewModel.Windows
         private void UpdateList()
         {
             parentVM.UpdateCollectionsContainsWork(CurrentWork);
+        }
+        private void ChangeCell(EisenhowerMatrixCell cell)
+        {
+            parentVM.Matrix.Where(x => x.CellList.Contains(CurrentWork)).Select(x => x.CellList.Remove(CurrentWork)); // не обновляет прошлую колекцию?
+            foreach( var col in parentVM.Matrix )
+            {
+                if(col.EisenhowerMatrixCell == cell)
+                {
+                    col.CellList.Add(CurrentWork);
+                }
+            }
         }
         private List<string> EnumToList<T>(Dictionary<T, string> map)
         {
