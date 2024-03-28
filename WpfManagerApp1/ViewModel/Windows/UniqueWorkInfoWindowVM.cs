@@ -66,7 +66,8 @@ namespace WpfManagerApp1.ViewModel
             get => cellMap[CurrentWork.EisenhowerMatrixCell];
             set
             {
-                CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                ChangeCell(cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault());
+                CurrentWork.EisenhowerMatrixCell = GetValueFromMap(cellMap, value);
                 UpdateList();
             }
         }
@@ -75,7 +76,7 @@ namespace WpfManagerApp1.ViewModel
             get => importanceMap[CurrentWork.Importance];
             set
             {
-                CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                CurrentWork.Importance = GetValueFromMap(importanceMap, value);
                 UpdateList();
             }
         }
@@ -84,7 +85,7 @@ namespace WpfManagerApp1.ViewModel
             get => statusMap[CurrentWork.Completeness];
             set
             {
-                CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                CurrentWork.Completeness = GetValueFromMap(statusMap, value);
                 UpdateList();
             }
         }
@@ -112,9 +113,31 @@ namespace WpfManagerApp1.ViewModel
         {
             parentVM.UpdateCollectionsContainsWork(CurrentWork);
         }
+
+        private void ChangeCell(EisenhowerMatrixCell cell)
+        {
+            foreach (var col in parentVM.Matrix)
+            {
+                if (col.CellList.Contains(CurrentWork))
+                {
+                    col.CellList.Remove(CurrentWork);
+                }
+            }
+            foreach (var col in parentVM.Matrix)
+            {
+                if (col.EisenhowerMatrixCell == cell)
+                {
+                    col.CellList.Add(CurrentWork);
+                }
+            }
+        }
         private List<string> EnumToList<T>(Dictionary<T,string> map)
         {
             return map.Values.ToList();
+        }
+        private T GetValueFromMap<T>(Dictionary<T, string> map, string value)
+        {
+            return map.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
         }
     }
 }

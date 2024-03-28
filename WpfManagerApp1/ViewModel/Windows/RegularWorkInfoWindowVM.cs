@@ -66,7 +66,7 @@ namespace WpfManagerApp1.ViewModel.Windows
             set
             {
                 ChangeCell(cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault());
-                CurrentWork.EisenhowerMatrixCell = cellMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault(); //не понятно что делает
+                CurrentWork.EisenhowerMatrixCell = GetValueFromMap(cellMap, value);
                 UpdateList();
             }
         }
@@ -75,7 +75,7 @@ namespace WpfManagerApp1.ViewModel.Windows
             get => importanceMap[CurrentWork.Importance];
             set
             {
-                CurrentWork.Importance = importanceMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
+                CurrentWork.Importance = GetValueFromMap(importanceMap, value);
                 UpdateList();
             }
         }
@@ -84,8 +84,7 @@ namespace WpfManagerApp1.ViewModel.Windows
             get => statusMap[CurrentWork.Completeness];
             set
             {
-                CurrentWork.Completeness = statusMap.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
-                UpdateList();
+                CurrentWork.Completeness = GetValueFromMap(statusMap, value);
             }
         }
         public RegularWorkInfoWindowVM(RegularWork work, MainWindowVM parentVM)
@@ -100,8 +99,14 @@ namespace WpfManagerApp1.ViewModel.Windows
         }
         private void ChangeCell(EisenhowerMatrixCell cell)
         {
-            parentVM.Matrix.Where(x => x.CellList.Contains(CurrentWork)).Select(x => x.CellList.Remove(CurrentWork)); // не обновляет прошлую колекцию?
-            foreach( var col in parentVM.Matrix )
+            foreach (var col in parentVM.Matrix)
+            {
+                if (col.CellList.Contains(CurrentWork))
+                {
+                    col.CellList.Remove(CurrentWork);
+                }
+            }
+            foreach ( var col in parentVM.Matrix )
             {
                 if(col.EisenhowerMatrixCell == cell)
                 {
@@ -112,6 +117,10 @@ namespace WpfManagerApp1.ViewModel.Windows
         private List<string> EnumToList<T>(Dictionary<T, string> map)
         {
             return map.Values.ToList();
+        }
+        private T GetValueFromMap<T>(Dictionary<T, string> map, string value)
+        {
+            return map.Where(x => x.Value == value).Select(x => x.Key).FirstOrDefault();
         }
     }
 }
