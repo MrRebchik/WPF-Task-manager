@@ -7,16 +7,16 @@
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
              mc:Ignorable="d" 
              >
-    <Grid>
+    <Grid x:Name="grid">
         <ListView
             ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedWorkInFullList}"
             SelectionMode="Single"
             >
             <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
-                    <GridViewColumn>
+                <GridView >
+                    <GridViewColumn  DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
+                    <GridViewColumn Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Name="Importance"  Text="{Binding Path=Importance}"/>
@@ -39,7 +39,7 @@
                         </GridViewColumn.CellTemplate>
                         Важность
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Name="Completeness" Text="{Binding Path=Completeness, UpdateSourceTrigger=PropertyChanged}"/>

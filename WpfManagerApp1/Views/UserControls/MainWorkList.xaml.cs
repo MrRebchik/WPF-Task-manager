@@ -30,6 +30,15 @@ namespace WpfManagerApp1.Views.UserControls
             get { return (ICommand)GetValue(WorkMouseDoubleClickCommandProperty); }
             set { SetValue(WorkMouseDoubleClickCommandProperty, value); }
         }
+
+        public static readonly DependencyProperty GridActualWidthProperty =
+            DependencyProperty.Register("GridActualWidth", typeof(double), typeof(Grid), new PropertyMetadata(null));
+
+        public double GridActualWidth
+        {
+            get { return (double)GetValue(GridActualWidthProperty); }
+            set { SetValue(GridActualWidthProperty, grid.ActualWidth-180); }
+        }
         #endregion
 
         public MainWorkList()

@@ -12,6 +12,15 @@
         MinHeight="600" MinWidth="1000"
         WindowState="Maximized"
         >
+    <Window.Resources>
+        <Style TargetType="uc:EisenhowerMatrixCell">
+            <Setter Property="IncomingWorkItem" Value="{Binding IncomingWorkItem}"/>
+            <Setter Property="RemovedWorkItem" Value="{Binding RemovedWorkItemVM}"/>
+            <Setter Property="WorkDropCommand" Value="{Binding WorkRecieveCommand}"/>
+            <Setter Property="WorkRemoveCommand" Value="{Binding WorkRemovedCommandVM}"/>
+            <Setter Property="CheckIfDropDidComand" Value="{Binding CheckIfDropDidComandVM}"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -43,53 +52,27 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+
+                        <uc:EisenhowerMatrixCell Grid.Row="0"
+                                             Grid.Column="0"
+                                             DataContext="{Binding ImportantImmediatelyWorksVM}"
+                                             />
                         
                         <uc:EisenhowerMatrixCell Grid.Row="0"
-                                                 Grid.Column="0"
-                                                 DataContext="{Binding ImportantImmediatelyWorksVM}"
-                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
-                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
-                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
-                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
-                                                 CheckIfDropDidComand="{Binding CheckIfDropDidComandVM}"
-                                                 >
-
-                        </uc:EisenhowerMatrixCell>
-                        <uc:EisenhowerMatrixCell Grid.Row="0"
-                                                 Grid.Column="1"
-                                                 DataContext="{Binding UnimportantImmediatelyWorksVM}"
-                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
-                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
-                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
-                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
-                                                 CheckIfDropDidComand="{Binding CheckIfDropDidComandVM}"
-                                                 >
-                            
-                        </uc:EisenhowerMatrixCell>
+                                             Grid.Column="1"
+                                             DataContext="{Binding UnimportantImmediatelyWorksVM}"
+                                             />
+                        
                         <uc:EisenhowerMatrixCell Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 DataContext="{Binding ImportantUnimmediatelyWorksVM}"
-                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
-                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
-                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
-                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
-                                                 CheckIfDropDidComand="{Binding CheckIfDropDidComandVM}"
-                                                 >
-
-                        </uc:EisenhowerMatrixCell>
+                                             Grid.Column="0"
+                                             DataContext="{Binding ImportantUnimmediatelyWorksVM}"
+                                             />
+                        
                         <uc:EisenhowerMatrixCell Grid.Row="1"
-                                                 Grid.Column="1"
-                                                 DataContext="{Binding UnimportantUnimmediatelyWorksVM}"
-                                                 IncomingWorkItem="{Binding IncomingWorkItem}"
-                                                 RemovedWorkItem="{Binding RemovedWorkItemVM}"
-                                                 WorkDropCommand="{Binding WorkRecieveCommand}"
-                                                 WorkRemoveCommand="{Binding WorkRemovedCommandVM}"
-                                                 CheckIfDropDidComand="{Binding CheckIfDropDidComandVM}"
-                                                 >
-
-                        </uc:EisenhowerMatrixCell>
-
-                    </Grid>
+                                             Grid.Column="1"
+                                             DataContext="{Binding UnimportantUnimmediatelyWorksVM}"
+                                             />
+                        </Grid>
                     <DockPanel
                         Grid.Column="1">
                         <Label
