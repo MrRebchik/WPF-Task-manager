@@ -28,7 +28,7 @@
                         <Border.Background>
                             <RadialGradientBrush GradientOrigin="0.2,0.4">
                                 <GradientStop Color="#FFFFBCAD" Offset="1"/>
-                                <GradientStop Color="#FFFBCEB1" Offset="0.243"/>
+                                <GradientStop Color="#FFFBCEB1" Offset="0.25"/>
                             </RadialGradientBrush>
                         </Border.Background>
                         <ItemsPresenter>

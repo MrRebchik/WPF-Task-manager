@@ -37,13 +37,14 @@ namespace WpfManagerApp1.Views.UserControls
         public double GridActualWidth
         {
             get { return (double)GetValue(GridActualWidthProperty); }
-            set { SetValue(GridActualWidthProperty, grid.ActualWidth-180); }
+            set { SetValue(GridActualWidthProperty, grid.ActualWidth); }
         }
+
         #endregion
 
         public MainWorkList()
         {
-            InitializeComponent();
+            InitializeComponent();;
         }
 
         private void Work_MouseMove(object sender, MouseEventArgs e)

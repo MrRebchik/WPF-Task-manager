@@ -20,12 +20,6 @@ namespace WpfManagerApp1.ViewModel
     {
         #region Другие VM
         
-        private MainWorkListVM mainWorkListVM;
-        public MainWorkListVM MainWorkListVM 
-        { 
-            get => mainWorkListVM; 
-            set => Set(ref mainWorkListVM, value); 
-        }
         public List<EisenhowerMatrixCellVM> Matrix { get; set; }
         public EisenhowerMatrixCellVM ImportantImmediatelyWorksVM { get; internal set; }
         public EisenhowerMatrixCellVM UnimportantImmediatelyWorksVM { get; internal set; }
@@ -140,7 +134,7 @@ namespace WpfManagerApp1.ViewModel
         #region Title - название окна
 
         private string _title = "Планировщик";
-        
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -159,6 +153,7 @@ namespace WpfManagerApp1.ViewModel
         {
             get { return "Текущая версия: " + Assembly.GetExecutingAssembly().GetName().Version.ToString(2); }
         }
+
         #endregion
 
         #region Методы
@@ -176,7 +171,7 @@ namespace WpfManagerApp1.ViewModel
 
         #endregion
 
-        public MainWindowVM(MainWorkListVM _mainWindowVM)
+        public MainWindowVM()
         {
             #region Связь с Model
 
@@ -189,8 +184,6 @@ namespace WpfManagerApp1.ViewModel
 
 
             #endregion
-            
-            this.MainWorkListVM = _mainWindowVM;
             
             ImportantImmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.ImportantImmediately);
             UnimportantImmediatelyWorksVM = new EisenhowerMatrixCellVM(this, EisenhowerMatrixCell.UnimportantImmediately);

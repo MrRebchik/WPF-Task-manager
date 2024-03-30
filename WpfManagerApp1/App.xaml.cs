@@ -17,9 +17,7 @@ namespace WpfManagerApp1
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWorkListVM mainWorkListVM = new MainWorkListVM();
-
-            MainWindowVM mainWindowVM = new MainWindowVM(mainWorkListVM)
+            MainWindowVM mainWindowVM = new MainWindowVM()
             {
             };
 

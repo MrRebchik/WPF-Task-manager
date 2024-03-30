@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:WpfManagerApp1.ViewModel"
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              >
+    <UserControl.Resources>
+        <Style TargetType="GridViewHeaderRowPresenter">
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="grid">
         <ListView
             ItemsSource="{Binding WorksCollection, UpdateSourceTrigger=PropertyChanged}"
@@ -14,8 +18,10 @@
             SelectionMode="Single"
             >
             <ListView.View>
-                <GridView >
-                    <GridViewColumn  DisplayMemberBinding="{Binding Path=Name}">Название</GridViewColumn>
+                <GridView>
+                    <GridViewColumn x:Name="workTitleColumn" DisplayMemberBinding="{Binding Path=Name}" >
+                        Название
+                    </GridViewColumn>
                     <GridViewColumn Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
