@@ -111,33 +111,51 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Label
-            Grid.Row="7"
-            Content="Важность задания"
-            Margin="85 0 0 0"
-            VerticalAlignment="Bottom"
-            />
-        <ComboBox
-            Grid.Row="7"
-            Width="300"
-            HorizontalAlignment="Center"
-            ItemsSource="{Binding Path=ImportanceList}"
-            SelectedItem="{Binding Path=SelectedImportance}"
-            >
-        </ComboBox>
-        <Label
+        <Grid Margin="80 0"
+              Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                
+                <Label Content="Важность"/>
+                <ComboBox
+                    Width="200"
+                    Margin="30 0"
+                    ItemsSource="{Binding Path=ImportanceList}"
+                    SelectedItem="{Binding Path=SelectedImportance}"
+                />
+
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                <Label
+                    Content="Тип"
+                    VerticalAlignment="Bottom"
+                />
+                <ComboBox
+                    Width="200"
+                    Margin="30 0"
+                    ItemsSource="{Binding Path=TypesList}"
+                    SelectedItem="{Binding Path=SelectedType}"
+                />
+
+            </StackPanel>
+        </Grid>
+
+        <StackPanel 
             Grid.Row="9"
-            Content="Тип задания"
-            Margin="85 0 0 0"
-            VerticalAlignment="Bottom"
-            />
-        <ComboBox
-            Grid.Row="9"
-            Width="300"
-            HorizontalAlignment="Center"
-            ItemsSource="{Binding Path=TypesList}"
-            SelectedItem="{Binding Path=SelectedType}"
-            />
+            Margin="250 0"
+            Orientation="Horizontal"
+                    >
+            <Label Content="Дедлайн"/>
+            <DatePicker
+                Margin="100 0"
+                SelectedDate=""
+                />
+        </StackPanel>
+       
         <Button
             Grid.Row="11"
             HorizontalAlignment="Center"
