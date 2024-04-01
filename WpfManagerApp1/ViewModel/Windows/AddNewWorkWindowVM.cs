@@ -12,6 +12,7 @@ using WpfManagerApp1.Views.Windows;
 using System;
 using System.Xml.Linq;
 using System.Dynamic;
+using System.Windows.Navigation;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -96,7 +97,22 @@ namespace WpfManagerApp1.ViewModel
         public string SelectedImportance { get => selectedImportance; set => Set(ref selectedImportance, value); }
 
         private string selectedType;
-        public string SelectedType { get => selectedType; set => Set(ref selectedType, value); } 
+        public string SelectedType 
+        { 
+            get => selectedType; 
+            set { Set(ref selectedType, value); OnPropertyChanged("IsUniqueWorkType"); } 
+        }
+        public bool IsUniqueWorkType
+        {
+            get => selectedType == "Единичное задание";
+        }
+
+        private DateTime deadline = DateTime.Today;
+        public DateTime Deadline
+        {
+            get => deadline;
+            set => Set(ref deadline, value);
+        }
         #endregion
 
         #endregion
@@ -116,7 +132,7 @@ namespace WpfManagerApp1.ViewModel
 
             if (selectedType == "Единичное задание") 
                 createdWork = new UniqueWork(WorksRouter.IncreaseLastID()) 
-                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
+                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance], DeadLine= this.Deadline };
             else 
                 createdWork = new RegularWork(WorksRouter.IncreaseLastID())
                 { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
@@ -135,7 +151,6 @@ namespace WpfManagerApp1.ViewModel
         {
             WorksRouter = worksRouter;
             this.mainWindowVM = mainWindowVM;
-
             CreateNewWorkCommand = new RelayCommand(OnCreateNewWorkCommandExecuted, CanCreateNewWorkCommandExecute);
         }
 

@@ -145,14 +145,16 @@
         </Grid>
 
         <StackPanel 
+            IsEnabled="{Binding IsUniqueWorkType, UpdateSourceTrigger=PropertyChanged}"
             Grid.Row="9"
             Margin="250 0"
             Orientation="Horizontal"
+            ToolTip="Доступно только для единичных заданий"
                     >
             <Label Content="Дедлайн"/>
             <DatePicker
                 Margin="100 0"
-                SelectedDate=""
+                SelectedDate="{Binding Deadline}"
                 />
         </StackPanel>
        
