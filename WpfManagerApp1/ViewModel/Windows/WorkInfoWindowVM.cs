@@ -60,6 +60,13 @@ namespace WpfManagerApp1.ViewModel.Windows
             get => currentWork;
             set => Set(ref currentWork, value);
         }
+
+        private string currentWorkType;
+        public string CurrentWorkType
+        {
+            get => typeMap[CurrentWork.GetType()];
+            set => Set(ref currentWorkType, value);
+        }
         public string SelectedMatrixCell
         {
             get => cellMap[CurrentWork.EisenhowerMatrixCell];
@@ -101,6 +108,11 @@ namespace WpfManagerApp1.ViewModel.Windows
 
         private void ChangeCell(EisenhowerMatrixCell cell)
         {
+            RemoveWorkFromCells();
+            AddWorkToCell(cell);
+        }
+        private void RemoveWorkFromCells()
+        {
             foreach (var col in parentVM.Matrix)
             {
                 if (col.CellList.Contains(CurrentWork))
@@ -108,6 +120,9 @@ namespace WpfManagerApp1.ViewModel.Windows
                     col.CellList.Remove(CurrentWork);
                 }
             }
+        }
+        private void AddWorkToCell(EisenhowerMatrixCell cell)
+        {
             foreach (var col in parentVM.Matrix)
             {
                 if (col.EisenhowerMatrixCell == cell)

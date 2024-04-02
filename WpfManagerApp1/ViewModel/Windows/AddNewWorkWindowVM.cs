@@ -77,8 +77,6 @@ namespace WpfManagerApp1.ViewModel
             {"Единичное задание" , typeof(UniqueWork) },
             {"Повторяющееся задание" , typeof(RegularWork)},
         };
-
-        public Dictionary<string, Type> TypesMap { get => typesMap; }
         #endregion
 
         #region importanceList
@@ -110,7 +108,7 @@ namespace WpfManagerApp1.ViewModel
         private DateTime deadline = DateTime.Today;
         public DateTime Deadline
         {
-            get => deadline;
+            get => deadline.AddDays(7);
             set => Set(ref deadline, value);
         }
         #endregion
