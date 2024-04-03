@@ -37,18 +37,18 @@ namespace WpfManagerApp1.ViewModel.Windows
         };
         public List<string> CellList
         {
-            get => EnumToList<EisenhowerMatrixCell>(cellMap);
-            set => EnumToList<EisenhowerMatrixCell>(cellMap);
+            get => EnumToList(cellMap);
+            set => EnumToList(cellMap);
         }
         public List<string> ImportanceList
         {
-            get => EnumToList<Importance>(importanceMap);
-            set => EnumToList<Importance>(importanceMap);
+            get => EnumToList(importanceMap);
+            set => EnumToList(importanceMap);
         }
         public List<string> StatusList
         {
-            get => EnumToList<CompleteStatus>(statusMap);
-            set => EnumToList<CompleteStatus>(statusMap);
+            get => EnumToList(statusMap);
+            set => EnumToList(statusMap);
         }
 
 

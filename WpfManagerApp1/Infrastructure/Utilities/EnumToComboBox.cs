@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using WpfManagerApp1.Model;
 
 namespace WpfManagerApp1.Infrastructure.Utilities
 {
     internal class EnumToComboBox
     {
-        private Dictionary<Type, string> typeMap = new Dictionary<Type, string>()
+        static Enum b = ConsoleColor.Red;
+        Type eisMatrixCell = Enum.GetUnderlyingType(b);
+
+        private static Dictionary<Type, string> typeMap = new Dictionary<Type, string>()
         {
             {typeof(UniqueWork), "Одноразовое задание"},
             {typeof(RegularWork), "Повторяемое задание"},
@@ -21,27 +25,39 @@ namespace WpfManagerApp1.Infrastructure.Utilities
             {EisenhowerMatrixCell.ImportantUnimmediately , "Важное не срочное" },
             {EisenhowerMatrixCell.UnimportantUnimmediately , "Не важное не срочное" },
         };
-        private Dictionary<Importance, string> importanceMap = new Dictionary<Importance, string>()
+        private static Dictionary<Importance, string> importanceMap = new Dictionary<Importance, string>()
         {
             { Importance.Max , "Максимальная" },
             { Importance.High , "Высокая" },
             { Importance.Medium , "Нормальная" },
             { Importance.Low , "Низкая" },
         };
-        private Dictionary<CompleteStatus, string> statusMap = new Dictionary<CompleteStatus, string>()
+        private static Dictionary<CompleteStatus, string> statusMap = new Dictionary<CompleteStatus, string>()
         {
             {CompleteStatus.Active , "Активное" },
             {CompleteStatus.Frozen , "Отложено" },
             {CompleteStatus.Done , "Выполнено" },
         };
 
-        private Dictionary<Enum, Dictionary<Type,string>> enumsMap = new Dictionary<Enum, Dictionary<Type, string>>()
+        List<Dictionary<Type, string>> a = new List<Dictionary<Type, string>>()
         {
-            {EisenhowerMatrixCell, cellMap },
+            typeMap ,
         };
+
+        
+        List<string> GetList<T>()
+        {
+            var targetMap = new Dictionary<T, string>();
+
+            return EnumToList(targetMap);
+        }
+        private List<string> EnumToList<T>(Dictionary<T, string> map)
+        {
+            return map.Values.ToList();
+        }
         public EnumToComboBox()
         {
-            var a = new Array();
+            Type a = typeof(EisenhowerMatrixCell);
         }
     }
 }

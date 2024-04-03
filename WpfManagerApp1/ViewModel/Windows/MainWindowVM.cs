@@ -110,7 +110,7 @@ namespace WpfManagerApp1.ViewModel
         #region Связь с Model
         public DataProvider DataProvider { get; }
         public WorksRouter WorksRouter { get; set; }
-        public DayPlanManager DayPlanManager { get; }
+        public DayPlanRouter DayPlanManager { get; }
         #endregion
 
         #region Коллекции
@@ -178,7 +178,7 @@ namespace WpfManagerApp1.ViewModel
             //DataProvider = new BDMock();
             DataProvider = new DataBaseNoSQL();
             WorksRouter = new WorksRouter(DataProvider);
-            DayPlanManager = new DayPlanManager(DataProvider);
+            DayPlanManager = new DayPlanRouter(DataProvider);
 
             WorksCollection = new ObservableCollection<Work>(WorksRouter.GetWorks());
 

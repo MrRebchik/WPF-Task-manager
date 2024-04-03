@@ -6,7 +6,7 @@ using static WpfManagerApp1.Services.WorksRouter;
 namespace WpfManagerApp1.Services
 {
 
-    public class DayPlanManager
+    public class DayPlanRouter
     {
         #region События
 
@@ -16,7 +16,7 @@ namespace WpfManagerApp1.Services
 
         #endregion
 
-        public DayPlanManager(DataProvider dataProvider)
+        public DayPlanRouter(DataProvider dataProvider)
         {
             AllDaysList = new List<DayPlan>();
             DataProvider = dataProvider;
