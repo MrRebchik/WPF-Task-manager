@@ -3,16 +3,11 @@ using System.Windows.Input;
 using WpfManagerApp1.Infrastructure.Commands;
 using WpfManagerApp1.ViewModel.Base;
 using WpfManagerApp1.Services;
-using WpfManagerApp1.Data;
 using WpfManagerApp1.Model;
-using System.Collections.ObjectModel;
-using System.Security.Policy;
 using System.Collections.Generic;
 using WpfManagerApp1.Views.Windows;
 using System;
-using System.Xml.Linq;
-using System.Dynamic;
-using System.Windows.Navigation;
+using WpfManagerApp1.Infrastructure.Utilities;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -20,9 +15,7 @@ namespace WpfManagerApp1.ViewModel
     {
 
         #region Свойства
-
-        WorksRouter WorksRouter { get; set; }
-
+        WorksRouter worksRouter { get; set; } // не понятно зачем это поле если потом ссылку получаю из mainWindowVM
         MainWindowVM mainWindowVM { get; set; }
 
         #region Title - название окнa
@@ -46,47 +39,15 @@ namespace WpfManagerApp1.ViewModel
         public string WorkDescription { get => workDescription; set => Set(ref workDescription, value); }
         #endregion
 
-        #region ImportanceMap
-        private Dictionary<string, Importance> importanceMap = new Dictionary<string, Importance>
-        {
-            {"Низкая важность" , Importance.Low },
-            {"Обычная важность" , Importance.Medium },
-            {"Высокая важность" , Importance.High },
-            {"Максимальная важность" , Importance.Max },
-        };
-        
-        public Dictionary<string, Importance> ImportanceMap { get => importanceMap;}
-        #endregion
+        #region ImportanceList
 
-        #region importanceList
-        private List<string> importanceList = new List<string>
-        {
-            "Низкая важность",
-            "Обычная важность",
-            "Высокая важность",
-            "Максимальная важность",
-        };
-
-        public List<string> ImportanceList { get => importanceList; }
+        public List<string> ImportanceList { get => EnumToComboBox.EnumToList(EnumToComboBox.importanceMap); }
 
         #endregion
 
-        #region TypesMap
-        private Dictionary<string, Type> typesMap = new Dictionary<string, Type>
-        {
-            {"Единичное задание" , typeof(UniqueWork) },
-            {"Повторяющееся задание" , typeof(RegularWork)},
-        };
-        #endregion
+        #region TypesList
 
-        #region importanceList
-        private List<string> typesList = new List<string>
-        {
-            "Единичное задание",
-            "Повторяющееся задание",
-        };
-
-        public List<string> TypesList { get => typesList; }
+        public List<string> TypesList { get => EnumToComboBox.EnumToList(EnumToComboBox.typeMap); }
 
         #endregion
 
@@ -102,7 +63,7 @@ namespace WpfManagerApp1.ViewModel
         }
         public bool IsUniqueWorkType
         {
-            get => selectedType == "Единичное задание";
+            get => selectedType == EnumToComboBox.typeMap[typeof(UniqueWork)];
         }
 
         private DateTime deadline = DateTime.Today;
@@ -121,35 +82,55 @@ namespace WpfManagerApp1.ViewModel
         private bool CanCreateNewWorkCommandExecute(object parameter) => true;
         private void OnCreateNewWorkCommandExecuted(object parameter)
         {
-            if (string.IsNullOrWhiteSpace(WorkName) || selectedImportance == null || SelectedType == null)
-            {
-                MessageBox.Show("Все обязательные поля для ввода должны быть заполенены");
-                return;
-            }
+            ValidateInput();
+
             Work createdWork;
 
-            if (selectedType == "Единичное задание") 
-                createdWork = new UniqueWork(WorksRouter.IncreaseLastID()) 
-                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance], DeadLine= this.Deadline };
+            if (selectedType == EnumToComboBox.typeMap[typeof(UniqueWork)])
+                createdWork = new UniqueWork(worksRouter.IncreaseLastID()) 
+                { 
+                    Name = workName, 
+                    Description = workDescription, 
+                    Importance = EnumToComboBox.GetEnumValueFromComboBox(EnumToComboBox.importanceMap, selectedImportance),
+                    DeadLine = this.Deadline 
+                };
             else 
-                createdWork = new RegularWork(WorksRouter.IncreaseLastID())
-                { Name = workName, Description = workDescription, Importance = importanceMap[selectedImportance] };
-            mainWindowVM.WorksRouter.AddWork(createdWork);
+                createdWork = new RegularWork(worksRouter.IncreaseLastID())
+                { 
+                    Name = workName, 
+                    Description = workDescription, 
+                    Importance = EnumToComboBox.GetEnumValueFromComboBox(EnumToComboBox.importanceMap,selectedImportance)
+                };
+            mainWindowVM.WorksRouter.AddWork(createdWork); 
             mainWindowVM.WorksCollection.Add(createdWork);
-            foreach (Window w in App.Current.Windows)
-            {
-                if(w is AddNewWorkWindow)
-                    w.Close();
-            }
+            CloseThisWindow();
         }
 
         #endregion
 
         public AddNewWorkWindowVM(WorksRouter worksRouter, MainWindowVM mainWindowVM)
         {
-            WorksRouter = worksRouter;
+            this.worksRouter = worksRouter;
             this.mainWindowVM = mainWindowVM;
+
             CreateNewWorkCommand = new RelayCommand(OnCreateNewWorkCommandExecuted, CanCreateNewWorkCommandExecute);
+        }
+
+        void ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(WorkName) || selectedImportance == null || SelectedType == null)
+            {
+                MessageBox.Show("Все обязательные поля для ввода должны быть заполенены");
+                return;
+            }
+        }
+        void CloseThisWindow()
+        {
+            foreach (Window w in App.Current.Windows)
+            {
+                if (w is AddNewWorkWindow)
+                    w.Close();
+            }
         }
 
     }
