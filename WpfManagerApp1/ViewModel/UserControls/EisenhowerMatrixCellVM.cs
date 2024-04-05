@@ -26,6 +26,7 @@ namespace WpfManagerApp1.ViewModel.UserControls
         private MainWindowVM _mainWindowVM;
         private EisenhowerMatrixCell _eisenhowerMatrixCell;
         private string cellName;
+        private string timeLeft;
         private ObservableCollection<Work> cellList = new ObservableCollection<Work>();
         private Work _incomingWorkItem;
         private Work _removedWorkItemVM = null;

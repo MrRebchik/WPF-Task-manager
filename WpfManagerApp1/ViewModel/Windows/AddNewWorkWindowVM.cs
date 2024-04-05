@@ -15,7 +15,7 @@ namespace WpfManagerApp1.ViewModel
     {
 
         #region Свойства
-        WorksRouter worksRouter { get; set; } // не понятно зачем это поле если потом ссылку получаю из mainWindowVM
+        WorksRouter worksRouter { get; set; } // FIX не понятно зачем это поле если потом ссылку получаю из mainWindowVM
         MainWindowVM mainWindowVM { get; set; }
 
         #region Title - название окнa
@@ -69,7 +69,7 @@ namespace WpfManagerApp1.ViewModel
         private DateTime deadline = DateTime.Today;
         public DateTime Deadline
         {
-            get => deadline.AddDays(7);
+            get => deadline;
             set => Set(ref deadline, value);
         }
         #endregion
@@ -91,6 +91,7 @@ namespace WpfManagerApp1.ViewModel
                 { 
                     Name = workName, 
                     Description = workDescription, 
+                    CreationDate = DateTime.Now,
                     Importance = EnumToComboBox.GetEnumValueFromComboBox(EnumToComboBox.importanceMap, selectedImportance),
                     DeadLine = this.Deadline 
                 };
@@ -98,7 +99,8 @@ namespace WpfManagerApp1.ViewModel
                 createdWork = new RegularWork(worksRouter.IncreaseLastID())
                 { 
                     Name = workName, 
-                    Description = workDescription, 
+                    Description = workDescription,
+                    CreationDate = DateTime.Now,
                     Importance = EnumToComboBox.GetEnumValueFromComboBox(EnumToComboBox.importanceMap,selectedImportance)
                 };
             mainWindowVM.WorksRouter.AddWork(createdWork); 

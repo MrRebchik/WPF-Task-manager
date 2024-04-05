@@ -8,8 +8,6 @@
              mc:Ignorable="d"
              >
     <UserControl.Resources>
-        <Style TargetType="GridViewHeaderRowPresenter">
-        </Style>
     </UserControl.Resources>
     <Grid x:Name="grid">
         <ListView
@@ -17,11 +15,37 @@
             SelectedItem="{Binding SelectedWorkInFullList}"
             SelectionMode="Single"
             >
+            <!--<ListView.Template>
+                <ControlTemplate>
+                    <Border>
+                        <ContentPresenter>
+                            <GridView/>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </ListView.Template>-->
             <ListView.View>
                 <GridView>
+                    <GridView.ColumnHeaderTemplate>
+                        <DataTemplate>
+                            <Border Background="Turquoise" CornerRadius="5">
+                                <HeaderedContentControl Background="Bisque">
+                                    <DockPanel HorizontalAlignment="Stretch">
+                                        <TextBlock FontSize="16">
+                                            <TextBlock.Text>
+                                                <Binding/>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </HeaderedContentControl>
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ColumnHeaderTemplate>
+
                     <GridViewColumn x:Name="workTitleColumn" DisplayMemberBinding="{Binding Path=Name}" >
                         Название
                     </GridViewColumn>
+
                     <GridViewColumn Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -45,6 +69,7 @@
                         </GridViewColumn.CellTemplate>
                         Важность
                     </GridViewColumn>
+
                     <GridViewColumn Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -66,9 +91,10 @@
                         </GridViewColumn.CellTemplate>
                         Статус
                     </GridViewColumn>
+
                 </GridView>
             </ListView.View>
-            
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="35"/>
@@ -76,6 +102,9 @@
                     <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
                 </Style>
             </ListView.ItemContainerStyle>
+
+            <!--<ListViewItem/>-->
+
         </ListView>
     </Grid>
 </UserControl>

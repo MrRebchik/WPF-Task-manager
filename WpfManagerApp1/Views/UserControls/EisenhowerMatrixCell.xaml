@@ -16,24 +16,22 @@
             Content="{Binding CellName}"
             />
         <ListBox Grid.Row="1"
-                    ItemsSource="{Binding CellList}"
-                    AllowDrop="True"
-                    Drop="EisenhowerMatrixCell_Drop"
-                    DragLeave="ListView_DragLeave"
-                    Padding="5"
-                    >
+                 ItemsSource="{Binding CellList}"
+                 AllowDrop="True"
+                 Drop="EisenhowerMatrixCell_Drop"
+                 DragLeave="ListView_DragLeave"
+                 Padding="5"
+                 >
             <ListBox.Template>
                 <ControlTemplate>
                     <Border CornerRadius="8" BorderThickness="0" Padding="8">
                         <Border.Background>
                             <RadialGradientBrush GradientOrigin="0.2,0.4">
-                                <GradientStop Color="#FFFFBCAD" Offset="1"/>
-                                <GradientStop Color="#FFFBCEB1" Offset="0.25"/>
+                                <GradientStop Color="#FFFFC2AD" Offset="1"/>
+                                <GradientStop Color="#FFFBE4B1" Offset="0.25"/>
                             </RadialGradientBrush>
                         </Border.Background>
-                        <ItemsPresenter>
-
-                        </ItemsPresenter>
+                        <ItemsPresenter/>
                     </Border>
                 </ControlTemplate>
             </ListBox.Template>
@@ -45,8 +43,26 @@
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label
-                        Content="{Binding Name}"/>
+                    <DockPanel>
+                        <Label
+                            Content="{Binding Name}"
+                            MinWidth="200"/>
+                        <TextBlock
+                            Name="timeLeft"
+                            DockPanel.Dock="Right"
+                            Margin="40 5 15 0"
+                            Text="{Binding TimeLeft}"/>
+                    </DockPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TimeLeft}" Value="1">
+                            <Setter TargetName="timeLeft" Property="TextBlock.Foreground" Value="Red"/>
+                            <Setter TargetName="timeLeft" Property="TextBlock.FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TimeLeft}" Value="0">
+                            <Setter TargetName="timeLeft" Property="TextBlock.Foreground" Value="Red"/>
+                            <Setter TargetName="timeLeft" Property="TextBlock.FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

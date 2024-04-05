@@ -36,6 +36,13 @@
         <TabControl>
             <TabItem Header="Все дела">
                 <Border CornerRadius="5" BorderThickness="2">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="#FFEADAF3" Offset="0"/>
+                            <GradientStop Color="#FFF0E6D2" Offset="0.2"/>
+                            <GradientStop Color="#FFC7EEEE" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

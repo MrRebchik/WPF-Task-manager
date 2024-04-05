@@ -136,6 +136,19 @@ namespace WpfManagerApp1.Model
                 OnWorkPropertyChanged();
             } 
         }
+        public string TimeLeft
+        {
+            get 
+            {
+                string result = string.Empty;
+                if(this.GetType() == typeof(UniqueWork))
+                {
+                    UniqueWork a = (UniqueWork)this;
+                    result = a.DeadLine.Subtract(DateTime.Today).Days.ToString();
+                }
+                return result;
+            }
+        }
 
         private protected void OnWorkPropertyChanged()
         {
