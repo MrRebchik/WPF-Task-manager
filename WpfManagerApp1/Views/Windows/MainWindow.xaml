@@ -83,6 +83,7 @@
                     <DockPanel
                         Grid.Column="1">
                         <Label
+                            FontFamily="./#TildaSans"
                             Content="Список дел"
                             DockPanel.Dock="Top"
                             />

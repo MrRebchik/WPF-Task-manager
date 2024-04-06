@@ -8,6 +8,198 @@
              mc:Ignorable="d"
              >
     <UserControl.Resources>
+        <!--<Style TargetType="GridViewColumnHeader">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Grid>
+                            <Border x:Name="HeaderBorder"
+                                    BorderThickness="0,1,0,1"
+                                    Padding="2,0,2,0"
+                                    CornerRadius="3"
+                                    >
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0"
+                                        EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#FF445E4C"  Offset="0.0" />
+                                                <GradientStop Color="#FFEBFF0D"  Offset="1.0" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+
+                                </Border.BorderBrush>
+                                <Border.Background>
+
+                                    <LinearGradientBrush StartPoint="0,0"
+                                        EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#FFEAF4C8"
+                                                    Offset="0.0" />
+                                                <GradientStop Color="#FFEFF1BE"
+                                                    Offset="1.0" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+
+                                </Border.Background>
+                                <ContentPresenter x:Name="HeaderContent"
+                                    Margin="0,0,0,1"
+                                    RecognizesAccessKey="True"/>
+                            </Border>
+                            <Thumb x:Name="PART_HeaderGripper"
+                                   HorizontalAlignment="Right"
+                                   />
+                            
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
+       TargetType="ScrollViewer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Border CornerRadius="30">
+                            <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Background="#FFB4F3C3" CornerRadius="10">
+                                <DockPanel Margin="{TemplateBinding Padding}">
+                                <ScrollViewer DockPanel.Dock="Top"
+                                        HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Hidden"
+                                        Focusable="false">
+                                    <GridViewHeaderRowPresenter Margin="1,0,0,0"
+                                          Columns="{Binding Path=TemplatedParent.View.Columns,
+                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                          ColumnHeaderContainerStyle="{Binding
+                                            Path=TemplatedParent.View.ColumnHeaderContainerStyle,
+                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                          ColumnHeaderTemplate="{Binding
+                                            Path=TemplatedParent.View.ColumnHeaderTemplate,
+                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                          ColumnHeaderContextMenu="{Binding
+                                            Path=TemplatedParent.View.ColumnHeaderContextMenu,
+                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                    />
+                                </ScrollViewer>
+
+                                <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                    KeyboardNavigation.DirectionalNavigation="Local"
+                                    CanContentScroll="True"
+                                    CanHorizontallyScroll="False"
+                                    CanVerticallyScroll="False"
+                                />
+                            </DockPanel>
+                            </Border>
+                            
+
+                            <ScrollBar Name="PART_HorizontalScrollBar"
+                     Orientation="Horizontal"
+                     Grid.Row="1"
+                     Maximum="{TemplateBinding ScrollableWidth}"
+                     ViewportSize="{TemplateBinding ViewportWidth}"
+                     Value="{TemplateBinding HorizontalOffset}"
+                     Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+
+                            <ScrollBar Name="PART_VerticalScrollBar"
+                     Grid.Column="1"
+                     Maximum="{TemplateBinding ScrollableHeight}"
+                     ViewportSize="{TemplateBinding ViewportHeight}"
+                     Value="{TemplateBinding VerticalOffset}"
+                     Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       />
+
+                        </Grid>
+                        </Border>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Color x:Key="WindowColor">#FFE8EDF9</Color>
+        <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
+        <Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
+
+        <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
+        <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
+        <Color x:Key="DisabledForegroundColor">#FF888888</Color>
+
+        <Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
+        <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
+
+        <Color x:Key="ControlLightColor">White</Color>
+        <Color x:Key="ControlMediumColor">#FF7381F9</Color>
+        <Color x:Key="ControlDarkColor">#FF211AA9</Color>
+
+        <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
+        <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+
+
+        <Color x:Key="GlyphColor">#FF444444</Color>
+        <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
+
+        --><!--Border colors--><!--
+        <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
+        <Color x:Key="BorderMediumColor">#FF888888</Color>
+        <Color x:Key="BorderDarkColor">#FF444444</Color>
+
+        <Color x:Key="PressedBorderLightColor">#FF888888</Color>
+        <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
+
+        <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
+        <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>
+
+        <Color x:Key="DefaultBorderBrushDarkColor">Black</Color>
+
+        --><!--Control-specific resources.--><!--
+        <Color x:Key="HeaderTopColor">#FFC5CBF9</Color>
+        <Color x:Key="DatagridCurrentCellBorderColor">Black</Color>
+        <Color x:Key="SliderTrackDarkColor">#FFC5CBF9</Color>
+
+        <Color x:Key="NavButtonFrameColor">#FF3843C4</Color>
+
+        <LinearGradientBrush x:Key="MenuPopupBrush"
+                     EndPoint="0.5,1"
+                     StartPoint="0.5,0">
+            <GradientStop Color="{DynamicResource ControlLightColor}"
+                Offset="0" />
+            <GradientStop Color="{DynamicResource ControlMediumColor}"
+                Offset="0.5" />
+            <GradientStop Color="{DynamicResource ControlLightColor}"
+                Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill"
+                     StartPoint="0,0"
+                     EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#000000FF"
+                    Offset="0" />
+                    <GradientStop Color="#600000FF"
+                    Offset="0.4" />
+                    <GradientStop Color="#600000FF"
+                    Offset="0.6" />
+                    <GradientStop Color="#000000FF"
+                    Offset="1" />
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>-->
+
+
     </UserControl.Resources>
     <Grid x:Name="grid">
         <ListView
@@ -15,34 +207,11 @@
             SelectedItem="{Binding SelectedWorkInFullList}"
             SelectionMode="Single"
             >
-            <!--<ListView.Template>
-                <ControlTemplate>
-                    <Border>
-                        <ContentPresenter>
-                            <GridView/>
-                        </ContentPresenter>
-                    </Border>
-                </ControlTemplate>
-            </ListView.Template>-->
             <ListView.View>
                 <GridView>
-                    <GridView.ColumnHeaderTemplate>
-                        <DataTemplate>
-                            <Border Background="Turquoise" CornerRadius="5">
-                                <HeaderedContentControl Background="Bisque">
-                                    <DockPanel HorizontalAlignment="Stretch">
-                                        <TextBlock FontSize="16">
-                                            <TextBlock.Text>
-                                                <Binding/>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DockPanel>
-                                </HeaderedContentControl>
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ColumnHeaderTemplate>
+                   
 
-                    <GridViewColumn x:Name="workTitleColumn" DisplayMemberBinding="{Binding Path=Name}" >
+                    <GridViewColumn x:Name="workTitleColumn" DisplayMemberBinding="{Binding Path=Name}">
                         Название
                     </GridViewColumn>
 
