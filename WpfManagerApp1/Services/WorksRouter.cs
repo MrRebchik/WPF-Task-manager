@@ -14,6 +14,7 @@ namespace WpfManagerApp1.Services
         ByImmediacyDescending,
         ByImmediacyWithHabitsDescending,
         ByHabits,
+        ByCreationDate,
     }
     public class WorksRouter
     {
@@ -52,6 +53,7 @@ namespace WpfManagerApp1.Services
         private void LoadData()
         {
             DataProvider.GetWorks(out allWorksList);
+            allWorksList = allWorksList.Where(x => x.Completeness != CompleteStatus.Done).ToList();
         }
         public void AddWork(Work item)
         {
@@ -92,6 +94,7 @@ namespace WpfManagerApp1.Services
             SortCommandsMap.Add(SortFilters.ByImmediacyDescending, SortByImmediacyDescending);
             SortCommandsMap.Add(SortFilters.ByImmediacyWithHabitsDescending, SortByImmediacyWithHabitsDescending);
             SortCommandsMap.Add(SortFilters.ByHabits, SortByHabits);
+            SortCommandsMap.Add(SortFilters.ByCreationDate, SortByCreationDate);
         }
 
         public int IncreaseLastID()
@@ -147,9 +150,15 @@ namespace WpfManagerApp1.Services
         {
             return work.ToArray().
             Where(n => n.GetType() == typeof(RegularWork)).
-            Select(n => (RegularWork)n).
-            Where(n => n.IsHabit == true).
-            Select(n => (Work)n).
+            //Select(n => (RegularWork)n).
+            //Where(n => n.IsHabit == true).
+            //Select(n => (Work)n).
+            ToList();
+        };
+        public ListOperation SortByCreationDate = (work) =>
+        {
+            return work.ToArray().
+            OrderBy(n => n.CreationDate).
             ToList();
         };
 

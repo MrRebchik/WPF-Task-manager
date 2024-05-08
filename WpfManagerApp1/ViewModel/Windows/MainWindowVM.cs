@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Collections.Generic;
 using WpfManagerApp1.ViewModel.Windows;
 using System.Reflection;
+using WpfManagerApp1.Infrastructure.Utilities;
 
 namespace WpfManagerApp1.ViewModel
 {
@@ -118,6 +119,22 @@ namespace WpfManagerApp1.ViewModel
         public ObservableCollection<Work> WorksCollection { get; set; }
 
         public ObservableCollection<DayPlan> DayPlanCollection { get; set; }
+
+        public List<string> WorksFiltersList { get => EnumToComboBox.EnumToList(EnumToComboBox.worksFiltersMap); }
+
+        private string selectedWorksFilter;
+        public string SelectedWorksFilter
+        {
+            get => selectedWorksFilter;
+            set 
+            { 
+                Set(ref selectedWorksFilter, value);
+                WorksCollection = 
+                    new ObservableCollection<Work>(
+                        WorksRouter.GetWorks(EnumToComboBox.GetEnumValueFromComboBox(EnumToComboBox.worksFiltersMap, selectedWorksFilter)));
+                OnPropertyChanged("WorksCollection");
+            }
+        }
 
         #endregion
 

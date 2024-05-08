@@ -6,25 +6,26 @@
              xmlns:local="clr-namespace:WpfManagerApp1.Views.UserControls"
              mc:Ignorable="d" 
              >
-    <Grid Margin="15">
+    <Grid Margin="15 5 15 15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
             Content="{Binding CellName}"
+            FontSize="14"
             />
-        <ListBox Grid.Row="1"
+        <ListBox Grid.Row="2"
                  ItemsSource="{Binding CellList}"
                  AllowDrop="True"
                  Drop="EisenhowerMatrixCell_Drop"
                  DragLeave="ListView_DragLeave"
-                 Padding="5"
+                 Padding="3"
                  >
             <ListBox.Template>
                 <ControlTemplate>
-                    <Border CornerRadius="8" BorderThickness="0" Padding="8">
+                    <Border CornerRadius="8" BorderThickness="0">
                         <Border.Background>
                             <RadialGradientBrush GradientOrigin="0.2,0.4">
                                 <GradientStop Color="#FFFFC2AD" Offset="1"/>

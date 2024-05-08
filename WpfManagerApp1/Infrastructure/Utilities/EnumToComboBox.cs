@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WpfManagerApp1.Model;
+using WpfManagerApp1.Services;
 
 namespace WpfManagerApp1.Infrastructure.Utilities
 {
@@ -32,6 +33,17 @@ namespace WpfManagerApp1.Infrastructure.Utilities
             {CompleteStatus.Active , "Активное" },
             {CompleteStatus.Frozen , "Отложено" },
             {CompleteStatus.Done , "Выполнено" },
+        };
+        public static Dictionary<SortFilters, string> worksFiltersMap = new Dictionary<SortFilters, string>()
+        {
+            {SortFilters.ByImmediacy ,                     "По срочности" },
+            {SortFilters.ByImportance,                     "По важности" },
+            {SortFilters.ByImmediacyDescending,            "Сначала не срочные" },
+            {SortFilters.ByImportanceDescending,           "Сначала не важные" }, 
+            {SortFilters.ByHabits ,                        "Повторяемые" },
+            {SortFilters.ByCreationDate,                   "По умолчанию" },
+            //{SortFilters.ByImmediacyWithHabits,            "Сначала срочные привычки" },
+            //{SortFilters.ByImmediacyWithHabitsDescending,  "Сначала не срочные привычки" },
         };
 
         public static List<string> EnumToList<T>(Dictionary<T, string> map)

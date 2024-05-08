@@ -35,82 +35,92 @@
 
         <TabControl>
             <TabItem Header="Все дела">
-                <Border CornerRadius="5" BorderThickness="2">
+                <Border>
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                            <GradientStop Color="#FFEADAF3" Offset="0"/>
-                            <GradientStop Color="#FFF0E6D2" Offset="0.2"/>
-                            <GradientStop Color="#FFC7EEEE" Offset="1"/>
+                            <GradientStop Color="#FFF4EAF9" Offset="0"/>
+                            <GradientStop Color="#FFF1EBDE" Offset="0.2"/>
+                            <GradientStop Color="#FFF2FAFA" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid
                             Grid.Column="0" 
                             >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <uc:EisenhowerMatrixCell Grid.Row="0"
+                            <uc:EisenhowerMatrixCell Grid.Row="0"
                                              Grid.Column="0"
                                              DataContext="{Binding ImportantImmediatelyWorksVM}"
                                              />
-                        
-                        <uc:EisenhowerMatrixCell Grid.Row="0"
+
+                            <uc:EisenhowerMatrixCell Grid.Row="0"
                                              Grid.Column="1"
                                              DataContext="{Binding UnimportantImmediatelyWorksVM}"
                                              />
-                        
-                        <uc:EisenhowerMatrixCell Grid.Row="1"
+
+                            <uc:EisenhowerMatrixCell Grid.Row="1"
                                              Grid.Column="0"
                                              DataContext="{Binding ImportantUnimmediatelyWorksVM}"
                                              />
-                        
-                        <uc:EisenhowerMatrixCell Grid.Row="1"
+
+                            <uc:EisenhowerMatrixCell Grid.Row="1"
                                              Grid.Column="1"
                                              DataContext="{Binding UnimportantUnimmediatelyWorksVM}"
                                              />
                         </Grid>
-                    <DockPanel
+                        <DockPanel
                         Grid.Column="1">
-                        <Label
-                            FontFamily="./#TildaSans"
-                            Content="Список дел"
-                            DockPanel.Dock="Top"
-                            />
-                        <StackPanel
-                            Height="25"
-                            Orientation="Horizontal"
-                            DockPanel.Dock="Bottom"
-                            Margin="0 0 0 15">
-                            <Button
-                                Content="Добавить задание"
-                                Command="{Binding AddNewWorkCommand}"
-                                />
-                            <Button
-                                Content="Удалить задание"
-                                Command="{Binding DeleteSelectedWorkCommand}"
-                                />
-                        </StackPanel>
-                        <uc:MainWorkList
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False"  Margin=" 0 2">
+                                <Label Content="Список дел" DockPanel.Dock="Left"
+                                       FontSize="14"/>
+                                <ComboBox Width="200" Height="25" DockPanel.Dock="Right"
+                                          Margin=" 0 0 4 0"
+                                          ItemsSource="{Binding Path= WorksFiltersList}"
+                                          SelectedItem="{Binding Path= SelectedWorksFilter}"/>
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    DockPanel.Dock="Right"
+                                    Margin=" 5 0">
+                                    <Button
+                                        Background="#c8f5c1"
+                                        Height="25"
+                                        Margin=" 5 0 0 0"
+                                        Content="Добавить задание"
+                                        Command="{Binding AddNewWorkCommand}"
+                                    />
+                                    <Button
+                                        Background="#faaaaa"
+                                        Height="25"
+                                        Margin=" 5 0 0 0"
+                                        Content="Удалить задание"
+                                        Command="{Binding DeleteSelectedWorkCommand}"
+                                    />
+                                </StackPanel>
+                            </DockPanel>
+
+
+                            <uc:MainWorkList
                             x:Name="MainWorkList"
                             WorkMouseDoubleClickCommand="{Binding OpenWorkInfoWindowCommand}"
-                            >
-                            <uc:MainWorkList.InputBindings>
-                                <KeyBinding Key="Delete" Command="{Binding DeleteSelectedWorkCommand}"/>
-                            </uc:MainWorkList.InputBindings>
-                        </uc:MainWorkList>
-                    </DockPanel>
-                </Grid>
+                            Margin="0 0 4 15">
+                                <uc:MainWorkList.InputBindings>
+                                    <KeyBinding Key="Delete" Command="{Binding DeleteSelectedWorkCommand}"/>
+                                </uc:MainWorkList.InputBindings>
+                            </uc:MainWorkList>
+                        </DockPanel>
+                    </Grid>
                 </Border>
             </TabItem>
             <TabItem Header="Планы по неделям">
